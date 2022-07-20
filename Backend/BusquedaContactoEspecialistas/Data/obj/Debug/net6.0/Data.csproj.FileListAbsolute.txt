@@ -1,0 +1,12 @@
+D:\Dev-Facultad\ADSoftware\Backend\BusquedaContactoEspecialistas\Data\bin\Debug\net6.0\Data.deps.json
+D:\Dev-Facultad\ADSoftware\Backend\BusquedaContactoEspecialistas\Data\bin\Debug\net6.0\Data.dll
+D:\Dev-Facultad\ADSoftware\Backend\BusquedaContactoEspecialistas\Data\bin\Debug\net6.0\Data.pdb
+D:\Dev-Facultad\ADSoftware\Backend\BusquedaContactoEspecialistas\Data\obj\Debug\net6.0\Data.csproj.AssemblyReference.cache
+D:\Dev-Facultad\ADSoftware\Backend\BusquedaContactoEspecialistas\Data\obj\Debug\net6.0\Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dev-Facultad\ADSoftware\Backend\BusquedaContactoEspecialistas\Data\obj\Debug\net6.0\Data.AssemblyInfoInputs.cache
+D:\Dev-Facultad\ADSoftware\Backend\BusquedaContactoEspecialistas\Data\obj\Debug\net6.0\Data.AssemblyInfo.cs
+D:\Dev-Facultad\ADSoftware\Backend\BusquedaContactoEspecialistas\Data\obj\Debug\net6.0\Data.csproj.CoreCompileInputs.cache
+D:\Dev-Facultad\ADSoftware\Backend\BusquedaContactoEspecialistas\Data\obj\Debug\net6.0\Data.dll
+D:\Dev-Facultad\ADSoftware\Backend\BusquedaContactoEspecialistas\Data\obj\Debug\net6.0\refint\Data.dll
+D:\Dev-Facultad\ADSoftware\Backend\BusquedaContactoEspecialistas\Data\obj\Debug\net6.0\Data.pdb
+D:\Dev-Facultad\ADSoftware\Backend\BusquedaContactoEspecialistas\Data\obj\Debug\net6.0\ref\Data.dll
