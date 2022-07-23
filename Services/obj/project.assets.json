@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dev-Facultad\\ADSoftware\\Backend\\Services\\Services.csproj",
+      "projectUniqueName": "D:\\Dev-Facultad\\ADSoftware\\Services\\Services.csproj",
       "projectName": "Services",
-      "projectPath": "D:\\Dev-Facultad\\ADSoftware\\Backend\\Services\\Services.csproj",
+      "projectPath": "D:\\Dev-Facultad\\ADSoftware\\Services\\Services.csproj",
       "packagesPath": "C:\\Users\\bmartinez\\.nuget\\packages\\",
-      "outputPath": "D:\\Dev-Facultad\\ADSoftware\\Backend\\Services\\obj\\",
+      "outputPath": "D:\\Dev-Facultad\\ADSoftware\\Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bmartinez\\AppData\\Roaming\\NuGet\\NuGet.Config",

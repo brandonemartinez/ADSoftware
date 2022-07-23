@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Cy1rr22S/QJPqpjHxjl66odmHLsv4s0YyBa44uFgQoVFWMuKc0CazK5NZm2EtRgR2zqhcjtrHUHDeyv83kP0Iw==",
+  "dgSpecHash": "gDMA49XIqoB4fIuEvwkC1zon1qj0R4sB+2FH3/V+hl1epAjPpmfg36fBSDaGjlAeh0U2iA7IGgZQJXquN/8WFA==",
   "success": true,
-  "projectFilePath": "D:\\Dev-Facultad\\ADSoftware\\backend\\Services\\Services.csproj",
+  "projectFilePath": "D:\\Dev-Facultad\\ADSoftware\\Services\\Services.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

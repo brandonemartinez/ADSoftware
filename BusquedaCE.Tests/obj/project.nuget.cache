@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Q6SW1tarCbi4nvKEH6DyZ8cJvYn/4dWycXZrca0QIpvfr14fP/BRc9tBk+zreDikHI1iwA2gM37B+L2px6nCkA==",
+  "dgSpecHash": "OHvIojHkL5EAlTzAoH5hoVCZUchWtqeDH4ogJBo+uJJHQrA5EKJD8zrsmvT4YYiALesogHwJIpKAkk6TgE/mmA==",
   "success": true,
-  "projectFilePath": "D:\\Dev-Facultad\\ADSoftware\\backend\\BusquedaCE.Tests\\BusquedaCE.Tests.csproj",
+  "projectFilePath": "D:\\Dev-Facultad\\ADSoftware\\BusquedaCE.Tests\\BusquedaCE.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bmartinez\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\bmartinez\\.nuget\\packages\\microsoft.codecoverage\\17.1.0\\microsoft.codecoverage.17.1.0.nupkg.sha512",

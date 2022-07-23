@@ -5982,11 +5982,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dev-Facultad\\ADSoftware\\Backend\\BusquedaCE.Tests\\BusquedaCE.Tests.csproj",
+      "projectUniqueName": "D:\\Dev-Facultad\\ADSoftware\\BusquedaCE.Tests\\BusquedaCE.Tests.csproj",
       "projectName": "BusquedaCE.Tests",
-      "projectPath": "D:\\Dev-Facultad\\ADSoftware\\Backend\\BusquedaCE.Tests\\BusquedaCE.Tests.csproj",
+      "projectPath": "D:\\Dev-Facultad\\ADSoftware\\BusquedaCE.Tests\\BusquedaCE.Tests.csproj",
       "packagesPath": "C:\\Users\\bmartinez\\.nuget\\packages\\",
-      "outputPath": "D:\\Dev-Facultad\\ADSoftware\\Backend\\BusquedaCE.Tests\\obj\\",
+      "outputPath": "D:\\Dev-Facultad\\ADSoftware\\BusquedaCE.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bmartinez\\AppData\\Roaming\\NuGet\\NuGet.Config",

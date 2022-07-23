@@ -1,0 +1,11 @@
+D:\Dev-Facultad\ADSoftware\Api\obj\Release\net6.0\PubTmp\Out\Api.exe
+D:\Dev-Facultad\ADSoftware\Api\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+D:\Dev-Facultad\ADSoftware\Api\obj\Release\net6.0\PubTmp\Out\appsettings.json
+D:\Dev-Facultad\ADSoftware\Api\obj\Release\net6.0\PubTmp\Out\Api.dll
+D:\Dev-Facultad\ADSoftware\Api\obj\Release\net6.0\PubTmp\Out\Api.deps.json
+D:\Dev-Facultad\ADSoftware\Api\obj\Release\net6.0\PubTmp\Out\Api.runtimeconfig.json
+D:\Dev-Facultad\ADSoftware\Api\obj\Release\net6.0\PubTmp\Out\Api.pdb
+D:\Dev-Facultad\ADSoftware\Api\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
+D:\Dev-Facultad\ADSoftware\Api\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
+D:\Dev-Facultad\ADSoftware\Api\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Dev-Facultad\ADSoftware\Api\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll

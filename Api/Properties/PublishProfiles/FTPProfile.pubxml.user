@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAkrOX+o+4wk6lfFAPasQlgwAAAAACAAAAAAADZgAAwAAAABAAAACSgEdWITbwrGXw0E+x+JenAAAAAASAAACgAAAAEAAAAP0wPyXaGq+2FvM8WT1k0HMYAAAA2om5Pck2K+QPucmVikk59UMrzxms3FMrFAAAACcPqFxdihsU5uXiR7btnk9rHwSd</EncryptedPassword>
+    <_PublishTargetUrl>ftp://192.52.242.121/www.busquedaespecialistas.somee.com</_PublishTargetUrl>
+    <History>True|2022-07-23T13:59:19.0813207Z;False|2022-07-23T10:58:03.0247726-03:00;True|2022-07-23T10:55:54.2722122-03:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Api.deps.json">
+      <publishTime>07/23/2022 10:58:49</publishTime>
+    </File>
+    <File Include="Api.dll">
+      <publishTime>07/23/2022 10:58:49</publishTime>
+    </File>
+    <File Include="Api.exe">
+      <publishTime>07/23/2022 10:58:49</publishTime>
+    </File>
+    <File Include="Api.pdb">
+      <publishTime>07/23/2022 10:58:49</publishTime>
+    </File>
+    <File Include="Api.runtimeconfig.json">
+      <publishTime>07/23/2022 10:55:21</publishTime>
+    </File>
+    <File Include="appsettings.Development.json">
+      <publishTime>07/20/2022 19:43:08</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>07/20/2022 19:43:08</publishTime>
+    </File>
+    <File Include="Microsoft.OpenApi.dll">
+      <publishTime>08/29/2020 20:14:12</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.Swagger.dll">
+      <publishTime>10/16/2021 09:54:10</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerGen.dll">
+      <publishTime>10/16/2021 09:54:36</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerUI.dll">
+      <publishTime>10/16/2021 09:54:30</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>07/23/2022 10:58:49</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
