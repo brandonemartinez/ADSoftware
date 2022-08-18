@@ -1,20 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Dev-Facultad\\ADSoftware\\Services\\Services.csproj": {}
+    "C:\\Dev\\ADSoftware\\Backend\\Services\\Services.csproj": {}
   },
   "projects": {
-    "D:\\Dev-Facultad\\ADSoftware\\Services\\Services.csproj": {
+    "C:\\Dev\\ADSoftware\\Backend\\Services\\Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dev-Facultad\\ADSoftware\\Services\\Services.csproj",
+        "projectUniqueName": "C:\\Dev\\ADSoftware\\Backend\\Services\\Services.csproj",
         "projectName": "Services",
-        "projectPath": "D:\\Dev-Facultad\\ADSoftware\\Services\\Services.csproj",
-        "packagesPath": "C:\\Users\\bmartinez\\.nuget\\packages\\",
-        "outputPath": "D:\\Dev-Facultad\\ADSoftware\\Services\\obj\\",
+        "projectPath": "C:\\Dev\\ADSoftware\\Backend\\Services\\Services.csproj",
+        "packagesPath": "C:\\Users\\brand\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\ADSoftware\\Backend\\Services\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\bmartinez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\brand\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,8 +27,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.pkg.github.com/Switch-Software-Solutions/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -46,7 +50,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -55,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
