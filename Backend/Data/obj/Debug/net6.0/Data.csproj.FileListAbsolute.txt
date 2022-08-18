@@ -22,3 +22,17 @@ D:\Dev-Facultad\ADSoftware\backend\Data\obj\Debug\net6.0\Data.dll
 D:\Dev-Facultad\ADSoftware\backend\Data\obj\Debug\net6.0\refint\Data.dll
 D:\Dev-Facultad\ADSoftware\backend\Data\obj\Debug\net6.0\Data.pdb
 D:\Dev-Facultad\ADSoftware\backend\Data\obj\Debug\net6.0\ref\Data.dll
+C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Data.deps.json
+C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Data.dll
+C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Data.pdb
+C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.csproj.AssemblyReference.cache
+C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.AssemblyInfoInputs.cache
+C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.AssemblyInfo.cs
+C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.csproj.CoreCompileInputs.cache
+C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.dll
+C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\refint\Data.dll
+C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.pdb
+C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\ref\Data.dll
+C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Data.runtimeconfig.json
+C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.genruntimeconfig.cache
