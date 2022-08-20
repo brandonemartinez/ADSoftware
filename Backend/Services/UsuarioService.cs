@@ -30,5 +30,10 @@ namespace Services
             return nuevoUsuario;
 
         }
+
+        public async Task ValidateAlreadyCreatedUser(Usuario nuevoUsuario)
+        {
+            //TODO Validar que el usuario, documento e email no coincidan con otros
+        }
     }
 }

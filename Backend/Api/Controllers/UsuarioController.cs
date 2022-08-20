@@ -34,7 +34,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<UserResourceResponse>> GetById(string id)
@@ -61,7 +61,7 @@ namespace Api.Controllers
             Usuario newUser = await _userservice.Create(userToCreate);
             Usuario user = await _userservice.GetById(newUser.Documento);
             UserResourceResponse response = _mapper.Map<Usuario, UserResourceResponse>(user);
-            return Ok(response);
+            return Created("Created", response);
         }
 
     }
