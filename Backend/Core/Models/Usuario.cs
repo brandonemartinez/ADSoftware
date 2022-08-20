@@ -14,7 +14,7 @@ namespace Data.Models
         public string Documento { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public string Usuario1 { get; set; }
+        public string User { get; set; }
         public string Contrasenia { get; set; }
         public string Correo { get; set; }
         public string Telefono { get; set; }
@@ -22,7 +22,7 @@ namespace Data.Models
 
         public virtual Departamento IdDepartamentoNavigation { get; set; }
         public virtual Cliente Cliente { get; set; }
-        public virtual Especialista Especialistum { get; set; }
+        public virtual Especialista Especialista { get; set; }
 
         public virtual ICollection<Cita> IdCita { get; set; }
         public virtual ICollection<HistorialPago> IdHistorialPagos { get; set; }

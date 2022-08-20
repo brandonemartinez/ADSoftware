@@ -234,7 +234,7 @@ namespace Data
                     .HasColumnName("razonSocial");
 
                 entity.HasOne(d => d.DocumentoNavigation)
-                    .WithOne(p => p.Especialistum)
+                    .WithOne(p => p.Especialista)
                     .HasForeignKey<Especialista>(d => d.Documento)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Especiali__docum__30F848ED");
@@ -392,7 +392,7 @@ namespace Data
                     .IsUnicode(false)
                     .HasColumnName("telefono");
 
-                entity.Property(e => e.Usuario1)
+                entity.Property(e => e.User)
                     .IsRequired()
                     .HasMaxLength(30)
                     .IsUnicode(false)
