@@ -26,7 +26,7 @@ namespace Data.Repositories
             return await Context.Set<TEntity>().ToListAsync();
         }
 
-        public virtual async ValueTask<TEntity> GetByIntIdAsync(string id)
+        public virtual async ValueTask<TEntity> GetByIntIdAsync(int id)
         {
             return await Context.Set<TEntity>().FindAsync(id);
         }
