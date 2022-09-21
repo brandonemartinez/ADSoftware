@@ -9,8 +9,10 @@ namespace Core.Services
 {
     public interface IUsuarioService
     {
-        Task<Usuario> GetById(string documento);
         Task<IEnumerable<Usuario>> GetAll();
-        Task<Usuario> Create(Usuario usuario);
+        Task<Usuario> CreateEspecialist(Usuario usuario);
+        Task<Usuario> CreateClient(Usuario usuario);
+
+        Task<Usuario> GetById(string documento);
     }
 }

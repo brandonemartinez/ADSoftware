@@ -12,5 +12,20 @@ namespace Data.Repositories
         {
             get { return Context as DB_CATALOGO_SERVICIOSContext; }
         }
+
+        public async Task<Usuario> GetEspecialistaByIdCompleteAsync(string documento)
+        {
+            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Especialista).FirstOrDefaultAsync(u => u.Documento == documento);
+        }
+
+        public async Task<Usuario> GetClienteByIdCompleteAsync(string documento)
+        {
+            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Cliente).FirstOrDefaultAsync(u => u.Documento == documento);
+        }
+        
+        public async Task<Usuario> GetClienteByIdOrEmailCompleteAsync(string documento, string correo)
+        {
+            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Cliente).FirstOrDefaultAsync(u => u.Documento == documento || u.Correo == correo);
+        }
     }
 }

@@ -7,11 +7,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{26F113E4-EE4B-4F44-AEE5-027477C7A542}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{0A7C9F38-E2F2-4330-926F-8C4643624593}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{0A7C9F38-E2F2-4330-926F-8C4643624593}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{7872BA89-B5B2-4CC0-A341-5F90D954E1BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{7872BA89-B5B2-4CC0-A341-5F90D954E1BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusquedaCE.Tests", "BusquedaCE.Tests\BusquedaCE.Tests.csproj", "{64DA6648-46B4-43D0-B206-2CD5E53C91DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusquedaCE.Tests", "BusquedaCE.Tests\BusquedaCE.Tests.csproj", "{64DA6648-46B4-43D0-B206-2CD5E53C91DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1768F797-93FD-41DA-AEC3-B91191D087F4}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

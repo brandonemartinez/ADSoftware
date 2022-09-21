@@ -1,6 +1,6 @@
-﻿namespace Api.Resources
+﻿namespace Api.Resources.Client
 {
-    public class UserResourceResponse
+    public class ClientResourceResponse
     {
         public string Documento { get; set; }
         public string Nombre { get; set; }

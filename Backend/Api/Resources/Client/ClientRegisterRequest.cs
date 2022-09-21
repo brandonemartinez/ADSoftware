@@ -1,6 +1,6 @@
-﻿namespace Api.Resources
+﻿namespace Api.Resources.Client
 {
-    public class UserRegisterRequest
+    public class ClientRegisterRequest
     {
         public string Documento { get; set; }
         public string Nombre { get; set; }

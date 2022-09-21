@@ -10,6 +10,7 @@ namespace Core
     public interface IUnitOfWork : IDisposable
     {
         IUsuarioRepository UsuarioRepository { get; }
+        IEspecialistaRepository EspecialistaRepository { get; }
 
         Task<int> CommitAsync();
         Task<int> CommitAsync(string eventType, string entityName, object entity);
