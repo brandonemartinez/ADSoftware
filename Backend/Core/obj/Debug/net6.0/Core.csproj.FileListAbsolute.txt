@@ -22,3 +22,6 @@ C:\Dev\ADSoftware\Backend\Core\obj\Debug\net6.0\Core.dll
 C:\Dev\ADSoftware\Backend\Core\obj\Debug\net6.0\refint\Core.dll
 C:\Dev\ADSoftware\Backend\Core\obj\Debug\net6.0\Core.pdb
 C:\Dev\ADSoftware\Backend\Core\obj\Debug\net6.0\ref\Core.dll
+C:\Dev\ADSoftware\Backend\Core\bin\Debug\net6.0\Dtos.dll
+C:\Dev\ADSoftware\Backend\Core\bin\Debug\net6.0\Dtos.pdb
+C:\Dev\ADSoftware\Backend\Core\obj\Debug\net6.0\Core.csproj.CopyComplete

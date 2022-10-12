@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "IsDR4p9ta9kAMDzJy+n3xEsyXeOfD3WswE0al1ZTDcF/iqcU6wmHjyQoXKDZiL8LIajP235TCoSRARhFdMj3Wg==",
+  "dgSpecHash": "58F3d+O2n0ETfgj+aByOAqFpWK1jHGyO3y4L/2CYJcFAh0YjoV5xImjTmEfaLkm3rykl7E3Fsmf3RxbYitNZsg==",
   "success": true,
   "projectFilePath": "C:\\Dev\\ADSoftware\\Backend\\Services\\Services.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\brand\\.nuget\\packages\\system.linq.dynamic.core\\1.2.20\\system.linq.dynamic.core.1.2.20.nupkg.sha512"
+  ],
   "logs": []
 }

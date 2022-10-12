@@ -1,5 +1,5 @@
-﻿using Core.Repositories;
-using Data.Models;
+﻿using Core.Models;
+using Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories

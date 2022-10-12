@@ -2,8 +2,8 @@
 using Api.Resources.Especialist;
 using Api.Validators;
 using AutoMapper;
+using Core.Models;
 using Core.Services;
-using Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -62,7 +62,10 @@ namespace Api.Controllers
                 if (!validatorResult.IsValid)
                     return BadRequest(validatorResult.Errors);
 
+                //Mapper
                 var userToCreate = _mapper.Map<EspecialistRegisterRequest, Usuario>(userRegisterRequest);
+                userRegisterRequest.Oficios.ForEach(f => userToCreate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f }));
+
                 Usuario newUser = await _usuarioService.CreateEspecialist(userToCreate);
                 Usuario user = await _usuarioService.GetById(newUser.Documento);
                 if (user == null) return NotFound();

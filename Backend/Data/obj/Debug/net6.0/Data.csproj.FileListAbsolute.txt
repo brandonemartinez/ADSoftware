@@ -39,3 +39,5 @@ C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\refint\Data.dll
 C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.pdb
 C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.genruntimeconfig.cache
 C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\ref\Data.dll
+C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Dtos.dll
+C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Dtos.pdb

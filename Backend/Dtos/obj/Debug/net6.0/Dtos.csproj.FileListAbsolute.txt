@@ -1,0 +1,12 @@
+C:\Dev\ADSoftware\Backend\Dtos\bin\Debug\net6.0\Dtos.deps.json
+C:\Dev\ADSoftware\Backend\Dtos\bin\Debug\net6.0\Dtos.dll
+C:\Dev\ADSoftware\Backend\Dtos\bin\Debug\net6.0\Dtos.pdb
+C:\Dev\ADSoftware\Backend\Dtos\obj\Debug\net6.0\Dtos.csproj.AssemblyReference.cache
+C:\Dev\ADSoftware\Backend\Dtos\obj\Debug\net6.0\Dtos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\ADSoftware\Backend\Dtos\obj\Debug\net6.0\Dtos.AssemblyInfoInputs.cache
+C:\Dev\ADSoftware\Backend\Dtos\obj\Debug\net6.0\Dtos.AssemblyInfo.cs
+C:\Dev\ADSoftware\Backend\Dtos\obj\Debug\net6.0\Dtos.csproj.CoreCompileInputs.cache
+C:\Dev\ADSoftware\Backend\Dtos\obj\Debug\net6.0\Dtos.dll
+C:\Dev\ADSoftware\Backend\Dtos\obj\Debug\net6.0\refint\Dtos.dll
+C:\Dev\ADSoftware\Backend\Dtos\obj\Debug\net6.0\Dtos.pdb
+C:\Dev\ADSoftware\Backend\Dtos\obj\Debug\net6.0\ref\Dtos.dll

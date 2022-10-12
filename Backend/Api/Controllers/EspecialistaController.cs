@@ -1,9 +1,10 @@
-﻿using Api.Resources;
-using Api.Validators;
+﻿using Api.Resources.Especialist;
 using AutoMapper;
+using Core.Models;
 using Core.Services;
-using Data.Models;
+using Dtos.Dto.Especialista;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Api.Controllers
 {
@@ -12,27 +13,54 @@ namespace Api.Controllers
     [ApiController]
     public class EspecialistaController : ControllerBase
     {
-        //private readonly IEspecialistaService _especialistaService;
+        private readonly IEspecialistaService _especialistaService;
         private readonly IMapper _mapper;
 
         public EspecialistaController(
-            //IEspecialistaService especialistaService
+            IEspecialistaService especialistaService,
             IMapper mapper
             )
         {
-            //_especialistaService = especialistaService;
+            _especialistaService = especialistaService;
             _mapper = mapper;
         }
 
-        //[HttpGet]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //public async Task<ActionResult<IEnumerable<UserResourceResponse>>> GetAll()
-        //{
-        //    var userCollection = await _especialistaService.GetAll();
-        //    if (userCollection == null) return NotFound($"No se encontro ningun usuario");
-        //    var userResourcesResponse = _mapper.Map<IEnumerable<Usuario>, IEnumerable<UserResourceResponse>>(userCollection);
-        //    return Ok(userResourcesResponse);
-        //}
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<EspecialistaResourceListResponse>>> GetAll()
+        {
+            var especialsitaCollection = await _especialistaService.GetAll();
+            if (especialsitaCollection == null) return NotFound($"No se encontro ningun especialista");
+            var especialistaResourcesListResponse = _mapper.Map<IEnumerable<Especialista>, IEnumerable<EspecialistaResourceListResponse>>(especialsitaCollection);
+            return Ok(especialistaResourcesListResponse);
+        }
+
+        [HttpGet("filteredList")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<EspecialistaResourceListResponse>>> GetListFiltred(
+            string? Nombre,
+            string? Apellido,
+            string? Oficio,
+            string? Calificacion,
+            string? OrderBy,
+            int? Page,
+            bool OrderByMethod = true
+            )
+        {
+            var especialsitaCollection = await _especialistaService.GetListFiltred(
+                new ListFilter
+                {
+                    Nombre = Nombre,
+                    Apellido = Apellido,
+                    Oficio = Oficio,
+                    Calificacion = Calificacion,
+                    OrderBy = OrderBy,
+                    OrderByMethod = OrderByMethod
+                });
+            if (especialsitaCollection == null) return NotFound($"No se encontro ningun especialista");
+            var especialistaResourcesListResponse = _mapper.Map<IEnumerable<Especialista>, IEnumerable<EspecialistaResourceListResponse>>(especialsitaCollection);
+            return Ok(especialistaResourcesListResponse);
+        }
 
         //[HttpGet("{id}")]
         //[ProducesResponseType(StatusCodes.Status201Created)]

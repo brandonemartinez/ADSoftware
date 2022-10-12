@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "Dtos/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Dtos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Dtos.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Dtos/1.0.0": {
+      "type": "project",
+      "path": "../Dtos/Dtos.csproj",
+      "msbuildProject": "../Dtos/Dtos.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "Dtos >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\brand\\.nuget\\packages\\": {},
@@ -40,7 +59,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Dev\\ADSoftware\\Backend\\Dtos\\Dtos.csproj": {
+              "projectPath": "C:\\Dev\\ADSoftware\\Backend\\Dtos\\Dtos.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

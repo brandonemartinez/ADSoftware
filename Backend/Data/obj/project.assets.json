@@ -786,11 +786,24 @@
       "Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Dtos": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Core.dll": {}
         },
         "runtime": {
           "bin/placeholder/Core.dll": {}
+        }
+      },
+      "Dtos/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Dtos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Dtos.dll": {}
         }
       }
     }
@@ -2018,6 +2031,11 @@
       "type": "project",
       "path": "../Core/Core.csproj",
       "msbuildProject": "../Core/Core.csproj"
+    },
+    "Dtos/1.0.0": {
+      "type": "project",
+      "path": "../Dtos/Dtos.csproj",
+      "msbuildProject": "../Dtos/Dtos.csproj"
     }
   },
   "projectFileDependencyGroups": {

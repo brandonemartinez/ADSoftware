@@ -1,11 +1,6 @@
-﻿using Core.Repositories;
-using Data.Models;
+﻿using Core.Models;
+using Core.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
@@ -22,6 +17,11 @@ namespace Data.Repositories
         public async Task<Especialista> GetEspecialistaByIdCompleteAsync(string documento)
         {
             return await DB_CATALOGO_SERVICIOSContext.Especialista.FirstOrDefaultAsync(u => u.Documento == documento);
+        }
+
+        public async Task<IEnumerable<Especialista>> GetEspecialistasCompleteAsync()
+        {
+            return await DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.DocumentoNavigation).ToListAsync();
         }
     }
 }

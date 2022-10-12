@@ -1,11 +1,8 @@
 ﻿using Core;
+using Core.Models;
 using Core.Services;
-using Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Dtos.Dto.Especialista;
+using System.Linq.Dynamic.Core;
 
 namespace Services
 {
@@ -32,6 +29,23 @@ namespace Services
             Especialista usuario = await _unitOfWork.EspecialistaRepository.GetEspecialistaByIdCompleteAsync(nuevoUsuario.Documento);
             if (usuario != null) exists = true;
             return exists;
+        }
+
+        public async Task<IEnumerable<Especialista>> GetAll()
+        {
+
+            var especialistas = await _unitOfWork.EspecialistaRepository.GetEspecialistasCompleteAsync();
+            return especialistas;
+        }
+
+        public async Task<IEnumerable<Especialista>> GetListFiltred(ListFilter listFilter)
+        {
+            var especialistas = await _unitOfWork.EspecialistaRepository.GetEspecialistasCompleteAsync();
+            string orderMethod = listFilter.OrderByMethod ? "ASC" : "DESC";
+            if(listFilter.OrderBy is not null)
+            especialistas.OrderBy(o => o.DocumentoNavigation);
+
+            return especialistas;
         }
     }
 }

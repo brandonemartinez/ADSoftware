@@ -25,3 +25,5 @@ C:\Dev\ADSoftware\Backend\Services\obj\Debug\net6.0\Services.dll
 C:\Dev\ADSoftware\Backend\Services\obj\Debug\net6.0\refint\Services.dll
 C:\Dev\ADSoftware\Backend\Services\obj\Debug\net6.0\Services.pdb
 C:\Dev\ADSoftware\Backend\Services\obj\Debug\net6.0\ref\Services.dll
+C:\Dev\ADSoftware\Backend\Services\bin\Debug\net6.0\Dtos.dll
+C:\Dev\ADSoftware\Backend\Services\bin\Debug\net6.0\Dtos.pdb

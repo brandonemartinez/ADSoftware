@@ -486,8 +486,16 @@
         }
       },
       "Core/1.0.0": {
+        "dependencies": {
+          "Dtos": "1.0.0"
+        },
         "runtime": {
           "Core.dll": {}
+        }
+      },
+      "Dtos/1.0.0": {
+        "runtime": {
+          "Dtos.dll": {}
         }
       }
     }
@@ -800,6 +808,11 @@
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
     "Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Dtos/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

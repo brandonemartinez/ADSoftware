@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "Core/1.0.0": {
+        "dependencies": {
+          "Dtos": "1.0.0"
+        },
         "runtime": {
           "Core.dll": {}
+        }
+      },
+      "Dtos/1.0.0": {
+        "runtime": {
+          "Dtos.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Dtos/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -12,6 +12,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IEspecialistaService, EspecialistaService>();
 builder.Services.AddScoped(typeof(DB_CATALOGO_SERVICIOSContext));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

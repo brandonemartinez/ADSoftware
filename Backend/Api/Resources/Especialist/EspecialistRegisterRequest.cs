@@ -1,4 +1,6 @@
-﻿namespace Api.Resources.Especialist
+﻿using Data.Dto.Especialista;
+
+namespace Api.Resources.Especialist
 {
     public class EspecialistRegisterRequest
     {
@@ -14,5 +16,7 @@
         public string Fotos { get; set; }
         public int? Calificacion { get; set; }
         public int IdPlanes { get; set; }
+        public List<int> Oficios { get; set; }
+
     }
 }
