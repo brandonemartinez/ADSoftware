@@ -5,7 +5,7 @@
                 public string Nombre {get; set;}
                 public string Apellido {get; set;}
                 public string Oficio {get; set;}
-                public string Calificacion {get; set;}
+                public decimal? Calificacion {get; set;}
                 public string OrderBy {get; set;}
                 public bool OrderByMethod { get; set; } 
 

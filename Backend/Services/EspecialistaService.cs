@@ -40,11 +40,12 @@ namespace Services
 
         public async Task<IEnumerable<Especialista>> GetListFiltred(ListFilter listFilter)
         {
-            var especialistas = await _unitOfWork.EspecialistaRepository.GetEspecialistasCompleteAsync();
-            string orderMethod = listFilter.OrderByMethod ? "ASC" : "DESC";
-            if(listFilter.OrderBy is not null)
-            especialistas.OrderBy(o => o.DocumentoNavigation);
-
+            IEnumerable<Especialista> especialistas = await _unitOfWork.EspecialistaRepository.GetEspecialistaFilter(listFilter.Nombre,
+                                                                                               listFilter.Apellido,
+                                                                                               listFilter.Oficio,
+                                                                                               listFilter.Calificacion,
+                                                                                               listFilter.OrderBy,
+                                                                                               listFilter.OrderByMethod);
             return especialistas;
         }
     }

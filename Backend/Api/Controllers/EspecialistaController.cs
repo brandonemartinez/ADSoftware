@@ -41,7 +41,7 @@ namespace Api.Controllers
             string? Nombre,
             string? Apellido,
             string? Oficio,
-            string? Calificacion,
+            decimal? Calificacion,
             string? OrderBy,
             int? Page,
             bool OrderByMethod = true
