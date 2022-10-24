@@ -25,6 +25,11 @@ namespace Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Crear cliente
+        /// </summary>
+        /// <param name="userRegisterRequest"></param>
+        /// <returns></returns>
         [HttpPost("Cliente")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ClientResourceResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
