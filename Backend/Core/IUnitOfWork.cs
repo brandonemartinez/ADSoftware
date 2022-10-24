@@ -1,9 +1,4 @@
 ﻿using Core.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core
 {
@@ -11,6 +6,7 @@ namespace Core
     {
         IUsuarioRepository UsuarioRepository { get; }
         IEspecialistaRepository EspecialistaRepository { get; }
+        IDepartamentoRepository DepartamentoRepository { get; }
 
         Task<int> CommitAsync();
         Task<int> CommitAsync(string eventType, string entityName, object entity);

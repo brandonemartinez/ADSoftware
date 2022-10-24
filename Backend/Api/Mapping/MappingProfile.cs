@@ -1,7 +1,9 @@
 ﻿using Api.Resources.Client;
+using Api.Resources.Department;
 using Api.Resources.Especialist;
 using AutoMapper;
 using Core.Models;
+using Dtos.Dto.Departamento;
 
 namespace Api.Mapping
 {
@@ -13,6 +15,13 @@ namespace Api.Mapping
             CreateMap<Usuario, ClientResourceResponse>().ReverseMap();
             CreateMap<Usuario, ClientRegisterRequest>().ReverseMap();
             CreateMap<Usuario, EspecialistResourceResponse>().ReverseMap();
+            CreateMap<Departamento, DepartmentResourceListResponse>()
+                .ForMember(dest => dest.Departamento, act => act.MapFrom(src => src.Nombre))
+                .ForMember(dest => dest.Ciudades, act => act.MapFrom(src => src.Ciudads))
+                .ReverseMap();
+            CreateMap<Ciudad, CiudadDto>()
+                .ForMember(dest => dest.Ciudad, act => act.MapFrom(src => src.Ciudad1))
+                .ReverseMap();
             CreateMap<EspecialistRegisterRequest, Usuario>()
                 .ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
                 .ForPath(dest => dest.Especialista.RazonSocial, act => act.MapFrom(src => src.RazonSocial))

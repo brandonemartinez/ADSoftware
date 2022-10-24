@@ -14,6 +14,7 @@ namespace Data
         private readonly DB_CATALOGO_SERVICIOSContext _context;
         private UsuarioRepository _usuarioRepository;
         private EspecialistaRepository _especialistaRepository;
+        private DepartamentoRepository _departamentoRepository;
 
         public UnitOfWork(DB_CATALOGO_SERVICIOSContext context)
         {
@@ -24,6 +25,8 @@ namespace Data
             _usuarioRepository ??= new UsuarioRepository(_context);
         public IEspecialistaRepository EspecialistaRepository =>
             _especialistaRepository ??= new EspecialistaRepository(_context);
+        public IDepartamentoRepository DepartamentoRepository =>
+            _departamentoRepository ??= new DepartamentoRepository(_context);
 
         public void Dispose()
         {
