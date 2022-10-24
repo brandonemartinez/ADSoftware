@@ -2,7 +2,7 @@
 
 namespace Api.Resources.Especialist
 {
-    public class EspecialistRegisterRequest
+    public class EspecialistUpdateRequest
     {
         public string Documento { get; set; }
         public string Nombre { get; set; }
@@ -17,6 +17,5 @@ namespace Api.Resources.Especialist
         public int? Calificacion { get; set; }
         public int IdPlanes { get; set; }
         public List<OficioEspecialistaDto> Oficios { get; set; }
-
     }
 }

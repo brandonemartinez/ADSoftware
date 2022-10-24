@@ -27,7 +27,9 @@ C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Data.runtimeconfig.json
 C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Data.dll
 C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Data.pdb
 C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Core.dll
+C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Dtos.dll
 C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Core.pdb
+C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Dtos.pdb
 C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.csproj.AssemblyReference.cache
 C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.GeneratedMSBuildEditorConfig.editorconfig
 C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.AssemblyInfoInputs.cache
@@ -39,5 +41,3 @@ C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\refint\Data.dll
 C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.pdb
 C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\Data.genruntimeconfig.cache
 C:\Dev\ADSoftware\Backend\Data\obj\Debug\net6.0\ref\Data.dll
-C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Dtos.dll
-C:\Dev\ADSoftware\Backend\Data\bin\Debug\net6.0\Dtos.pdb

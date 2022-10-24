@@ -1,6 +1,7 @@
 ﻿using Core;
 using Core.Models;
 using Core.Services;
+using Services.Mapping;
 
 namespace Services
 {
@@ -41,6 +42,16 @@ namespace Services
             Usuario usuario = await _unitOfWork.UsuarioRepository.GetByStringIdAsync(documento);
             return usuario;
         }
+        public async Task<Usuario> UpdateEspecialist(Usuario userToUpdate)
+        {
+            Usuario userDb = await _unitOfWork.UsuarioRepository.GetEspecialistaByIdCompleteAsync(userToUpdate.Documento);
+
+            UdpateEspecialistMapper.MapEspecialistToUpdate(userDb, userToUpdate);
+
+            _unitOfWork.UsuarioRepository.UpdateCompleteEspecialistAsync(userDb);
+            await _unitOfWork.CommitAsync();
+            return userToUpdate;
+        }
 
         private async Task<bool> ValidateAlreadyCreatedUserEspecialist(Usuario nuevoUsuario)
         {
@@ -57,6 +68,7 @@ namespace Services
             if (usuario != null) exists = true;
             return exists;
         }
+
 
     }
 }

@@ -111,7 +111,6 @@ C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.GeneratedMSBuildEditorConfig.
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.AssemblyInfoInputs.cache
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.AssemblyInfo.cs
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.csproj.CoreCompileInputs.cache
-C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.MvcApplicationPartsAssemblyInfo.cs
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\appsettings.Development.json
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\appsettings.json
@@ -142,6 +141,7 @@ C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\System.Drawing.Common.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\System.Linq.Dynamic.Core.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\System.Runtime.Caching.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\System.Security.Permissions.dll
@@ -160,10 +160,12 @@ C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\S
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Core.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Data.dll
+C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Dtos.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Services.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Core.pdb
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Data.pdb
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Services.pdb
+C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Dtos.pdb
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\staticwebassets.build.json
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\staticwebassets.development.json
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\scopedcss\bundle\Api.styles.css
@@ -173,6 +175,3 @@ C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\refint\Api.dll
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.pdb
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.genruntimeconfig.cache
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\ref\Api.dll
-C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Dtos.dll
-C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Dtos.pdb
-C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\System.Linq.Dynamic.Core.dll

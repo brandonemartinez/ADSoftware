@@ -40,5 +40,6 @@ namespace Data.Repositories
         {
             Context.Set<TEntity>().Update(entity);
         }
+
     }
 }

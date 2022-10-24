@@ -28,6 +28,14 @@ namespace Api.Mapping
                 .ForPath(dest => dest.Especialista.IdPlanes, act => act.MapFrom(src => src.IdPlanes))
                 .ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
                 .ReverseMap();
+            CreateMap<EspecialistUpdateRequest, Usuario>()
+                .ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
+                .ForPath(dest => dest.Especialista.RazonSocial, act => act.MapFrom(src => src.RazonSocial))
+                .ForPath(dest => dest.Especialista.IdPlanes, act => act.MapFrom(src => src.IdPlanes))
+                .ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
+                .ForPath(dest => dest.Especialista.Documento, act => act.MapFrom(src => src.Documento))
+                .ForPath(dest => dest.Especialista.Calificacion, act => act.MapFrom(src => src.Calificacion))
+                .ReverseMap();
             CreateMap<EspecialistaResourceListResponse, Especialista>()
                 .ForPath(dest => dest.DocumentoNavigation.Nombre, act => act.MapFrom(src => src.Nombre))
                 .ForPath(dest => dest.DocumentoNavigation.Apellido, act => act.MapFrom(src => src.Apellido))

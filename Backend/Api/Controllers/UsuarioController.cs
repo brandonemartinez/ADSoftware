@@ -4,6 +4,7 @@ using Api.Validators;
 using AutoMapper;
 using Core.Models;
 using Core.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -64,7 +65,7 @@ namespace Api.Controllers
 
                 //Mapper
                 var userToCreate = _mapper.Map<EspecialistRegisterRequest, Usuario>(userRegisterRequest);
-                userRegisterRequest.Oficios.ForEach(f => userToCreate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f }));
+                userRegisterRequest.Oficios.ForEach(f => userToCreate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, Certificaciones = f.Certificaciones, Documento = userRegisterRequest.Documento }));
 
                 Usuario newUser = await _usuarioService.CreateEspecialist(userToCreate);
                 Usuario user = await _usuarioService.GetById(newUser.Documento);
@@ -97,6 +98,33 @@ namespace Api.Controllers
                 if (user == null) return NotFound();
                 EspecialistResourceResponse response = _mapper.Map<Usuario, EspecialistResourceResponse>(user);
                 return Created("Created", response);
+            }
+            catch (ArgumentException exception)
+            {
+                throw exception;
+            }
+        }
+
+        [HttpPut("Especialista")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(EspecialistResourceResponse))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<EspecialistResourceResponse>> UpdateEspecialista([FromBody] EspecialistUpdateRequest userUpdateRequest)
+        {
+            try
+            {
+                var validator = new EspecialistaUpdateRequestValidator();
+                var validatorResult = await validator.ValidateAsync(userUpdateRequest);
+                if (!validatorResult.IsValid)
+                    return BadRequest(validatorResult.Errors);
+
+                //Mapper
+                var userToUpdate = _mapper.Map<EspecialistUpdateRequest, Usuario>(userUpdateRequest);
+                userUpdateRequest.Oficios.ForEach(f => userToUpdate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, Certificaciones = f.Certificaciones, Documento = userToUpdate.Documento}));
+
+                Usuario newUser = await _usuarioService.UpdateEspecialist(userToUpdate);
+                EspecialistResourceResponse response = _mapper.Map<Usuario, EspecialistResourceResponse>(newUser);
+                return Created("Updated", response);
             }
             catch (ArgumentException exception)
             {
