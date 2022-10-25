@@ -20,13 +20,13 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IEspecialistaService, EspecialistaService>();
 builder.Services.AddScoped<IDepartamentoService, DepartamentoService>();
-//TEST Security
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+//JWT
 var appsettingsSection = builder.Configuration.GetSection("Auth");
 builder.Services.Configure<AppSettings>(appsettingsSection);
 
-//JWT
 var appsettings = appsettingsSection.Get<AppSettings>();
 var key = Encoding.ASCII.GetBytes(appsettings.Token);
 
@@ -47,7 +47,6 @@ builder.Services.AddAuthentication(d =>
     };
 });
 
-//
 builder.Services.AddScoped(typeof(DB_CATALOGO_SERVICIOSContext));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

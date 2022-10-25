@@ -108,7 +108,6 @@ D:\Dev-Facultad\ADSoftware\Api\obj\Debug\net6.0\Api.genruntimeconfig.cache
 D:\Dev-Facultad\ADSoftware\Api\obj\Debug\net6.0\ref\Api.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\appsettings.Development.json
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\appsettings.json
-C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\beears.json
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Api.exe
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Api.deps.json
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Api.runtimeconfig.json

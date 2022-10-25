@@ -8,9 +8,11 @@ namespace Services
     public class UsuarioService : IUsuarioService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public UsuarioService(IUnitOfWork unitOfWork)
+        private readonly IEmailService _emailService;
+        public UsuarioService(IUnitOfWork unitOfWork, IEmailService emailService)
         {
             _unitOfWork = unitOfWork;
+            _emailService = emailService;
         }
 
         public async Task<IEnumerable<Usuario>> GetAll()
@@ -26,6 +28,7 @@ namespace Services
 
             await _unitOfWork.UsuarioRepository.CreateAsync(nuevoUsuario);
             await _unitOfWork.CommitAsync();
+            _emailService.EnviarEmailCuentaCreada(nuevoUsuario.Correo, nuevoUsuario.Nombre);
             return nuevoUsuario;
         }
         public async Task<Usuario> CreateClient(Usuario nuevoUsuario)
@@ -35,6 +38,7 @@ namespace Services
 
             await _unitOfWork.UsuarioRepository.CreateAsync(nuevoUsuario);
             await _unitOfWork.CommitAsync();
+            _emailService.EnviarEmailCuentaCreada(nuevoUsuario.Correo, nuevoUsuario.Nombre);
             return nuevoUsuario;
         }
         public async Task<Usuario> GetById(string documento)
@@ -53,11 +57,10 @@ namespace Services
             return userToUpdate;
         }
 
+        //Verificar si esta hecho
         public async Task<Usuario> UpdateClient(Usuario userToUpdate)
         {
             Usuario userDb = await _unitOfWork.UsuarioRepository.GetClienteByIdCompleteAsync(userToUpdate.Documento);
-
-            //UdpateEspecialistMapper.MapEspecialistToUpdate(userDb, userToUpdate);
 
             _unitOfWork.UsuarioRepository.UpdateCompleteClientAsync(userDb);
             await _unitOfWork.CommitAsync();
