@@ -4,6 +4,7 @@ using Core.Models;
 using Core.Services;
 using Dtos.Dto.Especialista;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace Api.Controllers
 {
@@ -50,6 +51,7 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet("Filtrado")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<EspecialistaResourceListResponse>>> GetListFiltred(
             string? Nombre,
             string? Oficio,
@@ -74,7 +76,17 @@ namespace Api.Controllers
                     OrderByMethod = OrderByMethod
                 });
             if (especialsitaCollection == null) return NotFound($"No se encontro ningun especialista");
-            var especialistaResourcesListResponse = _mapper.Map<IEnumerable<Especialista>, IEnumerable<EspecialistaResourceListResponse>>(especialsitaCollection);
+            IEnumerable<EspecialistaResourceListResponse> especialistaResourcesListResponse = _mapper.Map<IEnumerable<Especialista>, IEnumerable<EspecialistaResourceListResponse>>(especialsitaCollection);
+            foreach (var item in especialistaResourcesListResponse)
+            {
+                var especialista = especialsitaCollection.FirstOrDefault(f => f.DocumentoNavigation.Nombre == item.Nombre);
+                item.Oficios = new List<EspecialistaOficioListResponse>();
+                foreach (var oficioEspecialista in especialista.OficioEspecialista)
+                {
+                    item.Oficios.Add(new EspecialistaOficioListResponse { Nombre = oficioEspecialista.IdOficioNavigation.Nombre });
+                }
+
+            };
             return Ok(especialistaResourcesListResponse);
         }
 

@@ -3,8 +3,8 @@ using AutoMapper;
 using Core;
 using Core.Services;
 using Data;
-using Services;
 using Microsoft.OpenApi.Models;
+using Services;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +16,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IEspecialistaService, EspecialistaService>();
 builder.Services.AddScoped<IDepartamentoService, DepartamentoService>();
+//
 builder.Services.AddScoped(typeof(DB_CATALOGO_SERVICIOSContext));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -31,7 +32,7 @@ builder.Services.AddSwaggerGen(options =>
             Name = "AD Software",
             Url = new Uri("http://www.adsoftware.com.uy/")
         },
-        
+
     });
 
     // using System.Reflection;

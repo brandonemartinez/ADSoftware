@@ -33,7 +33,8 @@ namespace Data.Repositories
             string OrderBy,
             bool OrderByMethod)
         {
-            var queryable = DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.DocumentoNavigation).AsQueryable();
+            var queryable = DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.DocumentoNavigation).Include(e => e.OficioEspecialista).AsQueryable();
+
             if (!string.IsNullOrEmpty(Nombre))
             {
                 queryable = queryable.Where(x => x.DocumentoNavigation.Nombre.Contains(Nombre));
@@ -41,10 +42,12 @@ namespace Data.Repositories
             if (!string.IsNullOrEmpty(Oficio))
             {
                 queryable = queryable.Where(x => x.OficioEspecialista.Any(a => a.IdOficioNavigation.Nombre.Contains(Oficio)));
+                //TODO Agregar not found si no encontraron resultados con cierto oficio
             };
             //if (!string.IsNullOrEmpty(Localidad))
             //{
-            //    queryable = queryable.Where(x => x.OficioEspecialista.Any(a => a.IdOficioNavigation.Nombre == Oficio));
+            //    queryable = queryable.Where(x => x.Disponibilidads);
+            //    //TODO Agregar not found si no encontraron resultados con cierto oficio
             //};
             if (CalificacionDesde.HasValue)
             {
@@ -54,8 +57,21 @@ namespace Data.Repositories
             {
                 queryable = queryable.Where(x => x.Calificacion <= CalificacionHasta);
             };
-            
+
             queryable = OrderEspecialists(queryable, OrderBy, OrderByMethod);
+            var oficios = await DB_CATALOGO_SERVICIOSContext.Oficios.ToListAsync();
+            await queryable.ForEachAsync(item =>
+            {
+                foreach (var oficio in item.OficioEspecialista)
+                {
+                    oficio.IdOficioNavigation = new Oficio()
+                    {
+                        Id = oficio.IdOficio,
+                        Nombre = oficios.FirstOrDefault(w => w.Id == oficio.IdOficio).Nombre
+                    };
+                }
+            });
+
             return queryable;
         }
 

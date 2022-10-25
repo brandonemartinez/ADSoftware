@@ -3,11 +3,7 @@
     public class EspecialistaResourceListResponse
     {
         public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Correo { get; set; }
-        public string Telefono { get; set; }
-        public string RazonSocial { get; set; }
-        public int IdDepartamento { get; set; }
         public int? Calificacion { get; set; }
+        public List<EspecialistaOficioListResponse> Oficios { get; set; }
     }
 }

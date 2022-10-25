@@ -1,0 +1,14 @@
+﻿[
+  {
+    "Id": 1,
+    "Name": "London Porter",
+    "Brand": "Fuller's",
+    "Alcohol": 8.5
+  },
+  {
+    "Id": 2,
+    "Name": "Pilsen Cero",
+    "Brand": "Pilsen",
+    "Alcohol": 8.5
+  }
+]
