@@ -1,10 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "58F3d+O2n0ETfgj+aByOAqFpWK1jHGyO3y4L/2CYJcFAh0YjoV5xImjTmEfaLkm3rykl7E3Fsmf3RxbYitNZsg==",
+  "dgSpecHash": "JRPTvSVWYWbb0HRdCGNwDc9z5CkqqFZQSdQj6z8vN+POxiiKHh7JmJIZNMpkvRv0GoPx8MjRF/ekahYL7ovu6w==",
   "success": true,
   "projectFilePath": "C:\\Dev\\ADSoftware\\Backend\\Services\\Services.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\brand\\.nuget\\packages\\system.linq.dynamic.core\\1.2.20\\system.linq.dynamic.core.1.2.20.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\brand\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\brand\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\brand\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\6.10.0\\microsoft.identitymodel.jsonwebtokens.6.10.0.nupkg.sha512",
+    "C:\\Users\\brand\\.nuget\\packages\\microsoft.identitymodel.logging\\6.10.0\\microsoft.identitymodel.logging.6.10.0.nupkg.sha512",
+    "C:\\Users\\brand\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.10.0\\microsoft.identitymodel.tokens.6.10.0.nupkg.sha512",
+    "C:\\Users\\brand\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.10.0\\system.identitymodel.tokens.jwt.6.10.0.nupkg.sha512",
+    "C:\\Users\\brand\\.nuget\\packages\\system.linq.dynamic.core\\1.2.20\\system.linq.dynamic.core.1.2.20.nupkg.sha512",
+    "C:\\Users\\brand\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

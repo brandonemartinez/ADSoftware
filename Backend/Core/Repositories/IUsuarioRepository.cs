@@ -9,5 +9,6 @@ namespace Core.Repositories
         Task<Usuario> GetClienteByIdOrEmailCompleteAsync(string documento, string email);
         void UpdateCompleteEspecialistAsync(Usuario user);
         void UpdateCompleteClientAsync(Usuario user);
+        Task<Usuario> GetUsuarioLoginAsync(string correo, string contrasenia);
     }
 }

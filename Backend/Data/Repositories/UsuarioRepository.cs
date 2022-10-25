@@ -23,6 +23,10 @@ namespace Data.Repositories
             return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Cliente).FirstOrDefaultAsync(u => u.Documento == documento);
         }
 
+        public async Task<Usuario> GetUsuarioLoginAsync(string correo, string contrasenia)
+        {
+            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Where(w => w.Correo == correo && w.Contrasenia == contrasenia).FirstOrDefaultAsync();
+        }        
         public async Task<Usuario> GetClienteByIdOrEmailCompleteAsync(string documento, string correo)
         {
             return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Cliente).FirstOrDefaultAsync(u => u.Documento == documento || u.Correo == correo);

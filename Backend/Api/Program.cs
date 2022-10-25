@@ -1,11 +1,15 @@
-﻿using Api.Mapping;
+﻿using Api.Common;
+using Api.Mapping;
 using AutoMapper;
 using Core;
 using Core.Services;
 using Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Services;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +20,33 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IEspecialistaService, EspecialistaService>();
 builder.Services.AddScoped<IDepartamentoService, DepartamentoService>();
+//TEST Security
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+var appsettingsSection = builder.Configuration.GetSection("Auth");
+builder.Services.Configure<AppSettings>(appsettingsSection);
+
+//JWT
+var appsettings = appsettingsSection.Get<AppSettings>();
+var key = Encoding.ASCII.GetBytes(appsettings.Token);
+
+builder.Services.AddAuthentication(d =>
+{
+    d.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    d.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer( d =>
+{
+    d.RequireHttpsMetadata = false;
+    d.SaveToken = true;
+    d.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
 //
 builder.Services.AddScoped(typeof(DB_CATALOGO_SERVICIOSContext));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -61,6 +92,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

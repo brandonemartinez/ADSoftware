@@ -3,6 +3,7 @@ using AutoMapper;
 using Core.Models;
 using Core.Services;
 using Dtos.Dto.Especialista;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -11,10 +12,12 @@ namespace Api.Controllers
     [Consumes("application/json")]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Administrador")]
     public class EspecialistaController : ControllerBase
     {
         private readonly IEspecialistaService _especialistaService;
         private readonly IMapper _mapper;
+
 
         public EspecialistaController(
             IEspecialistaService especialistaService,

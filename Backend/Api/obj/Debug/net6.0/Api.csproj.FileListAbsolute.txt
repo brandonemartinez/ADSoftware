@@ -117,6 +117,7 @@ C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Api.pdb
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Api.xml
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\AutoMapper.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\FluentValidation.dll
+C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
