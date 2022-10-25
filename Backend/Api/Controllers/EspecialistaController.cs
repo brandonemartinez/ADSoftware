@@ -4,7 +4,6 @@ using Core.Models;
 using Core.Services;
 using Dtos.Dto.Especialista;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 
 namespace Api.Controllers
 {
@@ -24,7 +23,10 @@ namespace Api.Controllers
             _especialistaService = especialistaService;
             _mapper = mapper;
         }
-
+        /// <summary>
+        /// Obtener a todos los Especialistas sin ningun filtro
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<EspecialistaResourceListResponse>>> GetAll()
@@ -34,16 +36,28 @@ namespace Api.Controllers
             var especialistaResourcesListResponse = _mapper.Map<IEnumerable<Especialista>, IEnumerable<EspecialistaResourceListResponse>>(especialsitaCollection);
             return Ok(especialistaResourcesListResponse);
         }
-
-        [HttpGet("filteredList")]
+        /// <summary>
+        /// Obtener todos los Especialistas con filtros
+        /// </summary>
+        /// <param name="Nombre">Nombre de Fantasia</param>
+        /// <param name="Oficio">Oficio/Especialidad</param>
+        /// <param name="Localidad">Ciudad/Departamento</param>
+        /// <param name="CalificacionDesde">Calificacion desde</param>
+        /// <param name="CalificacionHasta">Calificacion hasta</param>
+        /// <param name="Page">Paginado</param>
+        /// <param name="OrderBy">Criterio de Orden</param>
+        /// <param name="OrderByMethod">True: Ascendente, False: Descendente</param>
+        /// <returns></returns>
+        [HttpGet("Filtrado")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<EspecialistaResourceListResponse>>> GetListFiltred(
             string? Nombre,
-            string? Apellido,
             string? Oficio,
-            decimal? Calificacion,
-            string? OrderBy,
+            decimal? CalificacionDesde,
+            decimal? CalificacionHasta,
+            string? Localidad,
             int? Page,
+            string? OrderBy,
             bool OrderByMethod = true
             )
         {
@@ -51,9 +65,11 @@ namespace Api.Controllers
                 new ListFilter
                 {
                     Nombre = Nombre,
-                    Apellido = Apellido,
                     Oficio = Oficio,
-                    Calificacion = Calificacion,
+                    Localidad = Localidad,
+                    CalificacionDesde = CalificacionDesde,
+                    CalificacionHasta = CalificacionHasta,
+                    Page = Page,
                     OrderBy = OrderBy,
                     OrderByMethod = OrderByMethod
                 });

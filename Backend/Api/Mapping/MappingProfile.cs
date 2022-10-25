@@ -36,6 +36,7 @@ namespace Api.Mapping
                 .ForPath(dest => dest.Especialista.Documento, act => act.MapFrom(src => src.Documento))
                 .ForPath(dest => dest.Especialista.Calificacion, act => act.MapFrom(src => src.Calificacion))
                 .ReverseMap();
+            CreateMap<ClientResourceResponse, Usuario>().ReverseMap();
             CreateMap<EspecialistaResourceListResponse, Especialista>()
                 .ForPath(dest => dest.DocumentoNavigation.Nombre, act => act.MapFrom(src => src.Nombre))
                 .ForPath(dest => dest.DocumentoNavigation.Apellido, act => act.MapFrom(src => src.Apellido))

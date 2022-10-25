@@ -24,42 +24,81 @@ namespace Data.Repositories
         {
             return await DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.DocumentoNavigation).ToListAsync();
         }
+
         public async Task<IEnumerable<Especialista>> GetEspecialistaFilter(string Nombre,
-            string Apellido,
             string Oficio,
-            decimal? Calificacion,
+            string Localidad,
+            decimal? CalificacionDesde,
+            decimal? CalificacionHasta,
             string OrderBy,
             bool OrderByMethod)
         {
-
-
             var queryable = DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.DocumentoNavigation).AsQueryable();
             if (!string.IsNullOrEmpty(Nombre))
             {
                 queryable = queryable.Where(x => x.DocumentoNavigation.Nombre.Contains(Nombre));
             };
-            if (!string.IsNullOrEmpty(Apellido))
-            {
-                queryable = queryable.Where(x => x.DocumentoNavigation.Apellido.Contains(Apellido));
-            };
             if (!string.IsNullOrEmpty(Oficio))
             {
                 queryable = queryable.Where(x => x.OficioEspecialista.Any(a => a.IdOficioNavigation.Nombre.Contains(Oficio)));
             };
-            if (Calificacion.HasValue)
+            //if (!string.IsNullOrEmpty(Localidad))
+            //{
+            //    queryable = queryable.Where(x => x.OficioEspecialista.Any(a => a.IdOficioNavigation.Nombre == Oficio));
+            //};
+            if (CalificacionDesde.HasValue)
             {
-                queryable = queryable.Where(x => x.Calificacion.Equals(Calificacion));
+                queryable = queryable.Where(x => x.Calificacion >= CalificacionDesde);
             };
-            if (!string.IsNullOrEmpty(OrderBy))
+            if (CalificacionHasta.HasValue)
             {
-                //TODO OrderBy
-                queryable = queryable.Where(x => x.DocumentoNavigation.Nombre.Contains(Nombre));
+                queryable = queryable.Where(x => x.Calificacion <= CalificacionHasta);
             };
-            if (OrderByMethod)
+            
+            queryable = OrderEspecialists(queryable, OrderBy, OrderByMethod);
+            return queryable;
+        }
+
+        private IQueryable<Especialista> OrderEspecialists(IQueryable<Especialista> queryable, string orderBy, bool orderByMethod)
+        {
+            if (string.IsNullOrEmpty(orderBy))
             {
-                //TODO OrderByMethod
-                queryable = queryable.Where(x => x.DocumentoNavigation.Nombre.Contains(Nombre));
-            };
+                queryable = queryable.OrderBy(o => o.Calificacion);
+            }
+            else
+            {
+                if (orderByMethod)
+                {
+                    if (orderBy == "Nombre")
+                    {
+                        queryable = queryable.OrderBy(o => o.DocumentoNavigation.Nombre);
+                    }
+                    if (orderBy == "Oficio")
+                    {
+                        queryable = queryable.OrderBy(o => o.OficioEspecialista);
+                    }
+                    if (orderBy == "Calificacion")
+                    {
+                        queryable = queryable.OrderBy(o => o.Calificacion);
+                    }
+                }
+                else
+                {
+                    if (orderBy == "Nombre")
+                    {
+                        queryable = queryable.OrderByDescending(o => o.DocumentoNavigation.Nombre);
+                    }
+                    if (orderBy == "Oficio")
+                    {
+                        queryable = queryable.OrderByDescending(o => o.OficioEspecialista);
+                    }
+                    if (orderBy == "Calificacion")
+                    {
+                        queryable = queryable.OrderByDescending(o => o.Calificacion);
+                    }
+
+                }
+            }
             return queryable;
         }
     }

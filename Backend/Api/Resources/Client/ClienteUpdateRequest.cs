@@ -1,13 +1,14 @@
-﻿namespace Api.Resources.Especialist
+﻿namespace Api.Resources.Client
 {
-    public class EspecialistaResourceListResponse
+    public class ClienteUpdateRequest
     {
+        public string Documento { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
+        public string User { get; set; }
+        public string Contrasenia { get; set; }
         public string Correo { get; set; }
         public string Telefono { get; set; }
-        public string RazonSocial { get; set; }
         public int IdDepartamento { get; set; }
-        public int? Calificacion { get; set; }
     }
 }

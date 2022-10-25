@@ -20,7 +20,10 @@ namespace Api.Controllers
             _deparmentoService = deparmentoService;
             _mapper = mapper;
         }
-
+        /// <summary>
+        /// Obtener todos los Departamentos con sus Ciudades
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<DepartmentResourceListResponse>>> GetAll()

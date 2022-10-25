@@ -22,17 +22,10 @@ namespace Services.Mapping
 
         private static void mapUpdatedEspecialist(Especialista espcialistOld, Especialista especialistNew)
         {
-            //userDbEspecialist.Disponibilidads = userToUpdateEspecialist.Disponibilidads;
             espcialistOld.RazonSocial = especialistNew.RazonSocial;
-            //espcialistOld.OficioEspecialista = especialistNew.OficioEspecialista;
             espcialistOld.Calificacion = especialistNew.Calificacion;
             espcialistOld.Fotos = especialistNew.Fotos;
             espcialistOld.IdPlanes = especialistNew.IdPlanes;
-        }
-
-        private static void mapUpdateOficioEspecialis(ICollection<OficioEspecialista> oficioEspecialistasOld, ICollection<OficioEspecialista> oficioEspecialistasNew)
-        {
-            oficioEspecialistasOld = oficioEspecialistasNew;
         }
 
         private static void mapUpdatedUser(Usuario userDb, Usuario userToUpdate)

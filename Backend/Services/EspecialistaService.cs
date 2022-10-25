@@ -41,9 +41,10 @@ namespace Services
         public async Task<IEnumerable<Especialista>> GetListFiltred(ListFilter listFilter)
         {
             IEnumerable<Especialista> especialistas = await _unitOfWork.EspecialistaRepository.GetEspecialistaFilter(listFilter.Nombre,
-                                                                                               listFilter.Apellido,
                                                                                                listFilter.Oficio,
-                                                                                               listFilter.Calificacion,
+                                                                                               listFilter.Localidad,
+                                                                                               listFilter.CalificacionDesde,
+                                                                                               listFilter.CalificacionHasta,
                                                                                                listFilter.OrderBy,
                                                                                                listFilter.OrderByMethod);
             return especialistas;

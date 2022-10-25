@@ -53,6 +53,17 @@ namespace Services
             return userToUpdate;
         }
 
+        public async Task<Usuario> UpdateClient(Usuario userToUpdate)
+        {
+            Usuario userDb = await _unitOfWork.UsuarioRepository.GetClienteByIdCompleteAsync(userToUpdate.Documento);
+
+            //UdpateEspecialistMapper.MapEspecialistToUpdate(userDb, userToUpdate);
+
+            _unitOfWork.UsuarioRepository.UpdateCompleteClientAsync(userDb);
+            await _unitOfWork.CommitAsync();
+            return userToUpdate;
+        }
+
         private async Task<bool> ValidateAlreadyCreatedUserEspecialist(Usuario nuevoUsuario)
         {
             bool exists = false;

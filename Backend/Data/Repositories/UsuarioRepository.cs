@@ -41,6 +41,19 @@ namespace Data.Repositories
 
                 throw exe;
             }
+        }        
+        public async void UpdateCompleteClientAsync(Usuario? user)
+        {
+            try
+            {
+                DB_CATALOGO_SERVICIOSContext.Clientes.Update(user.Cliente);
+                DB_CATALOGO_SERVICIOSContext.Usuarios.Update(user);
+            }
+            catch (Exception exe)
+            {
+
+                throw exe;
+            }
         }
     }
 }

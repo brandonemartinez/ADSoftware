@@ -19,8 +19,10 @@ namespace Api.Controllers
         private readonly IMapper _mapper;
 
         public UsuarioController(IUsuarioService userservice,
+                                 IEspecialistaService especialistaService,
                                  IMapper mapper)
         {
+            _especialistaService = especialistaService;
             _usuarioService = userservice;
             _mapper = mapper;
         }
@@ -54,7 +56,11 @@ namespace Api.Controllers
                 throw;
             }
         }
-
+        /// <summary>
+        /// Crear un Especialista
+        /// </summary>
+        /// <param name="userRegisterRequest"></param>
+        /// <returns></returns>
         [HttpPost("Especialista")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EspecialistResourceResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -83,7 +89,11 @@ namespace Api.Controllers
                 throw exception;
             }
         }
-
+        /// <summary>
+        /// Cambiar de tipo a un Usuario Ciente a Especialista
+        /// </summary>
+        /// <param name="userRegisterRequest"></param>
+        /// <returns></returns>
         [HttpPost("Creado/Especialista")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EspecialistResourceResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -109,7 +119,11 @@ namespace Api.Controllers
                 throw exception;
             }
         }
-
+        /// <summary>
+        /// Editar Espacialista
+        /// </summary>
+        /// <param name="userUpdateRequest"></param>
+        /// <returns></returns>
         [HttpPut("Especialista")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(EspecialistResourceResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -125,10 +139,41 @@ namespace Api.Controllers
 
                 //Mapper
                 var userToUpdate = _mapper.Map<EspecialistUpdateRequest, Usuario>(userUpdateRequest);
-                userUpdateRequest.Oficios.ForEach(f => userToUpdate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, Certificaciones = f.Certificaciones, Documento = userToUpdate.Documento}));
+                userUpdateRequest.Oficios.ForEach(f => userToUpdate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, Certificaciones = f.Certificaciones, Documento = userToUpdate.Documento }));
 
                 Usuario newUser = await _usuarioService.UpdateEspecialist(userToUpdate);
                 EspecialistResourceResponse response = _mapper.Map<Usuario, EspecialistResourceResponse>(newUser);
+                return Created("Updated", response);
+            }
+            catch (ArgumentException exception)
+            {
+                throw exception;
+            }
+        }
+        /// <summary>
+        /// Editar Cliente
+        /// </summary>
+        /// <param name="userUpdateRequest"></param>
+        /// <returns></returns>
+        [HttpPut("Cliente")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(EspecialistResourceResponse))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ClientResourceResponse>> UpdateCliente([FromBody] ClienteUpdateRequest userUpdateRequest)
+        {
+            try
+            {
+                var validator = new ClienteUpdateRequestValidator();
+                var validatorResult = await validator.ValidateAsync(userUpdateRequest);
+                if (!validatorResult.IsValid)
+                    return BadRequest(validatorResult.Errors);
+
+                //Mapper
+                var userToUpdate = _mapper.Map<ClienteUpdateRequest, Usuario>(userUpdateRequest);
+
+                Usuario newUser = await _usuarioService.UpdateClient(userToUpdate);
+
+                ClientResourceResponse response = _mapper.Map<Usuario, ClientResourceResponse>(newUser);
                 return Created("Updated", response);
             }
             catch (ArgumentException exception)
