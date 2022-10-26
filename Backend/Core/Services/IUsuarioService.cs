@@ -10,5 +10,6 @@ namespace Core.Services
         Task<Usuario> GetById(string documento);
         Task<Usuario> UpdateClient(Usuario userToUpdate);
         Task<Usuario> UpdateEspecialist(Usuario userToUpdate);
+        Task<bool> UserActivation(string id, bool activacion);
     }
 }

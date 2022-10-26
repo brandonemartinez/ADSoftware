@@ -182,5 +182,39 @@ namespace Api.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Activar y Desactivar usuarios
+        /// </summary>
+        /// <param name="id">ID de Usuario</param>
+        /// <param name="activacion">False: Desactivar, True: Activar</param>
+        /// <returns></returns>
+        [HttpPut("{id}/Activacion/{activacion}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EspecialistResourceResponse))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ClientResourceResponse>> Activacion([FromRoute] string id, [FromRoute] bool activacion)
+        {
+            try
+            {
+                if (id == null)
+                    return BadRequest("ID de Usuario no puede estar vacio");
+                bool activacionResult = await _usuarioService.UserActivation(id, activacion);
+                if (activacionResult)
+                {
+                    return Ok("Updated");
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }
+            catch (ArgumentException exception)
+            {
+                throw exception;
+            }
+        }
+
     }
 }

@@ -83,6 +83,13 @@ namespace Services
             return exists;
         }
 
-
+        public async Task<bool> UserActivation(string id, bool activacion)
+        {
+            //TODO Agregar columna activo
+            Usuario usuario = await _unitOfWork.UsuarioRepository.GetByStringIdAsync(id);
+            //usuario.Activo = activacion;
+            _unitOfWork.UsuarioRepository.UpdateAsync(usuario);
+            return true;
+        }
     }
 }
