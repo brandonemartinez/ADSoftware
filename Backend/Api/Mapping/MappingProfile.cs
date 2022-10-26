@@ -13,7 +13,6 @@ namespace Api.Mapping
         {
             //Usuario
             CreateMap<Usuario, ClientResourceResponse>().ReverseMap();
-            CreateMap<Usuario, ClientRegisterRequest>().ReverseMap();
             CreateMap<Usuario, EspecialistResourceResponse>().ReverseMap();
             CreateMap<Departamento, DepartmentResourceListResponse>()
                 .ForMember(dest => dest.Departamento, act => act.MapFrom(src => src.Nombre))
@@ -21,6 +20,9 @@ namespace Api.Mapping
                 .ReverseMap();
             CreateMap<Ciudad, CiudadDto>()
                 .ForMember(dest => dest.Ciudad, act => act.MapFrom(src => src.Ciudad1))
+                .ReverseMap();
+            CreateMap<ClientRegisterRequest, Usuario>()
+                .ForPath(dest => dest.Cliente.Documento, act => act.MapFrom(src => src.Documento))
                 .ReverseMap();
             CreateMap<EspecialistRegisterRequest, Usuario>()
                 .ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))

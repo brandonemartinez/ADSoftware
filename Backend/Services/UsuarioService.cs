@@ -57,7 +57,6 @@ namespace Services
             return userToUpdate;
         }
 
-        //Verificar si esta hecho
         public async Task<Usuario> UpdateClient(Usuario userToUpdate)
         {
             Usuario userDb = await _unitOfWork.UsuarioRepository.GetClienteByIdCompleteAsync(userToUpdate.Documento);

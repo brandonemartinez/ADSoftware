@@ -49,5 +49,21 @@ namespace Services
                                                                                                listFilter.OrderByMethod);
             return especialistas;
         }
+
+        public async Task<bool> AgregarDisponibilidad(string idDocumento, IEnumerable<Disponibilidad> disponibilidadRequest)
+        {
+            Especialista usuario = await _unitOfWork.EspecialistaRepository.GetByStringIdAsync(idDocumento);
+            if (usuario == null)
+                throw new ArgumentException($"No se encontro Especialista con Id: {idDocumento}.");
+            try
+            {
+                await _unitOfWork.DisponibilidadRepository.CreateRangeAsync(disponibilidadRequest);
+            }
+            catch (Exception exe)
+            {
+                throw new Exception(exe.Message);
+            }
+            return true;
+        }
     }
 }

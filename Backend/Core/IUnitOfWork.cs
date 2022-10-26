@@ -7,6 +7,7 @@ namespace Core
         IUsuarioRepository UsuarioRepository { get; }
         IEspecialistaRepository EspecialistaRepository { get; }
         IDepartamentoRepository DepartamentoRepository { get; }
+        IDisponibilidadRepository DisponibilidadRepository { get; }
 
         Task<int> CommitAsync();
         Task<int> CommitAsync(string eventType, string entityName, object entity);

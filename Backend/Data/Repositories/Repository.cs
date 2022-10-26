@@ -14,6 +14,10 @@ namespace Data.Repositories
         public async Task CreateAsync(TEntity entity)
         {
             await Context.Set<TEntity>().AddAsync(entity);
+        }        
+        public async Task CreateRangeAsync(IEnumerable<TEntity> entity)
+        {
+            await Context.Set<TEntity>().AddRangeAsync(entity);
         }
 
         public virtual void DeleteAsync(TEntity entity)

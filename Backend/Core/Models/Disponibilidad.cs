@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Core.Models
+﻿namespace Core.Models
 {
     public partial class Disponibilidad
     {
@@ -12,7 +9,8 @@ namespace Core.Models
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public TimeSpan Hora { get; set; }
+        public TimeSpan HoraDesde { get; set; }
+        public TimeSpan HoraHasta { get; set; }
         public string Documento { get; set; }
 
         public virtual Especialista DocumentoNavigation { get; set; }
