@@ -20,7 +20,7 @@ namespace Data.Repositories
 
         public async Task<IEnumerable<Departamento>> GetDepartamentoCompleteAsync()
         {
-            return await DB_CATALOGO_SERVICIOSContext.Departamentos.Include(e => e.Ciudads).ToListAsync();
+            return await DB_CATALOGO_SERVICIOSContext.Departamentos.Include(e => e.Ciudad).ToListAsync();
         }
     }
 }

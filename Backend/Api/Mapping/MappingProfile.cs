@@ -16,31 +16,27 @@ namespace Api.Mapping
             CreateMap<Usuario, EspecialistResourceResponse>().ReverseMap();
             CreateMap<Departamento, DepartmentResourceListResponse>()
                 .ForMember(dest => dest.Departamento, act => act.MapFrom(src => src.Nombre))
-                .ForMember(dest => dest.Ciudades, act => act.MapFrom(src => src.Ciudads))
+                .ForMember(dest => dest.Ciudades, act => act.MapFrom(src => src.Ciudad))
                 .ReverseMap();
             CreateMap<Ciudad, CiudadDto>()
-                .ForMember(dest => dest.Ciudad, act => act.MapFrom(src => src.Ciudad1))
-                .ReverseMap();
-            CreateMap<ClientRegisterRequest, Usuario>()
-                .ForPath(dest => dest.Cliente.Documento, act => act.MapFrom(src => src.Documento))
+                .ForMember(dest => dest.Nombre, act => act.MapFrom(src => src.Nombre))
                 .ReverseMap();
             CreateMap<EspecialistRegisterRequest, Usuario>()
                 .ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
                 .ForPath(dest => dest.Especialista.RazonSocial, act => act.MapFrom(src => src.RazonSocial))
-                .ForPath(dest => dest.Especialista.IdPlanes, act => act.MapFrom(src => src.IdPlanes))
+                .ForPath(dest => dest.Especialista.IdPaquete, act => act.MapFrom(src => src.IdPlanes))
                 .ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
                 .ReverseMap();
             CreateMap<EspecialistUpdateRequest, Usuario>()
                 .ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
                 .ForPath(dest => dest.Especialista.RazonSocial, act => act.MapFrom(src => src.RazonSocial))
-                .ForPath(dest => dest.Especialista.IdPlanes, act => act.MapFrom(src => src.IdPlanes))
+                .ForPath(dest => dest.Especialista.IdPaquete, act => act.MapFrom(src => src.IdPlanes))
                 .ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
-                .ForPath(dest => dest.Especialista.Documento, act => act.MapFrom(src => src.Documento))
                 .ForPath(dest => dest.Especialista.Calificacion, act => act.MapFrom(src => src.Calificacion))
                 .ReverseMap();
             CreateMap<ClientResourceResponse, Usuario>().ReverseMap();
             CreateMap<EspecialistaResourceListResponse, Especialista>()
-                .ForPath(dest => dest.DocumentoNavigation.Nombre, act => act.MapFrom(src => src.Nombre))
+                .ForPath(dest => dest.IdNavigation.Nombre, act => act.MapFrom(src => src.Nombre))
                 .ReverseMap();
         }
     }

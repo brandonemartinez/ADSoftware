@@ -10,8 +10,8 @@ namespace Services.Mapping
             {
                 userOld.Especialista.OficioEspecialista.Add(new OficioEspecialista
                 {
-                    Certificaciones = item.Certificaciones,
-                    Documento = item.Documento,
+                    Certificacion = item.Certificacion,
+                    IdEspecialista = item.IdEspecialista,
                     IdOficio = item.IdOficio
                 });
             };
@@ -25,18 +25,18 @@ namespace Services.Mapping
             espcialistOld.RazonSocial = especialistNew.RazonSocial;
             espcialistOld.Calificacion = especialistNew.Calificacion;
             espcialistOld.Fotos = especialistNew.Fotos;
-            espcialistOld.IdPlanes = especialistNew.IdPlanes;
+            espcialistOld.IdPaquete = especialistNew.IdPaquete;
         }
 
         private static void mapUpdatedUser(Usuario userDb, Usuario userToUpdate)
         {
             userDb.Nombre = userToUpdate.Nombre;
             userDb.Apellido = userToUpdate.Apellido;
-            userDb.User = userToUpdate.User;
+            userDb.NombreUsuario = userToUpdate.NombreUsuario;
             userDb.Correo = userToUpdate.Correo;
             userDb.Contrasenia = userToUpdate.Contrasenia;
             userDb.Telefono = userToUpdate.Telefono;
-            userDb.Documento = userToUpdate.Documento;
+            userDb.Id = userToUpdate.Id;
             userDb.IdDepartamento = userToUpdate.IdDepartamento;
         }
     }

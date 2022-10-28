@@ -16,7 +16,7 @@ namespace Services
         public async Task<Especialista> CreateEspecialist(Especialista nuevoUsuario)
         {
             if (await ValidateAlreadyCreatedUserEspecialist(nuevoUsuario))
-                throw new ArgumentException($"El Especialista con Documento: {nuevoUsuario.Documento} ya esta creado.");
+                throw new ArgumentException($"El Especialista con Id: {nuevoUsuario.Id} ya esta creado.");
 
             await _unitOfWork.EspecialistaRepository.CreateAsync(nuevoUsuario);
             await _unitOfWork.CommitAsync();
@@ -26,7 +26,7 @@ namespace Services
         private async Task<bool> ValidateAlreadyCreatedUserEspecialist(Especialista nuevoUsuario)
         {
             bool exists = false;
-            Especialista usuario = await _unitOfWork.EspecialistaRepository.GetEspecialistaByIdCompleteAsync(nuevoUsuario.Documento);
+            Especialista usuario = await _unitOfWork.EspecialistaRepository.GetEspecialistaByIdCompleteAsync(nuevoUsuario.Id);
             if (usuario != null) exists = true;
             return exists;
         }
@@ -48,22 +48,6 @@ namespace Services
                                                                                                listFilter.OrderBy,
                                                                                                listFilter.OrderByMethod);
             return especialistas;
-        }
-
-        public async Task<bool> AgregarDisponibilidad(string idDocumento, IEnumerable<Disponibilidad> disponibilidadRequest)
-        {
-            Especialista usuario = await _unitOfWork.EspecialistaRepository.GetByStringIdAsync(idDocumento);
-            if (usuario == null)
-                throw new ArgumentException($"No se encontro Especialista con Id: {idDocumento}.");
-            try
-            {
-                await _unitOfWork.DisponibilidadRepository.CreateRangeAsync(disponibilidadRequest);
-            }
-            catch (Exception exe)
-            {
-                throw new Exception(exe.Message);
-            }
-            return true;
         }
     }
 }

@@ -84,7 +84,7 @@ namespace Api.Controllers
             IEnumerable<EspecialistaResourceListResponse> especialistaResourcesListResponse = _mapper.Map<IEnumerable<Especialista>, IEnumerable<EspecialistaResourceListResponse>>(especialsitaCollection);
             foreach (var item in especialistaResourcesListResponse)
             {
-                var especialista = especialsitaCollection.FirstOrDefault(f => f.DocumentoNavigation.Nombre == item.Nombre);
+                var especialista = especialsitaCollection.FirstOrDefault(f => f.IdNavigation.Nombre == item.Nombre);
                 item.Oficios = new List<EspecialistaOficioListResponse>();
                 foreach (var oficioEspecialista in especialista.OficioEspecialista)
                 {
@@ -93,25 +93,6 @@ namespace Api.Controllers
 
             };
             return Ok(especialistaResourcesListResponse);
-        }
-
-        [HttpPost("Disponibilidad")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<bool>> CreateEspecialista([FromBody] EspecialistaDisponibilidadRequest disponibilidadRequest)
-        {
-            var validator = new AgregarDisponibilidadValidator();
-            foreach (var disponibilidad in disponibilidadRequest.Disponibilidad)
-            {
-                var validatorResult = await validator.ValidateAsync(disponibilidad);
-                if (!validatorResult.IsValid)
-                    return BadRequest(validatorResult.Errors);
-            }
-
-            IEnumerable<Disponibilidad> disponibilidadCollection = DisponibilidadMapper.MapDisponibilidad(disponibilidadRequest);
-            bool result = await _especialistaService.AgregarDisponibilidad(disponibilidadRequest.IdDocumento, disponibilidadCollection);
-
-            return Ok("Created");
         }
     }
 }

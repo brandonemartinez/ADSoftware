@@ -13,30 +13,21 @@ namespace Data.Repositories
             get { return Context as DB_CATALOGO_SERVICIOSContext; }
         }
 
-        public async Task<Usuario> GetEspecialistaByIdCompleteAsync(string documento)
+        public async Task<Usuario> GetEspecialistaByIdCompleteAsync(int id)
         {
-            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Especialista).Include(u => u.Especialista.OficioEspecialista).FirstOrDefaultAsync(u => u.Documento == documento);
-        }
-
-        public async Task<Usuario> GetClienteByIdCompleteAsync(string documento)
-        {
-            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Cliente).FirstOrDefaultAsync(u => u.Documento == documento);
+            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Especialista).Include(u => u.Especialista.OficioEspecialista).FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<Usuario> GetUsuarioLoginAsync(string correo, string contrasenia)
         {
             return await DB_CATALOGO_SERVICIOSContext.Usuarios.Where(w => w.Correo == correo && w.Contrasenia == contrasenia).FirstOrDefaultAsync();
         }        
-        public async Task<Usuario> GetClienteByIdOrEmailCompleteAsync(string documento, string correo)
-        {
-            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Cliente).FirstOrDefaultAsync(u => u.Documento == documento || u.Correo == correo);
-        }
         public async void UpdateCompleteEspecialistAsync(Usuario? user)
         {
             try
             {
-                var removeData = DB_CATALOGO_SERVICIOSContext.OficioEspecialistas.Where(w => w.Documento == user.Documento);
-                DB_CATALOGO_SERVICIOSContext.OficioEspecialistas.RemoveRange(removeData);
+                var removeData = DB_CATALOGO_SERVICIOSContext.OficioEspecialista.Where(w => w.IdEspecialista == user.Id);
+                DB_CATALOGO_SERVICIOSContext.OficioEspecialista.RemoveRange(removeData);
                 DB_CATALOGO_SERVICIOSContext.Especialista.Update(user.Especialista);
                 DB_CATALOGO_SERVICIOSContext.Usuarios.Update(user);
             }
@@ -45,19 +36,6 @@ namespace Data.Repositories
 
                 throw exe;
             }
-        }        
-        public async void UpdateCompleteClientAsync(Usuario? user)
-        {
-            try
-            {
-                DB_CATALOGO_SERVICIOSContext.Clientes.Update(user.Cliente);
-                DB_CATALOGO_SERVICIOSContext.Usuarios.Update(user);
-            }
-            catch (Exception exe)
-            {
-
-                throw exe;
-            }
-        }
+        } 
     }
 }

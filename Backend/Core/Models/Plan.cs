@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Core.Models
 {
-    public partial class Plane
+    public partial class Plan
     {
-        public Plane()
+        public Plan()
         {
             Especialista = new HashSet<Especialista>();
         }

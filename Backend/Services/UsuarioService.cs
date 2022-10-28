@@ -24,31 +24,21 @@ namespace Services
         public async Task<Usuario> CreateEspecialist(Usuario nuevoUsuario)
         {
             if (await ValidateAlreadyCreatedUserEspecialist(nuevoUsuario))
-                throw new ArgumentException($"El Especialista con Documento: {nuevoUsuario.Documento} ya esta creado.");
+                throw new ArgumentException($"El Especialista con Id: {nuevoUsuario.Id} ya esta creado.");
 
             await _unitOfWork.UsuarioRepository.CreateAsync(nuevoUsuario);
             await _unitOfWork.CommitAsync();
             _emailService.EnviarEmailCuentaCreada(nuevoUsuario.Correo, nuevoUsuario.Nombre);
             return nuevoUsuario;
         }
-        public async Task<Usuario> CreateClient(Usuario nuevoUsuario)
+        public async Task<Usuario> GetById(int id)
         {
-            if (await ValidateAlreadyCreatedUserClient(nuevoUsuario))
-                throw new ArgumentException($"El Cliente con Documento: {nuevoUsuario.Documento} y Correo: {nuevoUsuario.Correo} ya esta creado.");
-
-            await _unitOfWork.UsuarioRepository.CreateAsync(nuevoUsuario);
-            await _unitOfWork.CommitAsync();
-            _emailService.EnviarEmailCuentaCreada(nuevoUsuario.Correo, nuevoUsuario.Nombre);
-            return nuevoUsuario;
-        }
-        public async Task<Usuario> GetById(string documento)
-        {
-            Usuario usuario = await _unitOfWork.UsuarioRepository.GetByStringIdAsync(documento);
+            Usuario usuario = await _unitOfWork.UsuarioRepository.GetByIdAsync(id);
             return usuario;
         }
         public async Task<Usuario> UpdateEspecialist(Usuario userToUpdate)
         {
-            Usuario userDb = await _unitOfWork.UsuarioRepository.GetEspecialistaByIdCompleteAsync(userToUpdate.Documento);
+            Usuario userDb = await _unitOfWork.UsuarioRepository.GetEspecialistaByIdCompleteAsync(userToUpdate.Id);
 
             UdpateEspecialistMapper.MapEspecialistToUpdate(userDb, userToUpdate);
 
@@ -57,35 +47,19 @@ namespace Services
             return userToUpdate;
         }
 
-        public async Task<Usuario> UpdateClient(Usuario userToUpdate)
-        {
-            Usuario userDb = await _unitOfWork.UsuarioRepository.GetClienteByIdCompleteAsync(userToUpdate.Documento);
-
-            _unitOfWork.UsuarioRepository.UpdateCompleteClientAsync(userDb);
-            await _unitOfWork.CommitAsync();
-            return userToUpdate;
-        }
 
         private async Task<bool> ValidateAlreadyCreatedUserEspecialist(Usuario nuevoUsuario)
         {
             bool exists = false;
-            Usuario usuario = await _unitOfWork.UsuarioRepository.GetEspecialistaByIdCompleteAsync(nuevoUsuario.Documento);
+            Usuario usuario = await _unitOfWork.UsuarioRepository.GetEspecialistaByIdCompleteAsync(nuevoUsuario.Id);
             if (usuario != null) exists = true;
             return exists;
         }
 
-        private async Task<bool> ValidateAlreadyCreatedUserClient(Usuario nuevoUsuario)
-        {
-            bool exists = false;
-            Usuario usuario = await _unitOfWork.UsuarioRepository.GetClienteByIdOrEmailCompleteAsync(nuevoUsuario.Documento, nuevoUsuario.Correo);
-            if (usuario != null) exists = true;
-            return exists;
-        }
-
-        public async Task<bool> UserActivation(string id, bool activacion)
+        public async Task<bool> UserActivation(int id, bool activacion)
         {
             //TODO Agregar columna activo
-            Usuario usuario = await _unitOfWork.UsuarioRepository.GetByStringIdAsync(id);
+            Usuario usuario = await _unitOfWork.UsuarioRepository.GetByIdAsync(id);
             //usuario.Activo = activacion;
             _unitOfWork.UsuarioRepository.UpdateAsync(usuario);
             return true;

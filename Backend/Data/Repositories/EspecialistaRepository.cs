@@ -15,14 +15,14 @@ namespace Data.Repositories
             get { return Context as DB_CATALOGO_SERVICIOSContext; }
         }
 
-        public async Task<Especialista> GetEspecialistaByIdCompleteAsync(string documento)
+        public async Task<Especialista> GetEspecialistaByIdCompleteAsync(int id)
         {
-            return await DB_CATALOGO_SERVICIOSContext.Especialista.FirstOrDefaultAsync(u => u.Documento == documento);
+            return await DB_CATALOGO_SERVICIOSContext.Especialista.FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<IEnumerable<Especialista>> GetEspecialistasCompleteAsync()
         {
-            return await DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.DocumentoNavigation).ToListAsync();
+            return await DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.IdNavigation).ToListAsync();
         }
 
         public async Task<IEnumerable<Especialista>> GetEspecialistaFilter(string Nombre,
@@ -33,11 +33,11 @@ namespace Data.Repositories
             string OrderBy,
             bool OrderByMethod)
         {
-            var queryable = DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.DocumentoNavigation).Include(e => e.OficioEspecialista).AsQueryable();
+            var queryable = DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.IdNavigation).Include(e => e.OficioEspecialista).AsQueryable();
 
             if (!string.IsNullOrEmpty(Nombre))
             {
-                queryable = queryable.Where(x => x.DocumentoNavigation.Nombre.Contains(Nombre));
+                queryable = queryable.Where(x => x.IdNavigation.Nombre.Contains(Nombre));
             };
             if (!string.IsNullOrEmpty(Oficio))
             {
@@ -87,7 +87,7 @@ namespace Data.Repositories
                 {
                     if (orderBy == "Nombre")
                     {
-                        queryable = queryable.OrderBy(o => o.DocumentoNavigation.Nombre);
+                        queryable = queryable.OrderBy(o => o.IdNavigation.Nombre);
                     }
                     if (orderBy == "Oficio")
                     {
@@ -102,7 +102,7 @@ namespace Data.Repositories
                 {
                     if (orderBy == "Nombre")
                     {
-                        queryable = queryable.OrderByDescending(o => o.DocumentoNavigation.Nombre);
+                        queryable = queryable.OrderByDescending(o => o.IdNavigation.Nombre);
                     }
                     if (orderBy == "Oficio")
                     {

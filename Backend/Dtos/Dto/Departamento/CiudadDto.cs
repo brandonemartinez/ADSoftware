@@ -8,6 +8,6 @@ namespace Dtos.Dto.Departamento
 {
     public class CiudadDto
     {
-        public string Ciudad { get; set; }
+        public string Nombre { get; set; }
     }
 }

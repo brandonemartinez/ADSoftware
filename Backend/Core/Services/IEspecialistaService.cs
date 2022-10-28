@@ -5,7 +5,7 @@ namespace Core.Services
 {
     public interface IEspecialistaService
     {
-        Task<bool> AgregarDisponibilidad(string idDocumento, IEnumerable<Disponibilidad> disponibilidadRequest);
+        //Task<bool> AgregarDisponibilidad(int idUsuario, IEnumerable<Disponibilidad> disponibilidadRequest);
         Task<Especialista> CreateEspecialist(Especialista especialista);
         Task<IEnumerable<Especialista>> GetAll();
         Task<IEnumerable<Especialista>> GetListFiltred(ListFilter listFilter);

@@ -28,35 +28,6 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// Crear cliente
-        /// </summary>
-        /// <param name="userRegisterRequest"></param>
-        /// <returns></returns>
-        [HttpPost("Cliente")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ClientResourceResponse))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ClientResourceResponse>> CreateCliente([FromBody] ClientRegisterRequest userRegisterRequest)
-        {
-            try
-            {
-                var validator = new ClientRegisterRequestValidator();
-                var validatorResult = await validator.ValidateAsync(userRegisterRequest);
-                if (!validatorResult.IsValid)
-                    return BadRequest(validatorResult.Errors);
-
-                var userToCreate = _mapper.Map<ClientRegisterRequest, Usuario>(userRegisterRequest);
-                Usuario newUser = await _usuarioService.CreateClient(userToCreate);
-                Usuario user = await _usuarioService.GetById(newUser.Documento);
-                ClientResourceResponse response = _mapper.Map<Usuario, ClientResourceResponse>(user);
-                return Created("Created", response);
-            }
-            catch
-            {
-                throw;
-            }
-        }
-        /// <summary>
         /// Crear un Especialista
         /// </summary>
         /// <param name="userRegisterRequest"></param>
@@ -76,10 +47,10 @@ namespace Api.Controllers
 
                 //Mapper
                 var userToCreate = _mapper.Map<EspecialistRegisterRequest, Usuario>(userRegisterRequest);
-                userRegisterRequest.Oficios.ForEach(f => userToCreate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, Certificaciones = f.Certificaciones, Documento = userRegisterRequest.Documento }));
+                userRegisterRequest.Oficios.ForEach(f => userToCreate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, Certificacion = f.Certificaciones }));
 
                 Usuario newUser = await _usuarioService.CreateEspecialist(userToCreate);
-                Usuario user = await _usuarioService.GetById(newUser.Documento);
+                Usuario user = await _usuarioService.GetById(newUser.Id);
                 if (user == null) return NotFound();
                 EspecialistResourceResponse response = _mapper.Map<Usuario, EspecialistResourceResponse>(user);
                 return Created("Created", response);
@@ -109,7 +80,7 @@ namespace Api.Controllers
 
                 var userToCreate = _mapper.Map<EspecialistRegisterRequest, Usuario>(userRegisterRequest);
                 Especialista newUser = await _especialistaService.CreateEspecialist(userToCreate.Especialista);
-                Usuario user = await _usuarioService.GetById(newUser.Documento);
+                Usuario user = await _usuarioService.GetById(newUser.Id);
                 if (user == null) return NotFound();
                 EspecialistResourceResponse response = _mapper.Map<Usuario, EspecialistResourceResponse>(user);
                 return Created("Created", response);
@@ -139,41 +110,10 @@ namespace Api.Controllers
 
                 //Mapper
                 var userToUpdate = _mapper.Map<EspecialistUpdateRequest, Usuario>(userUpdateRequest);
-                userUpdateRequest.Oficios.ForEach(f => userToUpdate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, Certificaciones = f.Certificaciones, Documento = userToUpdate.Documento }));
+                userUpdateRequest.Oficios.ForEach(f => userToUpdate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, Certificacion = f.Certificaciones, IdEspecialista = userToUpdate.Id }));
 
                 Usuario newUser = await _usuarioService.UpdateEspecialist(userToUpdate);
                 EspecialistResourceResponse response = _mapper.Map<Usuario, EspecialistResourceResponse>(newUser);
-                return Created("Updated", response);
-            }
-            catch (ArgumentException exception)
-            {
-                throw exception;
-            }
-        }
-        /// <summary>
-        /// Editar Cliente
-        /// </summary>
-        /// <param name="userUpdateRequest"></param>
-        /// <returns></returns>
-        [HttpPut("Cliente")]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(EspecialistResourceResponse))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ClientResourceResponse>> UpdateCliente([FromBody] ClienteUpdateRequest userUpdateRequest)
-        {
-            try
-            {
-                var validator = new ClienteUpdateRequestValidator();
-                var validatorResult = await validator.ValidateAsync(userUpdateRequest);
-                if (!validatorResult.IsValid)
-                    return BadRequest(validatorResult.Errors);
-
-                //Mapper
-                var userToUpdate = _mapper.Map<ClienteUpdateRequest, Usuario>(userUpdateRequest);
-
-                Usuario newUser = await _usuarioService.UpdateClient(userToUpdate);
-
-                ClientResourceResponse response = _mapper.Map<Usuario, ClientResourceResponse>(newUser);
                 return Created("Updated", response);
             }
             catch (ArgumentException exception)
@@ -193,7 +133,7 @@ namespace Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EspecialistResourceResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ClientResourceResponse>> Activacion([FromRoute] string id, [FromRoute] bool activacion)
+        public async Task<ActionResult<ClientResourceResponse>> Activacion([FromRoute] int id, [FromRoute] bool activacion)
         {
             try
             {

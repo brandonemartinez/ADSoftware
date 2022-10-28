@@ -11,7 +11,7 @@ namespace Core.Repositories
         Task CreateAsync(TEntity entity);
         Task CreateRangeAsync(IEnumerable<TEntity> entity);
         Task<IEnumerable<TEntity>> GetAllAsync();
-        ValueTask<TEntity> GetByStringIdAsync(string id);
+        ValueTask<TEntity> GetByIdAsync(int id);
         void UpdateAsync(TEntity entity);
         //ValueTask DeleteAsync(TEntity entity);
         //ValueTask<TEntity> GetByIntIdAsync(string id);

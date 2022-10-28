@@ -5,9 +5,9 @@ namespace Api.Resources.Especialist
     public class EspecialistaDisponibilidadRequest
     {
         /// <summary>
-        /// Documento de Especialista
+        /// Id de Especialista
         /// </summary>
-        public string IdDocumento { get; set; }
+        public int IdUsuario { get; set; }
         /// <summary>
         /// Departamentos
         /// </summary>

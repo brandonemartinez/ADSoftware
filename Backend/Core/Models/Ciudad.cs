@@ -5,9 +5,9 @@ namespace Core.Models
 {
     public partial class Ciudad
     {
-        public string Ciudad1 { get; set; }
+        public string? Nombre { get; set; }
         public int IdDepartamento { get; set; }
 
-        public virtual Departamento IdDepartamentoNavigation { get; set; }
+        public virtual Departamento IdDepartamentoNavigation { get; set; } = null!;
     }
 }

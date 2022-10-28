@@ -5,11 +5,11 @@ namespace Core.Models
 {
     public partial class OficioEspecialista
     {
-        public string Documento { get; set; }
+        public int IdEspecialista { get; set; }
         public int IdOficio { get; set; }
-        public string Certificaciones { get; set; }
+        public string? Certificacion { get; set; }
 
-        public virtual Especialista DocumentoNavigation { get; set; }
-        public virtual Oficio IdOficioNavigation { get; set; }
+        public virtual Especialista IdEspecialistaNavigation { get; set; } = null!;
+        public virtual Oficio IdOficioNavigation { get; set; } = null!;
     }
 }
