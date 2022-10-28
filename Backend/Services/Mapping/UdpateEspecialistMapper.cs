@@ -10,7 +10,6 @@ namespace Services.Mapping
             {
                 userOld.Especialista.OficioEspecialista.Add(new OficioEspecialista
                 {
-                    Certificacion = item.Certificacion,
                     IdEspecialista = item.IdEspecialista,
                     IdOficio = item.IdOficio
                 });

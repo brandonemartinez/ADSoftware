@@ -18,11 +18,8 @@ namespace Data.Repositories
             return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Especialista).Include(u => u.Especialista.OficioEspecialista).FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task<Usuario> GetUsuarioLoginAsync(string correo, string contrasenia)
-        {
-            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Where(w => w.Correo == correo && w.Contrasenia == contrasenia).FirstOrDefaultAsync();
-        }        
-        public async void UpdateCompleteEspecialistAsync(Usuario? user)
+        public async Task<Usuario> GetUsuarioLoginAsync(string correo, string contrasenia) => await DB_CATALOGO_SERVICIOSContext.Usuarios.Where(w => w.Correo == correo && w.Contrasenia == contrasenia).FirstOrDefaultAsync();
+        public void UpdateCompleteEspecialistAsync(Usuario? user)
         {
             try
             {
@@ -34,7 +31,7 @@ namespace Data.Repositories
             catch (Exception exe)
             {
 
-                throw exe;
+                throw new Exception(exe.Message);
             }
         } 
     }

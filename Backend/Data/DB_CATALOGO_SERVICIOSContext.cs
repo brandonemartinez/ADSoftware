@@ -182,6 +182,16 @@ namespace Data
                     .IsUnicode(false)
                     .HasColumnName("razonSocial");
 
+                entity.Property(e => e.FotoPerfil)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("fotoPerfil");
+                
+                entity.Property(e => e.Presentacion)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("presentacion");
+
                 entity.HasOne(d => d.IdNavigation)
                     .WithOne(p => p.Especialista)
                     .HasForeignKey<Especialista>(d => d.Id)
@@ -251,11 +261,6 @@ namespace Data
                 entity.Property(e => e.IdEspecialista).HasColumnName("idEspecialista");
 
                 entity.Property(e => e.IdOficio).HasColumnName("idOficio");
-
-                entity.Property(e => e.Certificacion)
-                    .HasMaxLength(255)
-                    .IsUnicode(false)
-                    .HasColumnName("certificacion");
 
                 entity.HasOne(d => d.IdEspecialistaNavigation)
                     .WithMany(p => p.OficioEspecialista)

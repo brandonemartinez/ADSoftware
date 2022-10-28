@@ -45,12 +45,11 @@ namespace Api.Controllers
         /// <summary>
         /// Obtener todos los Especialistas con filtros
         /// </summary>
-        /// <param name="Nombre">Nombre de Fantasia</param>
-        /// <param name="Oficio">Oficio/Especialidad</param>
+        /// <param name="Busqueda">Nombre/Oficio</param>
         /// <param name="Localidad">Ciudad/Departamento</param>
+        /// <param name="Calificacion">Calificacion igual</param>
         /// <param name="CalificacionDesde">Calificacion desde</param>
         /// <param name="CalificacionHasta">Calificacion hasta</param>
-        /// <param name="Page">Paginado</param>
         /// <param name="OrderBy">Criterio de Orden</param>
         /// <param name="OrderByMethod">True: Ascendente, False: Descendente</param>
         /// <returns></returns>
@@ -58,12 +57,11 @@ namespace Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<EspecialistaResourceListResponse>>> GetListFiltred(
-            string? Nombre,
-            string? Oficio,
+            string? Busqueda,
+            decimal? Calificacion,
             decimal? CalificacionDesde,
             decimal? CalificacionHasta,
-            string? Localidad,
-            int? Page,
+            string Localidad,
             string? OrderBy,
             bool OrderByMethod = true
             )
@@ -71,12 +69,11 @@ namespace Api.Controllers
             var especialsitaCollection = await _especialistaService.GetListFiltred(
                 new ListFilter
                 {
-                    Nombre = Nombre,
-                    Oficio = Oficio,
+                    Busqueda = Busqueda,
                     Localidad = Localidad,
+                    Calificacion = Calificacion,
                     CalificacionDesde = CalificacionDesde,
                     CalificacionHasta = CalificacionHasta,
-                    Page = Page,
                     OrderBy = OrderBy,
                     OrderByMethod = OrderByMethod
                 });

@@ -7,7 +7,6 @@ namespace Core.Models
     {
         public int IdEspecialista { get; set; }
         public int IdOficio { get; set; }
-        public string? Certificacion { get; set; }
 
         public virtual Especialista IdEspecialistaNavigation { get; set; } = null!;
         public virtual Oficio IdOficioNavigation { get; set; } = null!;

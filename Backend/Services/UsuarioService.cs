@@ -16,21 +16,22 @@ namespace Services
             _unitOfWork = unitOfWork;
             _emailService = emailService;
         }
-        public async Task<Usuario> CreateUsuario(Usuario usuarioACrear)
+        public async Task<Usuario> CreateUsuario(Usuario nuevoUsuario)
         {
             try
             {
-                usuarioACrear.Contrasenia = Encrypt.GetSHA256(usuarioACrear.Contrasenia);
-                usuarioACrear.Rol = Roles.CLIENTE;
-                usuarioACrear.Activo = true;
-                await _unitOfWork.UsuarioRepository.CreateAsync(usuarioACrear);
+                nuevoUsuario.Contrasenia = Encrypt.GetSHA256(nuevoUsuario.Contrasenia);
+                nuevoUsuario.Rol = Roles.CLIENTE;
+                nuevoUsuario.Activo = true;
+                nuevoUsuario.Especialista.Id = 0;
+                await _unitOfWork.UsuarioRepository.CreateAsync(nuevoUsuario);
                 await _unitOfWork.CommitAsync();
-                return usuarioACrear;
+                return nuevoUsuario;
             }
             catch (Exception exe)
             {
 
-                throw new ArgumentException(exe.InnerException.Message);
+                throw new ArgumentException(exe.Message);
             }
 
         }
@@ -43,13 +44,22 @@ namespace Services
 
         public async Task<Usuario> CreateEspecialist(Usuario nuevoUsuario)
         {
-            if (await ValidateAlreadyCreatedUserEspecialist(nuevoUsuario))
-                throw new ArgumentException($"El Especialista con Id: {nuevoUsuario.Id} ya esta creado.");
+            try
+            {
+                nuevoUsuario.Contrasenia = Encrypt.GetSHA256(nuevoUsuario.Contrasenia);
+                nuevoUsuario.Rol = Roles.ESPECIALISTA;
+                nuevoUsuario.Activo = true;
+                nuevoUsuario.Especialista.Id = null;
+                await _unitOfWork.UsuarioRepository.CreateAsync(nuevoUsuario);
+                await _unitOfWork.CommitAsync();
+                _emailService.EnviarEmailCuentaCreada(nuevoUsuario.Correo, nuevoUsuario.Nombre);
+                return nuevoUsuario;
 
-            await _unitOfWork.UsuarioRepository.CreateAsync(nuevoUsuario);
-            await _unitOfWork.CommitAsync();
-            _emailService.EnviarEmailCuentaCreada(nuevoUsuario.Correo, nuevoUsuario.Nombre);
-            return nuevoUsuario;
+            }
+            catch
+            {
+                throw;
+            }
         }
         public async Task<Usuario> GetById(int id)
         {

@@ -25,9 +25,10 @@ namespace Data.Repositories
             return await DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.IdNavigation).ToListAsync();
         }
 
-        public async Task<IEnumerable<Especialista>> GetEspecialistaFilter(string Nombre,
-            string Oficio,
+        public async Task<IEnumerable<Especialista>> GetEspecialistaFilter(
+            string Busqueda,
             string Localidad,
+            decimal? Calificacion,
             decimal? CalificacionDesde,
             decimal? CalificacionHasta,
             string OrderBy,
@@ -35,15 +36,15 @@ namespace Data.Repositories
         {
             var queryable = DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.IdNavigation).Include(e => e.OficioEspecialista).AsQueryable();
 
-            if (!string.IsNullOrEmpty(Nombre))
-            {
-                queryable = queryable.Where(x => x.IdNavigation.Nombre.Contains(Nombre));
-            };
-            if (!string.IsNullOrEmpty(Oficio))
-            {
-                queryable = queryable.Where(x => x.OficioEspecialista.Any(a => a.IdOficioNavigation.Nombre.Contains(Oficio)));
-                //TODO Agregar not found si no encontraron resultados con cierto oficio
-            };
+            //if (!string.IsNullOrEmpty(Nombre))
+            //{
+            //    queryable = queryable.Where(x => x.IdNavigation.Nombre.Contains(Nombre));
+            //};
+            //if (!string.IsNullOrEmpty(Oficio))
+            //{
+            //    queryable = queryable.Where(x => x.OficioEspecialista.Any(a => a.IdOficioNavigation.Nombre.Contains(Oficio)));
+            //    //TODO Agregar not found si no encontraron resultados con cierto oficio
+            //};
             //if (!string.IsNullOrEmpty(Localidad))
             //{
             //    queryable = queryable.Where(x => x.Disponibilidads);

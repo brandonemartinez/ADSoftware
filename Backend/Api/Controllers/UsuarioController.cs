@@ -76,7 +76,7 @@ namespace Api.Controllers
 
                 //Mapper
                 var userToCreate = _mapper.Map<EspecialistRegisterRequest, Usuario>(userRegisterRequest);
-                userRegisterRequest.Oficios.ForEach(f => userToCreate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, Certificacion = f.Certificaciones }));
+                userRegisterRequest.Oficios.ForEach(f => userToCreate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio}));
 
                 Usuario newUser = await _usuarioService.CreateEspecialist(userToCreate);
                 Usuario user = await _usuarioService.GetById(newUser.Id);
@@ -109,7 +109,7 @@ namespace Api.Controllers
 
                 var userToCreate = _mapper.Map<EspecialistRegisterRequest, Usuario>(userRegisterRequest);
                 Especialista newUser = await _especialistaService.CreateEspecialist(userToCreate.Especialista);
-                Usuario user = await _usuarioService.GetById(newUser.Id);
+                Usuario user = await _usuarioService.GetById(newUser.Id.Value);
                 if (user == null) return NotFound();
                 EspecialistResourceResponse response = _mapper.Map<Usuario, EspecialistResourceResponse>(user);
                 return Created("Created", response);
@@ -139,7 +139,7 @@ namespace Api.Controllers
 
                 //Mapper
                 var userToUpdate = _mapper.Map<EspecialistUpdateRequest, Usuario>(userUpdateRequest);
-                userUpdateRequest.Oficios.ForEach(f => userToUpdate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, Certificacion = f.Certificaciones, IdEspecialista = userToUpdate.Id }));
+                userUpdateRequest.Oficios.ForEach(f => userToUpdate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, IdEspecialista = userToUpdate.Id }));
 
                 Usuario newUser = await _usuarioService.UpdateEspecialist(userToUpdate);
                 EspecialistResourceResponse response = _mapper.Map<Usuario, EspecialistResourceResponse>(newUser);
@@ -160,14 +160,11 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpPut("{id}/Activacion/{activacion}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EspecialistResourceResponse))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<bool>> Activacion([FromRoute] int id, [FromRoute] bool activacion)
         {
             try
             {
-                if (id == null)
-                    return BadRequest("ID de Usuario no puede estar vacio");
                 bool activacionResult = await _usuarioService.UserActivation(id, activacion);
                 if (activacionResult)
                 {

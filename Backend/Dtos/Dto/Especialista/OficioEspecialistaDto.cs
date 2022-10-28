@@ -3,6 +3,5 @@
     public class OficioEspecialistaDto
     {
         public int IdOficio { get; set; }
-        public string Certificaciones { get; set; }
     }
 }

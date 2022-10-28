@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Models
 {
@@ -10,10 +12,12 @@ namespace Core.Models
             OficioEspecialista = new HashSet<OficioEspecialista>();
         }
 
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string RazonSocial { get; set; } = null!;
         public string NombreFantasia { get; set; } = null!;
         public string Fotos { get; set; } = null!;
+        public string FotoPerfil { get; set; } = null!;
+        public string Presentacion { get; set; } = null!;
         public int? Calificacion { get; set; }
         public string? RangoDia { get; set; }
         public TimeSpan? HoraDesde { get; set; }
