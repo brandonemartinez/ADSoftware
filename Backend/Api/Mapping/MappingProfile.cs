@@ -1,6 +1,6 @@
-﻿using Api.Resources.Client;
-using Api.Resources.Department;
+﻿using Api.Resources.Department;
 using Api.Resources.Especialist;
+using Api.Resources.Usuario;
 using AutoMapper;
 using Core.Models;
 using Dtos.Dto.Departamento;
@@ -12,7 +12,8 @@ namespace Api.Mapping
         public MappingProfile()
         {
             //Usuario
-            CreateMap<Usuario, ClientResourceResponse>().ReverseMap();
+            CreateMap<UsuarioRegisterResponse, Usuario>().ReverseMap();
+            CreateMap<UsuarioRegisterRequest, Usuario>().ReverseMap();
             CreateMap<Usuario, EspecialistResourceResponse>().ReverseMap();
             CreateMap<Departamento, DepartmentResourceListResponse>()
                 .ForMember(dest => dest.Departamento, act => act.MapFrom(src => src.Nombre))
@@ -34,7 +35,6 @@ namespace Api.Mapping
                 .ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
                 .ForPath(dest => dest.Especialista.Calificacion, act => act.MapFrom(src => src.Calificacion))
                 .ReverseMap();
-            CreateMap<ClientResourceResponse, Usuario>().ReverseMap();
             CreateMap<EspecialistaResourceListResponse, Especialista>()
                 .ForPath(dest => dest.IdNavigation.Nombre, act => act.MapFrom(src => src.Nombre))
                 .ReverseMap();

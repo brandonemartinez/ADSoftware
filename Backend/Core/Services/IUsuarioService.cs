@@ -9,5 +9,6 @@ namespace Core.Services
         Task<Usuario> GetById(int id);
         Task<Usuario> UpdateEspecialist(Usuario userToUpdate);
         Task<bool> UserActivation(int id, bool activacion);
+        Task<Usuario> CreateUsuario(Usuario userToCreate);
     }
 }

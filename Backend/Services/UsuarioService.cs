@@ -1,6 +1,8 @@
-﻿using Core;
+﻿using Api.Utilities;
+using Core;
 using Core.Models;
 using Core.Services;
+using Services.Constants;
 using Services.Mapping;
 
 namespace Services
@@ -13,6 +15,24 @@ namespace Services
         {
             _unitOfWork = unitOfWork;
             _emailService = emailService;
+        }
+        public async Task<Usuario> CreateUsuario(Usuario usuarioACrear)
+        {
+            try
+            {
+                usuarioACrear.Contrasenia = Encrypt.GetSHA256(usuarioACrear.Contrasenia);
+                usuarioACrear.Rol = Roles.CLIENTE;
+                usuarioACrear.Activo = true;
+                await _unitOfWork.UsuarioRepository.CreateAsync(usuarioACrear);
+                await _unitOfWork.CommitAsync();
+                return usuarioACrear;
+            }
+            catch (Exception exe)
+            {
+
+                throw new ArgumentException(exe.InnerException.Message);
+            }
+
         }
 
         public async Task<IEnumerable<Usuario>> GetAll()
@@ -64,5 +84,6 @@ namespace Services
             _unitOfWork.UsuarioRepository.UpdateAsync(usuario);
             return true;
         }
+
     }
 }

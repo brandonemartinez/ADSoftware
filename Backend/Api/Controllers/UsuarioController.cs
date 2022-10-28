@@ -1,10 +1,9 @@
-﻿using Api.Resources.Client;
-using Api.Resources.Especialist;
+﻿using Api.Resources.Especialist;
+using Api.Resources.Usuario;
 using Api.Validators;
 using AutoMapper;
 using Core.Models;
 using Core.Services;
-using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -25,6 +24,36 @@ namespace Api.Controllers
             _especialistaService = especialistaService;
             _usuarioService = userservice;
             _mapper = mapper;
+        }
+
+        /// <summary>
+        /// Registro de Cliente
+        /// </summary>
+        /// <param name="userRegisterRequest"></param>
+        /// <returns></returns>
+        [HttpPost("Cliente")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioRegisterResponse))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<UsuarioRegisterResponse>> CreateClient([FromBody] UsuarioRegisterRequest userRegisterRequest)
+        {
+            try
+            {
+                var validator = new UsuarioRegisterRequestValidator();
+                var validatorResult = await validator.ValidateAsync(userRegisterRequest);
+                if (!validatorResult.IsValid)
+                    return BadRequest(validatorResult.Errors);
+
+                //Mapper
+                var userToCreate = _mapper.Map<UsuarioRegisterRequest, Usuario>(userRegisterRequest);
+
+                Usuario usuario = await _usuarioService.CreateUsuario(userToCreate);
+                UsuarioRegisterResponse response = _mapper.Map<Usuario, UsuarioRegisterResponse>(usuario);
+                return Created("Created", response);
+            }
+            catch (ArgumentException exception)
+            {
+                throw exception;
+            }
         }
 
         /// <summary>
@@ -133,7 +162,7 @@ namespace Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EspecialistResourceResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ClientResourceResponse>> Activacion([FromRoute] int id, [FromRoute] bool activacion)
+        public async Task<ActionResult<bool>> Activacion([FromRoute] int id, [FromRoute] bool activacion)
         {
             try
             {

@@ -1,12 +1,10 @@
-﻿namespace Api.Resources.Client
+﻿namespace Api.Resources.Usuario
 {
-    public class ClientResourceResponse
+    public class UsuarioRegisterResponse
     {
-        public string Documento { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Correo { get; set; }
-        public string Telefono { get; set; }
         public int IdDepartamento { get; set; }
     }
 }

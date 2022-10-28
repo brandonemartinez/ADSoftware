@@ -1,6 +1,8 @@
-﻿using Api.Resources.Auth;
+﻿using Api.Resources;
+using Api.Resources.Auth;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Dynamic.Core.Tokenizer;
 
 namespace Api.Controllers
 {
@@ -21,14 +23,25 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpPost("Login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Login([FromBody]LoginData loginData)
         {
-            var userResponse = await _authService.Auth(loginData.Correo, loginData.Contraseña);
+            var token = await _authService.Auth(loginData.Correo, loginData.Contraseña);
 
-            if (userResponse == null)
-                return BadRequest();
+            if (token == null)
+                return NotFound(new Respuesta
+                {
+                    Titulo = "Login",
+                    Valido = false,
+                    Data = token
+                });
 
-            return Ok(userResponse);
+            return Ok(new Respuesta
+            {
+                Titulo = "Login",
+                Valido = true,
+                Data = token
+            });
         }
     }
 }
