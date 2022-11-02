@@ -4,6 +4,7 @@ using Api.Validators;
 using AutoMapper;
 using Core.Models;
 using Core.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -98,18 +99,18 @@ namespace Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EspecialistResourceResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<EspecialistResourceResponse>> CreatedUsuarioEspecialista([FromBody] EspecialistRegisterRequest userRegisterRequest)
+        public async Task<ActionResult<EspecialistResourceResponse>> CreatedUsuarioEspecialista([FromBody] CreatedEspecialistRegisterRequest userRegisterRequest)
         {
             try
             {
-                var validator = new EspecialistRegisterRequestValidator();
+                var validator = new CreatedEspecialistRegisterRequestValidator();
                 var validatorResult = await validator.ValidateAsync(userRegisterRequest);
                 if (!validatorResult.IsValid)
                     return BadRequest(validatorResult.Errors);
 
-                var userToCreate = _mapper.Map<EspecialistRegisterRequest, Usuario>(userRegisterRequest);
-                Especialista newUser = await _especialistaService.CreateEspecialist(userToCreate.Especialista);
-                Usuario user = await _usuarioService.GetById(newUser.Id.Value);
+                var userToCreate = _mapper.Map<CreatedEspecialistRegisterRequest, Usuario>(userRegisterRequest);
+                Usuario newUser = await _usuarioService.CreateAlreadyEspecialist(userToCreate);
+                Usuario user = await _usuarioService.GetById(newUser.Id);
                 if (user == null) return NotFound();
                 EspecialistResourceResponse response = _mapper.Map<Usuario, EspecialistResourceResponse>(user);
                 return Created("Created", response);

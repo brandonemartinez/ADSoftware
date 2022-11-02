@@ -36,20 +36,15 @@ namespace Data.Repositories
         {
             var queryable = DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.IdNavigation).Include(e => e.OficioEspecialista).AsQueryable();
 
-            //if (!string.IsNullOrEmpty(Nombre))
-            //{
-            //    queryable = queryable.Where(x => x.IdNavigation.Nombre.Contains(Nombre));
-            //};
-            //if (!string.IsNullOrEmpty(Oficio))
-            //{
-            //    queryable = queryable.Where(x => x.OficioEspecialista.Any(a => a.IdOficioNavigation.Nombre.Contains(Oficio)));
-            //    //TODO Agregar not found si no encontraron resultados con cierto oficio
-            //};
-            //if (!string.IsNullOrEmpty(Localidad))
-            //{
-            //    queryable = queryable.Where(x => x.Disponibilidads);
-            //    //TODO Agregar not found si no encontraron resultados con cierto oficio
-            //};
+            if (Busqueda != null)
+            {
+                queryable = queryable.Where(x => x.OficioEspecialista.Any(a => a.IdOficioNavigation.Nombre.Contains(Busqueda)) ||
+                                                 x.NombreFantasia.Contains(Busqueda));
+            };
+            if (Calificacion.HasValue)
+            {
+                queryable = queryable.Where(x => x.Calificacion == Calificacion);
+            }
             if (CalificacionDesde.HasValue)
             {
                 queryable = queryable.Where(x => x.Calificacion >= CalificacionDesde);

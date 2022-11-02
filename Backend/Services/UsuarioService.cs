@@ -23,7 +23,6 @@ namespace Services
                 nuevoUsuario.Contrasenia = Encrypt.GetSHA256(nuevoUsuario.Contrasenia);
                 nuevoUsuario.Rol = Roles.CLIENTE;
                 nuevoUsuario.Activo = true;
-                nuevoUsuario.Especialista.Id = 0;
                 await _unitOfWork.UsuarioRepository.CreateAsync(nuevoUsuario);
                 await _unitOfWork.CommitAsync();
                 return nuevoUsuario;
@@ -95,5 +94,29 @@ namespace Services
             return true;
         }
 
+        public async Task<Usuario> CreateAlreadyEspecialist(Usuario nuevoUsuario)
+        {
+            try
+            {
+                var user = await _unitOfWork.UsuarioRepository.GetEspecialistaByIdCompleteAsync(nuevoUsuario.Id);
+                if (user == null)
+                {
+                    throw new ArgumentException($"El usuario con id {nuevoUsuario.Id} no existe");
+                }
+                user.Especialista = nuevoUsuario.Especialista;
+                user.Rol = Roles.ESPECIALISTA;
+                _unitOfWork.UsuarioRepository.UpdateAsync(user);
+                await _unitOfWork.CommitAsync();
+                _emailService.EnviarEmailCuentaCreada(user.Correo, user.Nombre);
+                return user;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
 }
