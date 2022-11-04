@@ -179,3 +179,4 @@ C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.xml
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.pdb
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.genruntimeconfig.cache
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\ref\Api.dll
+C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Newtonsoft.Json.dll

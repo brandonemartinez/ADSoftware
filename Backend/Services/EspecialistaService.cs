@@ -2,6 +2,7 @@
 using Core.Models;
 using Core.Services;
 using Dtos.Dto.Especialista;
+using Services.Constants;
 using System.Linq.Dynamic.Core;
 
 namespace Services
@@ -47,6 +48,10 @@ namespace Services
                                                                                                listFilter.CalificacionHasta,
                                                                                                listFilter.OrderBy,
                                                                                                listFilter.OrderByMethod);
+            if(!especialistas.Any())
+            {
+                await _unitOfWork.CommitAsync(EventTypes.SEARCH, TablesName.ESPECIALISTA, listFilter);
+            }
             return especialistas;
         }
     }

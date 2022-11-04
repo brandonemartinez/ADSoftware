@@ -81,7 +81,7 @@ namespace Api.Controllers
             IEnumerable<EspecialistaResourceListResponse> especialistaResourcesListResponse = _mapper.Map<IEnumerable<Especialista>, IEnumerable<EspecialistaResourceListResponse>>(especialsitaCollection);
             foreach (var item in especialistaResourcesListResponse)
             {
-                var especialista = especialsitaCollection.FirstOrDefault(f => f.IdNavigation.Nombre == item.Nombre);
+                var especialista = especialsitaCollection.FirstOrDefault(f => f.NombreFantasia == item.Nombre);
                 item.Oficios = new List<EspecialistaOficioListResponse>();
                 foreach (var oficioEspecialista in especialista.OficioEspecialista)
                 {

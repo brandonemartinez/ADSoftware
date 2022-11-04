@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Models;
 using Core.Repositories;
 using Data.Repositories;
 using System;
@@ -42,9 +43,8 @@ namespace Data
         public async Task<int> CommitAsync(string eventType, string entityName, object entity)
         {
             int result;
-            result = await _context.SaveChangesAsync();
-            //TODO AUDITLOG
-            await _context.SaveChangesAsync();
+            await _context.Set<RegistroAuditoria>().AddAsync(new RegistroAuditoria(eventType, entityName, entity));
+            result =  await _context.SaveChangesAsync();
             return result;
 
         }

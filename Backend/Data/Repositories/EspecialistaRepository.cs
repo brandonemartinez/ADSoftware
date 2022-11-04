@@ -53,6 +53,11 @@ namespace Data.Repositories
             {
                 queryable = queryable.Where(x => x.Calificacion <= CalificacionHasta);
             };
+            //Create a function to find by localidad
+            if (Localidad != null)
+            {
+                queryable = queryable.Where(x => x.DepartamentoDisponible.Contains(Localidad));
+            };
 
             queryable = OrderEspecialists(queryable, OrderBy, OrderByMethod);
             var oficios = await DB_CATALOGO_SERVICIOSContext.Oficios.ToListAsync();

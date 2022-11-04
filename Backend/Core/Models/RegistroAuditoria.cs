@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using System.Xml;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace Core.Models
 {
@@ -10,5 +14,24 @@ namespace Core.Models
         public DateTime? FechaEvento { get; set; }
         public string? NombreTabla { get; set; }
         public string? Valores { get; set; }
+        public RegistroAuditoria()
+        {
+
+        }
+        public RegistroAuditoria(string token, string nombreTabla, object valores)
+        {
+            Token = token;
+            FechaEvento = DateTime.Now;
+            NombreTabla = nombreTabla;
+            Valores = JsonConvert.SerializeObject
+            (
+            valores,
+            Formatting.Indented,
+            new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            }
+            );
+        }
     }
 }

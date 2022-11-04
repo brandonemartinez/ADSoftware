@@ -60,7 +60,7 @@ namespace Api.Mapping
                 .ForPath(dest => dest.Especialista.IdPaquete, act => act.MapFrom(src => src.IdPaquete))
                 .ReverseMap();
             CreateMap<EspecialistaResourceListResponse, Especialista>()
-                .ForPath(dest => dest.IdNavigation.Nombre, act => act.MapFrom(src => src.Nombre))
+                .ForPath(dest => dest.NombreFantasia, act => act.MapFrom(src => src.Nombre))
                 .ReverseMap();
         }
     }
