@@ -17,8 +17,8 @@ namespace Api.Resources.Especialist
         public string RazonSocial { get; set; }
         public string NombreFantasia { get; set; }
         public string RangoDia { get; set; }
-        public TimeOnly HoraDesde { get; set; }
-        public TimeOnly HoraHasta { get; set; }
+        public int HoraDesde { get; set; }
+        public int HoraHasta { get; set; }
         public string DepartamentoDisponible { get; set; }
         public string Fotos { get; set; }
         public string FotoPerfil { get; set; }

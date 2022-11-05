@@ -27,10 +27,10 @@ namespace Services
             var usuario = await _unitOfWork.UsuarioRepository.GetUsuarioLoginAsync(correo, contrasenia);
             if (usuario == null) return null;
 
-            return GetToken(correo, contrasenia);
+            return GetToken(usuario.Id, usuario.Rol, usuario.Correo);
         }
 
-        private string GetToken(string correo, string contrasenia)
+        private string GetToken(int id, string rol, string correo)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -40,8 +40,8 @@ namespace Services
                 Subject = new ClaimsIdentity(
                     new Claim[]
                     {
-                        new Claim(ClaimTypes.NameIdentifier, correo),
-                        new Claim(ClaimTypes.Role, "Administrador")
+                        new Claim(ClaimTypes.NameIdentifier, id.ToString()),
+                        new Claim(ClaimTypes.Role, "Cliente"),
                     }
                     ),
                 Expires = DateTime.UtcNow.AddDays(60),

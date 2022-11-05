@@ -91,5 +91,6 @@ namespace Api.Controllers
             };
             return Ok(especialistaResourcesListResponse);
         }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Core.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
 
 namespace Data.Repositories
 {

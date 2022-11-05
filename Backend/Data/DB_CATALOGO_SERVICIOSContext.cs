@@ -87,7 +87,13 @@ namespace Data
                     .HasColumnType("date")
                     .HasColumnName("fecha");
 
-                entity.Property(e => e.Hora).HasColumnName("hora");
+                entity.Property(e => e.HoraDesde).HasColumnName("horaDesde");
+                entity.Property(e => e.HoraHasta).HasColumnName("horaHasta");
+
+                entity.Property(e => e.Localidad)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("localidad");
 
                 entity.HasMany(d => d.IdUsuarios)
                     .WithMany(p => p.IdCita)

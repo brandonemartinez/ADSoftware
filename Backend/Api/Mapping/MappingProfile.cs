@@ -1,8 +1,10 @@
-﻿using Api.Resources.Department;
+﻿using Api.Resources.Cita;
+using Api.Resources.Department;
 using Api.Resources.Especialist;
 using Api.Resources.Usuario;
 using AutoMapper;
 using Core.Models;
+using Dtos.Dto.Cita;
 using Dtos.Dto.Departamento;
 
 namespace Api.Mapping
@@ -54,14 +56,19 @@ namespace Api.Mapping
                 .ForPath(dest => dest.Especialista.FotoPerfil, act => act.MapFrom(src => src.FotoPerfil))
                 .ForPath(dest => dest.Especialista.Presentacion, act => act.MapFrom(src => src.Presentacion))
                 .ForPath(dest => dest.Especialista.RangoDia, act => act.MapFrom(src => src.RangoDia))
-                .ForPath(dest => dest.Especialista.HoraDesde, act => act.MapFrom(src => src.HoraDesde))
-                .ForPath(dest => dest.Especialista.HoraHasta, act => act.MapFrom(src => src.HoraHasta))
+                .ForPath(dest => dest.Especialista.HoraDesde, act => act.MapFrom(src => TimeSpan.FromHours(src.HoraDesde)))
+                .ForPath(dest => dest.Especialista.HoraHasta, act => act.MapFrom(src => TimeSpan.FromHours(src.HoraHasta)))
                 .ForPath(dest => dest.Especialista.DepartamentoDisponible, act => act.MapFrom(src => src.DepartamentoDisponible))
                 .ForPath(dest => dest.Especialista.IdPaquete, act => act.MapFrom(src => src.IdPaquete))
                 .ReverseMap();
             CreateMap<EspecialistaResourceListResponse, Especialista>()
                 .ForPath(dest => dest.NombreFantasia, act => act.MapFrom(src => src.Nombre))
                 .ReverseMap();
+            CreateMap<CitaResourceCreateRequest, Cita>()
+                .ForPath(dest => dest.HoraHasta, act => act.MapFrom(src => TimeSpan.FromHours(src.HoraHasta)))
+                .ForPath(dest => dest.HoraDesde, act => act.MapFrom(src => TimeSpan.FromHours(src.HoraDesde)))
+                .ReverseMap();
+            CreateMap<Cita, CitaDto>().ReverseMap();
         }
     }
 }

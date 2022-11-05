@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Core.Models
+﻿namespace Dtos.Dto.Cita
 {
-    public partial class Cita
+    public class CitaDto
     {
-        public Cita()
-        {
-            IdUsuarios = new HashSet<Usuario>();
-        }
-
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public TimeSpan HoraDesde { get; set; }
@@ -17,7 +9,5 @@ namespace Core.Models
         public bool? EstadoPago { get; set; }
         public string? Estado { get; set; }
         public string? Localidad { get; set; }
-
-        public virtual ICollection<Usuario> IdUsuarios { get; set; }
     }
 }
