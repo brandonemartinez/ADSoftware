@@ -37,7 +37,7 @@ builder.Services.AddAuthentication(d =>
 {
     d.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     d.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer( d =>
+}).AddJwtBearer(d =>
 {
     d.RequireHttpsMetadata = false;
     d.SaveToken = true;
@@ -66,6 +66,31 @@ builder.Services.AddSwaggerGen(options =>
             Url = new Uri("http://www.adsoftware.com.uy/")
         },
 
+    });
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Autorizacion header utiliza el esquma Bearer. Entre 'Bearer' [espacio] y despues su token en el input de abajo. Ejemplo: 'Bearer 12345abcdef'",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+        {
+          new OpenApiSecurityScheme
+          {
+            Reference = new OpenApiReference
+            {
+                Type = ReferenceType.SecurityScheme,
+                Id = "Bearer"
+            },
+              Scheme = "oauth2",
+              Name = "Bearer",
+              In = ParameterLocation.Header,
+          },
+            new List<string>()
+        }
     });
 
     // using System.Reflection;
