@@ -23,6 +23,11 @@ namespace Data.Repositories
             var queryable = DB_CATALOGO_SERVICIOSContext.Cita.Include(e => e.IdUsuarios).AsQueryable();
             queryable = queryable.Where(w => w.IdUsuarios.Any(a => a.Id == id));
             return queryable;
+        }        
+        
+        public async Task<Cita> GetByIdCompleteAsync(int id)
+        {
+            return await DB_CATALOGO_SERVICIOSContext.Cita.Include("IdUsuarios").FirstOrDefaultAsync(s => s.Id == id);
         }
     }
 }

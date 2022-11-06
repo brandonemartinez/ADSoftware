@@ -12,5 +12,6 @@ namespace Services.Constants
         public static readonly string ACEPTADA = "Aceptada";
         public static readonly string CANCELADA = "Cancelada";
         public static readonly string RECHAZADA = "Rechazada";
+        public static readonly string FINALIZADA = "Finalizada";
     }
 }

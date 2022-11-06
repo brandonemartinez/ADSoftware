@@ -47,7 +47,7 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// Crear cita
+        /// Obtener citas
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -61,11 +61,32 @@ namespace Api.Controllers
             var userData = identity.Claims.ToList();
             if (userData == null)
                 return Unauthorized();
-            
+
             IEnumerable<Cita> citas = await _citaService.GetById(int.Parse(userData[0].Value));
             IEnumerable<CitaDto> citasDtoCollection = _mapper.Map<IEnumerable<Cita>, IEnumerable<CitaDto>>(citas);
 
             return Ok(citasDtoCollection);
+        }
+
+        /// <summary>
+        /// Obtener citas
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut("{idCita}/{status}")]
+        [Authorize(Roles = "Cliente, Especialista")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<CitaResourceResponse>> CambiarEstadoCita([FromRoute] int idCita, [FromRoute] string status)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var userData = identity.Claims.ToList();
+            if (userData == null)
+                return Unauthorized();
+
+            string result = await _citaService.UpdateStatus(idCita, int.Parse(userData[0].Value), status);
+            
+            return Ok(result);
         }
     }
 }

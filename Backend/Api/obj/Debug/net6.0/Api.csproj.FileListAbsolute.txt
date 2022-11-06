@@ -131,6 +131,7 @@ C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Microsoft.OpenApi.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -179,4 +180,3 @@ C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.xml
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.pdb
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\Api.genruntimeconfig.cache
 C:\Dev\ADSoftware\Backend\Api\obj\Debug\net6.0\ref\Api.dll
-C:\Dev\ADSoftware\Backend\Api\bin\Debug\net6.0\Newtonsoft.Json.dll
