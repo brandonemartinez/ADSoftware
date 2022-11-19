@@ -1,5 +1,7 @@
 ﻿using Api.Resources.Especialist;
+using AutoMapper;
 using Core.Models;
+using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers.Admin
@@ -9,6 +11,14 @@ namespace Api.Controllers.Admin
     [ApiController]
     public class ReporteController : ControllerBase
     {
+        private readonly IReporteService _reporteService;
+        private readonly IMapper _mapper;
+        public ReporteController(IReporteService reporteService, IMapper mapper)
+        {
+            _reporteService = reporteService;
+            _mapper = mapper;
+        }
+
         ///// <summary>
         ///// Obtener a todos los Especialistas sin ningun filtro
         ///// </summary>

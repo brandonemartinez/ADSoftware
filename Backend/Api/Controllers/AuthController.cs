@@ -29,18 +29,18 @@ namespace Api.Controllers
             var token = await _authService.Auth(loginData.Correo, loginData.Contraseña);
 
             if (token == null)
-                return NotFound(new Respuesta
+                return NotFound(new RespuestaLogin
                 {
                     Titulo = "Login",
                     Valido = false,
-                    Data = token
+                    Token = token
                 });
 
-            return Ok(new Respuesta
+            return Ok(new RespuestaLogin
             {
                 Titulo = "Login",
                 Valido = true,
-                Data = token
+                Token = token
             });
         }
     }

@@ -1,9 +1,11 @@
 ﻿using Api.Resources.Cita;
 using Api.Resources.Department;
 using Api.Resources.Especialist;
+using Api.Resources.Oficio;
 using Api.Resources.Usuario;
 using AutoMapper;
 using Core.Models;
+using Dtos.Dto;
 using Dtos.Dto.Cita;
 using Dtos.Dto.Departamento;
 
@@ -69,6 +71,8 @@ namespace Api.Mapping
                 .ForPath(dest => dest.HoraDesde, act => act.MapFrom(src => TimeSpan.FromHours(src.HoraDesde)))
                 .ReverseMap();
             CreateMap<Cita, CitaDto>().ReverseMap();
+            CreateMap<Oficio, OficioDto>().ReverseMap();
+            CreateMap<Oficio, OficioResourceCreateRequest>().ReverseMap();
         }
     }
 }
