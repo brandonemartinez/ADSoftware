@@ -1,4 +1,5 @@
-﻿using Api.Resources.Especialist;
+﻿using Api.Resources.Client;
+using Api.Resources.Especialist;
 using Api.Resources.Usuario;
 using Api.Validators;
 using AutoMapper;
@@ -120,6 +121,7 @@ namespace Api.Controllers
                 throw exception;
             }
         }
+        
         /// <summary>
         /// Editar Espacialista
         /// </summary>
@@ -152,6 +154,36 @@ namespace Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Editar Cliente
+        /// </summary>
+        /// <param name="userUpdateRequest"></param>
+        /// <returns></returns>
+        [HttpPut("Cliente")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ClientResourceResponse))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ClientResourceResponse>> UpdateCliente([FromBody] ClientUpdateRequest userUpdateRequest)
+        {
+            try
+            {
+                var validator = new ClientUpdateRequestValidator();
+                var validatorResult = await validator.ValidateAsync(userUpdateRequest);
+                if (!validatorResult.IsValid)
+                    return BadRequest(validatorResult.Errors);
+
+                //Mapper
+                var userToUpdate = _mapper.Map<ClientUpdateRequest, Usuario>(userUpdateRequest);
+
+                Usuario newUser = await _usuarioService.UpdateClient(userToUpdate);
+                ClientResourceResponse response = _mapper.Map<Usuario, ClientResourceResponse>(newUser);
+                return Created("Updated", response);
+            }
+            catch (ArgumentException exception)
+            {
+                throw exception;
+            }
+        }
 
         /// <summary>
         /// Activar y Desactivar usuarios

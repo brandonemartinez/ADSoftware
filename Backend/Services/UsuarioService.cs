@@ -118,5 +118,16 @@ namespace Services
             }
 
         }
+
+        public async Task<Usuario> UpdateClient(Usuario userToUpdate)
+        {
+            Usuario userDb = await _unitOfWork.UsuarioRepository.GetByIdAsync(userToUpdate.Id);
+
+            UpdateClientMapper.mapUpdatedUser(userDb, userToUpdate);
+
+            _unitOfWork.UsuarioRepository.UpdateAsync(userDb);
+            await _unitOfWork.CommitAsync();
+            return userToUpdate;
+        }
     }
 }

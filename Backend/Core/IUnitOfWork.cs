@@ -9,6 +9,7 @@ namespace Core
         IDepartamentoRepository DepartamentoRepository { get; }
         ICitaRepository CitaRepository { get; }
         IOficioRepository OficioRepository { get; }
+        IPlanRepository PlanRepository { get; }
 
         Task<int> CommitAsync();
         Task<int> CommitAsync(string eventType, string entityName, object entity);
