@@ -26,6 +26,7 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICitaService, CitaService>();
 builder.Services.AddScoped<IOficioService, OficioService>();
+builder.Services.AddScoped<IPlanService, PlanService>();
 
 //JWT
 var appsettingsSection = builder.Configuration.GetSection("Auth");

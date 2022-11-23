@@ -21,22 +21,38 @@ namespace Services.Mapping
 
         private static void mapUpdatedEspecialist(Especialista espcialistOld, Especialista especialistNew)
         {
+            if (especialistNew.RazonSocial != null)
             espcialistOld.RazonSocial = especialistNew.RazonSocial;
+            if (especialistNew.Calificacion != null)
             espcialistOld.Calificacion = especialistNew.Calificacion;
-            espcialistOld.Fotos = especialistNew.Fotos;
+            //if (especialistNew.Fotos != null)
+            //espcialistOld.Fotos = especialistNew.Fotos;
+            if (especialistNew.IdPaquete != 0)
             espcialistOld.IdPaquete = especialistNew.IdPaquete;
         }
 
         private static void mapUpdatedUser(Usuario userDb, Usuario userToUpdate)
         {
-            userDb.Nombre = userToUpdate.Nombre;
-            userDb.Apellido = userToUpdate.Apellido;
-            userDb.NombreUsuario = userToUpdate.NombreUsuario;
-            userDb.Correo = userToUpdate.Correo;
-            userDb.Contrasenia = userToUpdate.Contrasenia;
-            userDb.Telefono = userToUpdate.Telefono;
-            userDb.Id = userToUpdate.Id;
-            userDb.IdDepartamento = userToUpdate.IdDepartamento;
+            if (userToUpdate.Nombre != null)
+                userDb.Nombre = userToUpdate.Nombre;
+            if (userToUpdate.Apellido != null)
+                userDb.Apellido = userToUpdate.Apellido;
+            if (userToUpdate.NombreUsuario != null)
+                userDb.NombreUsuario = userToUpdate.NombreUsuario;
+            if (userToUpdate.Contrasenia != null)
+                userDb.Contrasenia = userToUpdate.Contrasenia;
+            if (userToUpdate.Correo != null)
+                userDb.Correo = userToUpdate.Correo;
+            if (userToUpdate.Telefono != null)
+                userDb.Telefono = userToUpdate.Telefono;
+            if (userToUpdate.Direccion != null)
+                userDb.Direccion = userToUpdate.Direccion;
+            if (userToUpdate.FechaNacimiento != null)
+                userDb.FechaNacimiento = userToUpdate.FechaNacimiento;
+            if (userToUpdate.Genero != null)
+                userDb.Genero = userToUpdate.Genero;
+            if (userToUpdate.IdDepartamento == 0)
+                userDb.IdDepartamento = userToUpdate.IdDepartamento;
         }
     }
 }

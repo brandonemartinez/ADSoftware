@@ -19,12 +19,12 @@ namespace Services
             var usuario = await _unitOfWork.UsuarioRepository.GetByIdAsync(idEspecialista);
             if (usuario == null)
             {
-                throw new Exception($"No se encontro nignun especialista con el id: {idEspecialista}");
+                throw new KeyNotFoundException($"No se encontro nignun especialista con el id: {idEspecialista}");
             }
             var cliente = await _unitOfWork.UsuarioRepository.GetByIdAsync(idCliente);
             if (cliente == null)
             {
-                throw new Exception($"No se encontro nignun cliente con el id: {idEspecialista}");
+                throw new KeyNotFoundException($"No se encontro nignun cliente con el id: {idEspecialista}");
             }
             cita.IdUsuarios.Add(usuario);
             cita.IdUsuarios.Add(cliente);
@@ -54,7 +54,7 @@ namespace Services
             Cita cita = await _unitOfWork.CitaRepository.GetByIdCompleteAsync(idCita);
             if (cita == null)
             {
-                throw new Exception("Cita no encontrada");
+                throw new KeyNotFoundException($"No se encontro una cita con el id {idCita}.");
             }
             
             if (!cita.IdUsuarios.Any(a => a.Id == idUsuario))

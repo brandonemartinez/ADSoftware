@@ -28,6 +28,7 @@ namespace Data
         public virtual DbSet<Paquete> Paquetes { get; set; } = null!;
         public virtual DbSet<RegistroAuditoria> RegistroAuditoria { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
+        public virtual DbSet<Archivo> Archivos { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -70,6 +71,14 @@ namespace Data
                     .WithMany(p => p.Busqueda)
                     .HasForeignKey(d => d.IdDepartamento)
                     .HasConstraintName("FK__Busqueda__idDepa__3F466844");
+            });
+
+            modelBuilder.Entity<Archivo>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.FotoPerfil).HasColumnName("fotoPerfil");
+
             });
 
             modelBuilder.Entity<Cita>(entity =>
@@ -162,10 +171,6 @@ namespace Data
                     .IsUnicode(false)
                     .HasColumnName("departamentoDisponible");
 
-                entity.Property(e => e.Fotos)
-                    .HasMaxLength(255)
-                    .IsUnicode(false)
-                    .HasColumnName("fotos");
 
                 entity.Property(e => e.HoraDesde).HasColumnName("horaDesde");
 
@@ -188,11 +193,8 @@ namespace Data
                     .IsUnicode(false)
                     .HasColumnName("razonSocial");
 
-                entity.Property(e => e.FotoPerfil)
-                    .HasMaxLength(255)
-                    .IsUnicode(false)
-                    .HasColumnName("fotoPerfil");
-                
+
+
                 entity.Property(e => e.Presentacion)
                     .HasMaxLength(255)
                     .IsUnicode(false)
@@ -286,7 +288,7 @@ namespace Data
                 entity.ToTable("Paquete");
 
                 entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
+                    .ValueGeneratedOnAdd()
                     .HasColumnName("id");
 
                 entity.Property(e => e.CantidadCiudades).HasColumnName("cantidadCiudades");
@@ -298,9 +300,13 @@ namespace Data
                     .IsUnicode(false)
                     .HasColumnName("nombre");
 
-                entity.Property(e => e.Precio)
+                entity.Property(e => e.PrecioMensual)
                     .HasColumnType("decimal(18, 0)")
-                    .HasColumnName("precio");
+                    .HasColumnName("precioMensual");
+
+                entity.Property(e => e.PrecioAnual)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("precioAnual");
             });
 
             modelBuilder.Entity<RegistroAuditoria>(entity =>

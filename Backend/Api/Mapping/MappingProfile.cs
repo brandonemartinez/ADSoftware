@@ -1,13 +1,18 @@
 ﻿using Api.Resources.Cita;
+using Api.Resources.Client;
 using Api.Resources.Department;
 using Api.Resources.Especialist;
 using Api.Resources.Oficio;
+using Api.Resources.Plan;
 using Api.Resources.Usuario;
 using AutoMapper;
 using Core.Models;
+using Data.Dto.Especialista;
 using Dtos.Dto;
 using Dtos.Dto.Cita;
 using Dtos.Dto.Departamento;
+using Dtos.Dto.Plan;
+using System.Text;
 
 namespace Api.Mapping
 {
@@ -29,8 +34,8 @@ namespace Api.Mapping
             CreateMap<EspecialistRegisterRequest, Usuario>()
                 .ForPath(dest => dest.Especialista.RazonSocial, act => act.MapFrom(src => src.RazonSocial))
                 .ForPath(dest => dest.Especialista.NombreFantasia, act => act.MapFrom(src => src.NombreFantasia))
-                .ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
-                .ForPath(dest => dest.Especialista.FotoPerfil, act => act.MapFrom(src => src.FotoPerfil))
+                //.ForPath(dest => dest.Especialista.FotoPerfil, act => act.Ignore())
+                //.ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
                 .ForPath(dest => dest.Especialista.Presentacion, act => act.MapFrom(src => src.Presentacion))
                 .ForPath(dest => dest.Especialista.RangoDia, act => act.MapFrom(src => src.RangoDia))
                 .ForPath(dest => dest.Especialista.HoraDesde, act => act.MapFrom(src => src.HoraDesde))
@@ -42,8 +47,7 @@ namespace Api.Mapping
                 .ForPath(dest => dest.Id, act => act.MapFrom(src => src.IdUsuario))
                 .ForPath(dest => dest.Especialista.RazonSocial, act => act.MapFrom(src => src.RazonSocial))
                 .ForPath(dest => dest.Especialista.NombreFantasia, act => act.MapFrom(src => src.NombreFantasia))
-                .ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
-                .ForPath(dest => dest.Especialista.FotoPerfil, act => act.MapFrom(src => src.FotoPerfil))
+                //.ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
                 .ForPath(dest => dest.Especialista.Presentacion, act => act.MapFrom(src => src.Presentacion))
                 .ForPath(dest => dest.Especialista.RangoDia, act => act.MapFrom(src => src.RangoDia))
                 .ForPath(dest => dest.Especialista.HoraDesde, act => act.MapFrom(src => src.HoraDesde))
@@ -54,8 +58,8 @@ namespace Api.Mapping
             CreateMap<EspecialistUpdateRequest, Usuario>()
                 .ForPath(dest => dest.Especialista.RazonSocial, act => act.MapFrom(src => src.RazonSocial))
                 .ForPath(dest => dest.Especialista.NombreFantasia, act => act.MapFrom(src => src.NombreFantasia))
-                .ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
-                .ForPath(dest => dest.Especialista.FotoPerfil, act => act.MapFrom(src => src.FotoPerfil))
+                //.ForPath(dest => dest.Especialista.Fotos, act => act.MapFrom(src => src.Fotos))
+                //.ForPath(dest => dest.Especialista.FotoPerfil, act => act.MapFrom(src => src.FotoPerfil))
                 .ForPath(dest => dest.Especialista.Presentacion, act => act.MapFrom(src => src.Presentacion))
                 .ForPath(dest => dest.Especialista.RangoDia, act => act.MapFrom(src => src.RangoDia))
                 .ForPath(dest => dest.Especialista.HoraDesde, act => act.MapFrom(src => TimeSpan.FromHours(src.HoraDesde)))
@@ -73,6 +77,14 @@ namespace Api.Mapping
             CreateMap<Cita, CitaDto>().ReverseMap();
             CreateMap<Oficio, OficioDto>().ReverseMap();
             CreateMap<Oficio, OficioResourceCreateRequest>().ReverseMap();
+            CreateMap<Paquete, PlanResourceCreateRequest>().ReverseMap();
+            CreateMap<Paquete, PlanListResourceResponse>().ReverseMap();
+            CreateMap<Paquete, PlanDto>().ReverseMap();
+            CreateMap<Usuario, ClientUpdateRequest>().ReverseMap();
+            CreateMap<Usuario, ClientResourceResponse>().ReverseMap();
+            CreateMap<Especialista, EspecialistaDto>()
+                //.ForPath(dest => dest.FotoPerfil, act => act.MapFrom(src => src.FotoPerfil))
+                .ReverseMap();
         }
     }
 }

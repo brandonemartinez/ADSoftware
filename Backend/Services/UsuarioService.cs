@@ -101,7 +101,7 @@ namespace Services
                 var user = await _unitOfWork.UsuarioRepository.GetEspecialistaByIdCompleteAsync(nuevoUsuario.Id);
                 if (user == null)
                 {
-                    throw new ArgumentException($"El usuario con id {nuevoUsuario.Id} no existe");
+                    throw new KeyNotFoundException($"El usuario con id {nuevoUsuario.Id} no existe");
                 }
                 user.Especialista = nuevoUsuario.Especialista;
                 user.Rol = Roles.ESPECIALISTA;
@@ -122,6 +122,9 @@ namespace Services
         public async Task<Usuario> UpdateClient(Usuario userToUpdate)
         {
             Usuario userDb = await _unitOfWork.UsuarioRepository.GetByIdAsync(userToUpdate.Id);
+            if (userDb == null)
+                throw new KeyNotFoundException($"No se encontro ningun usuario con el Id: {userToUpdate.Id}.");
+            userToUpdate.Contrasenia = Encrypt.GetSHA256(userToUpdate.Contrasenia);
 
             UpdateClientMapper.mapUpdatedUser(userDb, userToUpdate);
 

@@ -8,6 +8,7 @@ namespace Core.Services
         //Task<bool> AgregarDisponibilidad(int idUsuario, IEnumerable<Disponibilidad> disponibilidadRequest);
         Task<Especialista> CreateEspecialist(Especialista especialista);
         Task<IEnumerable<Especialista>> GetAll();
+        Task<Especialista> GetById(int idEspecialista);
         Task<IEnumerable<Especialista>> GetListFiltred(ListFilter listFilter);
     }
 }

@@ -16,6 +16,10 @@ namespace Services
         {
             try
             {
+                Oficio exist = await _unitOfWork.OficioRepository.GetByName(oficio.Nombre);
+                if (exist != null)
+                    throw new InvalidOperationException($"Ya existe un oficio con el nombre {oficio.Nombre}.");
+
                 await _unitOfWork.OficioRepository.CreateAsync(oficio);
                 var result = await _unitOfWork.CommitAsync();
                 return true;

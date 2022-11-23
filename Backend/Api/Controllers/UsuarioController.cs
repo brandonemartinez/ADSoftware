@@ -7,6 +7,7 @@ using Core.Models;
 using Core.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Services.Utilities;
 
 namespace Api.Controllers
 {
@@ -71,14 +72,23 @@ namespace Api.Controllers
         {
             try
             {
+                if (userRegisterRequest == null)
+                    return BadRequest("El usuario para registrar esta vacio.");
+
                 var validator = new EspecialistRegisterRequestValidator();
                 var validatorResult = await validator.ValidateAsync(userRegisterRequest);
                 if (!validatorResult.IsValid)
                     return BadRequest(validatorResult.Errors);
 
+
                 //Mapper
                 var userToCreate = _mapper.Map<EspecialistRegisterRequest, Usuario>(userRegisterRequest);
-                userRegisterRequest.Oficios.ForEach(f => userToCreate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio}));
+                userRegisterRequest.Oficios.ForEach(f => userToCreate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio }));
+                //if (userRegisterRequest.FotoPerfil != null)
+                //{
+                //    //userToCreate.Especialista.FotoPerfil = await FileHelper.MapFileToAdd(userRegisterRequest.FotoPerfil);
+                //}
+
 
                 Usuario newUser = await _usuarioService.CreateEspecialist(userToCreate);
                 Usuario user = await _usuarioService.GetById(newUser.Id);
@@ -91,6 +101,7 @@ namespace Api.Controllers
                 throw exception;
             }
         }
+
         /// <summary>
         /// Cambiar de tipo a un Usuario Ciente a Especialista
         /// </summary>
@@ -121,7 +132,7 @@ namespace Api.Controllers
                 throw exception;
             }
         }
-        
+
         /// <summary>
         /// Editar Espacialista
         /// </summary>
@@ -215,5 +226,16 @@ namespace Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Agregar foto de perfil
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        [HttpPost("AgregarFotoPerfil")]
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult<string>> Activacion([FromForm] IFormFile file)
+        {
+            return "";
+        }
     }
 }

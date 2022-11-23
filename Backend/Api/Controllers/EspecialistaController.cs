@@ -4,6 +4,7 @@ using Api.Validators;
 using AutoMapper;
 using Core.Models;
 using Core.Services;
+using Data.Dto.Especialista;
 using Dtos.Dto.Especialista;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +42,20 @@ namespace Api.Controllers
             if (especialsitaCollection == null) return NotFound($"No se encontro ningun especialista");
             var especialistaResourcesListResponse = _mapper.Map<IEnumerable<Especialista>, IEnumerable<EspecialistaResourceListResponse>>(especialsitaCollection);
             return Ok(especialistaResourcesListResponse);
+        }
+
+        /// <summary>
+        /// Obtener Especialista por Id
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("{idEspecialista}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<EspecialistaResourceListResponse>>> Get(int idEspecialista)
+        {
+            Especialista especialista = await _especialistaService.GetById(idEspecialista);
+            if (especialista == null) return NotFound($"No se encontro ningun especialista");
+            var especialistaResponse = _mapper.Map<Especialista, EspecialistaDto>(especialista);
+            return Ok(especialistaResponse);
         }
         /// <summary>
         /// Obtener todos los Especialistas con filtros

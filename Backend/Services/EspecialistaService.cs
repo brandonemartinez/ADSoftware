@@ -17,7 +17,7 @@ namespace Services
         public async Task<Especialista> CreateEspecialist(Especialista nuevoUsuario)
         {
             if (await ValidateAlreadyCreatedUserEspecialist(nuevoUsuario))
-                throw new ArgumentException($"El Especialista con Id: {nuevoUsuario.Id} ya esta creado.");
+                throw new InvalidOperationException($"El Especialista con Id: {nuevoUsuario.Id} ya esta creado.");
 
             await _unitOfWork.EspecialistaRepository.CreateAsync(nuevoUsuario);
             await _unitOfWork.CommitAsync();
@@ -53,6 +53,12 @@ namespace Services
                 await _unitOfWork.CommitAsync(EventTypes.SEARCH, TablesName.ESPECIALISTA, listFilter);
             }
             return especialistas;
+        }
+
+        public async Task<Especialista> GetById(int idEspecialista)
+        {
+            var especialista = await _unitOfWork.EspecialistaRepository.GetByIdAsync(idEspecialista);
+            return especialista;
         }
     }
 }
