@@ -6,14 +6,15 @@ namespace Services.Mapping
     {
         public static void MapEspecialistToUpdate(Usuario userOld, Usuario userNew)
         {
-            foreach (var item in userNew.Especialista.OficioEspecialista)
-            {
-                userOld.Especialista.OficioEspecialista.Add(new OficioEspecialista
-                {
-                    IdEspecialista = item.IdEspecialista,
-                    IdOficio = item.IdOficio
-                });
-            };
+            //TODO Validate
+            //foreach (var item in userNew.Especialista.OficioEspecialista)
+            //{
+            //    userOld.Especialista.OficioEspecialista.Add(new OficioEspecialista
+            //    {
+            //        IdEspecialista = item.IdEspecialista,
+            //        IdOficio = item.IdOficio
+            //    });
+            //};
             mapUpdatedEspecialist(userOld.Especialista, userNew.Especialista);
             mapUpdatedUser(userOld, userNew);
 

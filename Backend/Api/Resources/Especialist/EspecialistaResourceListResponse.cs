@@ -1,9 +1,20 @@
-﻿namespace Api.Resources.Especialist
+﻿using Dtos.Dto;
+
+namespace Api.Resources.Especialist
 {
     public class EspecialistaResourceListResponse
     {
-        public string Nombre { get; set; }
+        public int Id { get; set; }
+        public string RazonSocial { get; set; } = null!;
+        public string Rut { get; set; } = null!;
+        public string NombreFantasia { get; set; } = null!;
+        public string? Presentacion { get; set; }
         public int? Calificacion { get; set; }
-        public List<EspecialistaOficioListResponse> Oficios { get; set; }
+        public string? RangoDia { get; set; }
+        public TimeSpan? HoraDesde { get; set; }
+        public TimeSpan? HoraHasta { get; set; }
+        public string? DepartamentoDisponible { get; set; }
+        public int IdPaquete { get; set; }
+        public virtual ICollection<OficioDetalleDto> Oficios { get; set; }
     }
 }

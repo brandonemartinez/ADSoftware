@@ -28,11 +28,11 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<OficioDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<OficioDetalleDto>>> GetAll()
         {
             IEnumerable<Oficio> oficioDtoCollection = await _oficioService.GetAll();
             if (oficioDtoCollection == null) return NotFound($"No se encontro ningun oficio");
-            var response = _mapper.Map<IEnumerable<Oficio>, IEnumerable<OficioDto>>(oficioDtoCollection);
+            var response = _mapper.Map<IEnumerable<Oficio>, IEnumerable<OficioDetalleDto>>(oficioDtoCollection);
             return Ok(response);
         }
     }

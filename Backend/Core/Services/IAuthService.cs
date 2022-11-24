@@ -1,7 +1,7 @@
 ﻿namespace Core.Services
 {
-    public interface IAuthService
+    public interface IArchivoService
     {
-        Task<string> Auth(string correo, string contraseña);
+        Task Create(byte[] archivo, int idEspecialista, bool fotoPerfil);
     }
 }

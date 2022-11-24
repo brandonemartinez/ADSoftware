@@ -17,6 +17,7 @@ namespace Data
         {
         }
 
+        public virtual DbSet<Archivo> Archivos { get; set; } = null!;
         public virtual DbSet<Busqueda> Busqueda { get; set; } = null!;
         public virtual DbSet<Cita> Cita { get; set; } = null!;
         public virtual DbSet<Ciudad> Ciudads { get; set; } = null!;
@@ -24,11 +25,9 @@ namespace Data
         public virtual DbSet<Especialista> Especialista { get; set; } = null!;
         public virtual DbSet<HistorialPago> HistorialPagos { get; set; } = null!;
         public virtual DbSet<Oficio> Oficios { get; set; } = null!;
-        public virtual DbSet<OficioEspecialista> OficioEspecialista { get; set; } = null!;
         public virtual DbSet<Paquete> Paquetes { get; set; } = null!;
         public virtual DbSet<RegistroAuditoria> RegistroAuditoria { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
-        public virtual DbSet<Archivo> Archivos { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -41,6 +40,24 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Archivo>(entity =>
+            {
+                entity.ToTable("Archivo");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.DataArchivo).HasColumnName("dataArchivo");
+
+                entity.Property(e => e.FotoPerfil).HasColumnName("fotoPerfil");
+
+                entity.Property(e => e.IdEspecialista).HasColumnName("idEspecialista");
+
+                entity.HasOne(d => d.IdEspecialistaNavigation)
+                    .WithMany(p => p.Archivos)
+                    .HasForeignKey(d => d.IdEspecialista)
+                    .HasConstraintName("FK__Archivo__idEspec__52593CB8");
+            });
+
             modelBuilder.Entity<Busqueda>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -73,17 +90,11 @@ namespace Data
                     .HasConstraintName("FK__Busqueda__idDepa__3F466844");
             });
 
-            modelBuilder.Entity<Archivo>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.FotoPerfil).HasColumnName("fotoPerfil");
-
-            });
-
             modelBuilder.Entity<Cita>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Calificado).HasColumnName("calificado");
 
                 entity.Property(e => e.Estado)
                     .HasMaxLength(30)
@@ -97,6 +108,7 @@ namespace Data
                     .HasColumnName("fecha");
 
                 entity.Property(e => e.HoraDesde).HasColumnName("horaDesde");
+
                 entity.Property(e => e.HoraHasta).HasColumnName("horaHasta");
 
                 entity.Property(e => e.Localidad)
@@ -124,13 +136,11 @@ namespace Data
 
             modelBuilder.Entity<Ciudad>(entity =>
             {
-                entity.HasKey(e => e.IdDepartamento);
-
                 entity.ToTable("Ciudad");
 
-                entity.Property(e => e.IdDepartamento)
-                    .ValueGeneratedNever()
-                    .HasColumnName("idDepartamento");
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.IdDepartamento).HasColumnName("idDepartamento");
 
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(30)
@@ -138,9 +148,8 @@ namespace Data
                     .HasColumnName("nombre");
 
                 entity.HasOne(d => d.IdDepartamentoNavigation)
-                    .WithOne(p => p.Ciudad)
-                    .HasForeignKey<Ciudad>(d => d.IdDepartamento)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .WithMany(p => p.Ciudades)
+                    .HasForeignKey(d => d.IdDepartamento)
                     .HasConstraintName("FK__Ciudad__idDepart__267ABA7A");
             });
 
@@ -148,9 +157,7 @@ namespace Data
             {
                 entity.ToTable("Departamento");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(30)
@@ -161,7 +168,7 @@ namespace Data
             modelBuilder.Entity<Especialista>(entity =>
             {
                 entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
+                    .ValueGeneratedNever()
                     .HasColumnName("id");
 
                 entity.Property(e => e.Calificacion).HasColumnName("calificacion");
@@ -170,7 +177,6 @@ namespace Data
                     .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasColumnName("departamentoDisponible");
-
 
                 entity.Property(e => e.HoraDesde).HasColumnName("horaDesde");
 
@@ -183,8 +189,13 @@ namespace Data
                     .IsUnicode(false)
                     .HasColumnName("nombreFantasia");
 
+                entity.Property(e => e.Presentacion)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("presentacion");
+
                 entity.Property(e => e.RangoDia)
-                    .HasMaxLength(30)
+                    .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasColumnName("rangoDia");
 
@@ -193,12 +204,10 @@ namespace Data
                     .IsUnicode(false)
                     .HasColumnName("razonSocial");
 
-
-
-                entity.Property(e => e.Presentacion)
-                    .HasMaxLength(255)
+                entity.Property(e => e.Rut)
+                    .HasMaxLength(55)
                     .IsUnicode(false)
-                    .HasColumnName("presentacion");
+                    .HasColumnName("rut");
 
                 entity.HasOne(d => d.IdNavigation)
                     .WithOne(p => p.Especialista)
@@ -211,6 +220,23 @@ namespace Data
                     .HasForeignKey(d => d.IdPaquete)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Especiali__idPaq__2F10007B");
+
+                entity.HasMany(d => d.IdOficios)
+                    .WithMany(p => p.IdEspecialista)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "OficioEspecialista",
+                        l => l.HasOne<Oficio>().WithMany().HasForeignKey("IdOficio").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__OficioEsp__idOfi__3A81B327"),
+                        r => r.HasOne<Especialista>().WithMany().HasForeignKey("IdEspecialista").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__OficioEsp__idEsp__398D8EEE"),
+                        j =>
+                        {
+                            j.HasKey("IdEspecialista", "IdOficio");
+
+                            j.ToTable("OficioEspecialista");
+
+                            j.IndexerProperty<int>("IdEspecialista").HasColumnName("idEspecialista");
+
+                            j.IndexerProperty<int>("IdOficio").HasColumnName("idOficio");
+                        });
             });
 
             modelBuilder.Entity<HistorialPago>(entity =>
@@ -254,59 +280,43 @@ namespace Data
             {
                 entity.ToTable("Oficio");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
 
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(30)
                     .IsUnicode(false)
                     .HasColumnName("nombre");
-            });
-
-            modelBuilder.Entity<OficioEspecialista>(entity =>
-            {
-                entity.HasKey(e => new { e.IdEspecialista, e.IdOficio });
-
-                entity.Property(e => e.IdEspecialista).HasColumnName("idEspecialista");
-
-                entity.Property(e => e.IdOficio).HasColumnName("idOficio");
-
-                entity.HasOne(d => d.IdEspecialistaNavigation)
-                    .WithMany(p => p.OficioEspecialista)
-                    .HasForeignKey(d => d.IdEspecialista)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OficioEsp__idEsp__398D8EEE");
-
-                entity.HasOne(d => d.IdOficioNavigation)
-                    .WithMany(p => p.OficioEspecialista)
-                    .HasForeignKey(d => d.IdOficio)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OficioEsp__idOfi__3A81B327");
             });
 
             modelBuilder.Entity<Paquete>(entity =>
             {
                 entity.ToTable("Paquete");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.CantidadCiudades).HasColumnName("cantidadCiudades");
 
                 entity.Property(e => e.CantidadProfesiones).HasColumnName("cantidadProfesiones");
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("descripcion");
 
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(30)
                     .IsUnicode(false)
                     .HasColumnName("nombre");
 
-                entity.Property(e => e.PrecioMensual)
-                    .HasColumnType("decimal(18, 0)")
-                    .HasColumnName("precioMensual");
-
                 entity.Property(e => e.PrecioAnual)
                     .HasColumnType("decimal(18, 0)")
                     .HasColumnName("precioAnual");
+
+                entity.Property(e => e.PrecioMensual)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("precioMensual");
             });
 
             modelBuilder.Entity<RegistroAuditoria>(entity =>
@@ -318,12 +328,12 @@ namespace Data
                     .HasColumnName("fechaEvento");
 
                 entity.Property(e => e.NombreTabla)
-                    .HasMaxLength(10)
+                    .HasMaxLength(55)
                     .IsUnicode(false)
                     .HasColumnName("nombreTabla");
 
                 entity.Property(e => e.Token)
-                    .HasMaxLength(10)
+                    .HasMaxLength(55)
                     .IsUnicode(false)
                     .HasColumnName("token");
 
@@ -347,7 +357,7 @@ namespace Data
                     .HasColumnName("apellido");
 
                 entity.Property(e => e.Contrasenia)
-                    .HasMaxLength(30)
+                    .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("contrasenia");
 

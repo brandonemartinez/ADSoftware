@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using System.Xml;
-using Formatting = Newtonsoft.Json.Formatting;
 
 namespace Core.Models
 {
@@ -14,6 +11,7 @@ namespace Core.Models
         public DateTime? FechaEvento { get; set; }
         public string? NombreTabla { get; set; }
         public string? Valores { get; set; }
+
         public RegistroAuditoria()
         {
 

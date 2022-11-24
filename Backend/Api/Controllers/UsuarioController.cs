@@ -18,14 +18,17 @@ namespace Api.Controllers
     {
         private readonly IUsuarioService _usuarioService;
         private readonly IEspecialistaService _especialistaService;
+        private readonly IArchivoService _archivoService;
         private readonly IMapper _mapper;
 
         public UsuarioController(IUsuarioService userservice,
                                  IEspecialistaService especialistaService,
+                                 IArchivoService archivoService,
                                  IMapper mapper)
         {
             _especialistaService = especialistaService;
             _usuarioService = userservice;
+            _archivoService = archivoService;
             _mapper = mapper;
         }
 
@@ -80,10 +83,10 @@ namespace Api.Controllers
                 if (!validatorResult.IsValid)
                     return BadRequest(validatorResult.Errors);
 
-
                 //Mapper
                 var userToCreate = _mapper.Map<EspecialistRegisterRequest, Usuario>(userRegisterRequest);
-                userRegisterRequest.Oficios.ForEach(f => userToCreate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio }));
+                //TODO Validate
+                //userRegisterRequest.Oficios.ForEach(f => userToCreate.Especialista.IdOficios.Add(new Oficio { Id = f.IdOficio }));
                 //if (userRegisterRequest.FotoPerfil != null)
                 //{
                 //    //userToCreate.Especialista.FotoPerfil = await FileHelper.MapFileToAdd(userRegisterRequest.FotoPerfil);
@@ -153,7 +156,8 @@ namespace Api.Controllers
 
                 //Mapper
                 var userToUpdate = _mapper.Map<EspecialistUpdateRequest, Usuario>(userUpdateRequest);
-                userUpdateRequest.Oficios.ForEach(f => userToUpdate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, IdEspecialista = userToUpdate.Id }));
+                //TODO Validate
+                //userUpdateRequest.Oficios.ForEach(f => userToUpdate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, IdEspecialista = userToUpdate.Id }));
 
                 Usuario newUser = await _usuarioService.UpdateEspecialist(userToUpdate);
                 EspecialistResourceResponse response = _mapper.Map<Usuario, EspecialistResourceResponse>(newUser);
@@ -230,12 +234,58 @@ namespace Api.Controllers
         /// Agregar foto de perfil
         /// </summary>
         /// <param name="file"></param>
+        /// <param name="idEspecialista"></param>
         /// <returns></returns>
-        [HttpPost("AgregarFotoPerfil")]
+        [HttpPost("AgregarFotoPerfil/{idEspecialista}")]
         [Consumes("multipart/form-data")]
-        public async Task<ActionResult<string>> Activacion([FromForm] IFormFile file)
+        public async Task<ActionResult<string>> GuardarFotoPerfil([FromForm] IFormFile file, int idEspecialista)
         {
-            return "";
+
+            try
+            {
+                byte[] fileBytes;
+                using (var memoryStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(memoryStream);
+                    fileBytes = memoryStream.ToArray();
+                }
+                await _archivoService.Create(fileBytes, idEspecialista, true);
+                return Ok("Archivo guardado");
+            }
+            catch (Exception exe)
+            {
+                throw exe;
+            }
+        }
+
+        /// <summary>
+        /// Agregar Certificaciones
+        /// </summary>
+        /// <param name="files"></param>
+        /// <param name="idEspecialista"></param>
+        /// <returns></returns>
+        [HttpPost("AgregarCertificaciones/{idEspecialista}")]
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult<string>> GardarCertificaciones([FromForm] List<IFormFile> files, int idEspecialista)
+        {
+            try
+            {
+                foreach (var file in files)
+                {
+                    byte[] fileBytes;
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await file.CopyToAsync(memoryStream);
+                        fileBytes = memoryStream.ToArray();
+                    }
+                    await _archivoService.Create(fileBytes, idEspecialista, false);
+                }   
+                return Ok("Archivos guardados");
+            }
+            catch (Exception exe)
+            {
+                throw exe;
+            }
         }
     }
 }

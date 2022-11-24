@@ -15,6 +15,7 @@ namespace Api.Resources.Especialist
         public string Genero { get; set; }
         public int IdDepartamento { get; set; }
         public string RazonSocial { get; set; }
+        public string Rut { get; set; }
         public string NombreFantasia { get; set; }
         public string RangoDia { get; set; }
         public int HoraDesde { get; set; }

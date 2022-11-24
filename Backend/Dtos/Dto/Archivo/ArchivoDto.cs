@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Core.Models
+namespace Dtos.Dto.Archivo
 {
-    public partial class Archivo
+    public class ArchivoDto
     {
         public int Id { get; set; }
-        public int? IdEspecialista { get; set; }
         public bool? FotoPerfil { get; set; }
         public byte[]? DataArchivo { get; set; }
-
-        public virtual Especialista? IdEspecialistaNavigation { get; set; }
     }
 }

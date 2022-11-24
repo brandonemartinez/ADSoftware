@@ -13,9 +13,15 @@ namespace Data.Repositories
             get { return Context as DB_CATALOGO_SERVICIOSContext; }
         }
 
+        public async Task CreateWithAttach(Usuario user)
+        {
+            DB_CATALOGO_SERVICIOSContext.Usuarios.Attach(user);
+        }
+
         public async Task<Usuario> GetEspecialistaByIdCompleteAsync(int id)
         {
-            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Especialista).Include(u => u.Especialista.OficioEspecialista).FirstOrDefaultAsync(u => u.Id == id);
+            //TODO Validate
+            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Especialista).Include(u => u.Especialista/*OficioEspecialista*/).FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<Usuario> GetUsuarioLoginAsync(string correo, string contrasenia) => await DB_CATALOGO_SERVICIOSContext.Usuarios.Where(w => w.Correo == correo && w.Contrasenia == contrasenia).FirstOrDefaultAsync();
@@ -23,8 +29,9 @@ namespace Data.Repositories
         {
             try
             {
-                var removeData = DB_CATALOGO_SERVICIOSContext.OficioEspecialista.Where(w => w.IdEspecialista == user.Id);
-                DB_CATALOGO_SERVICIOSContext.OficioEspecialista.RemoveRange(removeData);
+                //TODO Validate
+                //var removeData = DB_CATALOGO_SERVICIOSContext.OficioEspecialista.Where(w => w.IdEspecialista == user.Id);
+                //DB_CATALOGO_SERVICIOSContext.OficioEspecialista.RemoveRange(removeData);
                 DB_CATALOGO_SERVICIOSContext.Especialista.Update(user.Especialista);
                 DB_CATALOGO_SERVICIOSContext.Usuarios.Update(user);
             }

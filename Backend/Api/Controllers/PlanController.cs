@@ -56,7 +56,7 @@ namespace Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<CitaResourceResponse>> Get()
+        public async Task<ActionResult<PlanListResourceResponse>> Get()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
             var userData = identity.Claims.ToList();

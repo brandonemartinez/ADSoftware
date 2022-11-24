@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Dtos.Dto
 {
-    public class OficioDto
+    public class OficioDetalleDto
     {
+        public int Id { get; set; }
         public string Nombre { get; set; }
     }
 }

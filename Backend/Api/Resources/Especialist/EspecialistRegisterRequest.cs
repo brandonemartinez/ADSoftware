@@ -1,4 +1,5 @@
-﻿using Dtos.Dto.Especialista;
+﻿using Dtos.Dto;
+using Dtos.Dto.Especialista;
 
 namespace Api.Resources.Especialist
 {
@@ -15,16 +16,15 @@ namespace Api.Resources.Especialist
         public string Genero { get; set; }
         public int IdDepartamento { get; set; }
         public string RazonSocial { get; set; }
+        public string Rut { get; set; }
         public string NombreFantasia { get; set; }
         public string RangoDia { get; set; }
         public int HoraDesde { get; set; }
         public int HoraHasta { get; set; }
         public string DepartamentoDisponible { get; set; }
-        public string Fotos { get; set; }
-        public string FotoPerfil { get; set; }
         public string Presentacion { get; set; }
         public int idPaquete { get; set; }
-        public List<OficioEspecialistaDto> Oficios { get; set; }
+        public List<OficioDetalleDto> Oficios { get; set; }
 
     }
 }

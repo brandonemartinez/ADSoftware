@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dtos.Dto;
+using Dtos.Dto.Archivo;
 
 namespace Data.Dto.Especialista
 {
@@ -17,5 +14,7 @@ namespace Data.Dto.Especialista
         public TimeSpan? HoraDesde { get; set; }
         public TimeSpan? HoraHasta { get; set; }
         public string? DepartamentoDisponible { get; set; }
+        public List<OficioDetalleDto> Oficios { get; set; } = null!;
+        public List<ArchivoDto> Archivos { get; set; } = null!;
     }
 }

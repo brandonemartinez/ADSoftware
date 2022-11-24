@@ -6,23 +6,23 @@ namespace Services.Mapping
     {
         public static void mapUpdatedUser(Usuario userDb, Usuario userToUpdate)
         {
-            if (userToUpdate.Nombre != null)
+            if (!String.IsNullOrWhiteSpace(userToUpdate.Nombre))
                 userDb.Nombre = userToUpdate.Nombre;
-            if (userToUpdate.Apellido != null)
+            if (!String.IsNullOrWhiteSpace(userToUpdate.Apellido))
                 userDb.Apellido = userToUpdate.Apellido;
-            if (userToUpdate.NombreUsuario != null)
+            if (!String.IsNullOrWhiteSpace(userToUpdate.NombreUsuario))
                 userDb.NombreUsuario = userToUpdate.NombreUsuario;
-            if (userToUpdate.Contrasenia != null)
+            if (!String.IsNullOrWhiteSpace(userToUpdate.Contrasenia))
                 userDb.Contrasenia = userToUpdate.Contrasenia;
-            if (userToUpdate.Correo != null)
+            if (!String.IsNullOrWhiteSpace(userToUpdate.Correo))
                 userDb.Correo = userToUpdate.Correo;
-            if (userToUpdate.Telefono != null)
+            if (!String.IsNullOrWhiteSpace(userToUpdate.Telefono))
                 userDb.Telefono = userToUpdate.Telefono;
-            if (userToUpdate.Direccion != null)
+            if (!String.IsNullOrWhiteSpace(userToUpdate.Direccion))
                 userDb.Direccion = userToUpdate.Direccion;
             if (userToUpdate.FechaNacimiento != null)
                 userDb.FechaNacimiento = userToUpdate.FechaNacimiento;
-            if (userToUpdate.Genero != null)
+            if (!String.IsNullOrWhiteSpace(userToUpdate.Genero))
                 userDb.Genero = userToUpdate.Genero;
             if (userToUpdate.IdDepartamento != 0)
                 userDb.IdDepartamento = userToUpdate.IdDepartamento;

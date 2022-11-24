@@ -7,5 +7,6 @@ namespace Core.Repositories
         Task<Usuario> GetEspecialistaByIdCompleteAsync(int id);
         void UpdateCompleteEspecialistAsync(Usuario user);
         Task<Usuario> GetUsuarioLoginAsync(string correo, string contrasenia);
+        Task CreateWithAttach(Usuario user);
     }
 }

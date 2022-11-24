@@ -2,6 +2,7 @@
 using Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Data.Repositories
 {
@@ -17,12 +18,12 @@ namespace Data.Repositories
 
         public async Task<Especialista> GetEspecialistaByIdCompleteAsync(int id)
         {
-            return await DB_CATALOGO_SERVICIOSContext.Especialista.FirstOrDefaultAsync(u => u.Id == id);
+            return await DB_CATALOGO_SERVICIOSContext.Especialista.Include("Archivos").Include("IdOficios").FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<IEnumerable<Especialista>> GetEspecialistasCompleteAsync()
         {
-            return await DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.IdNavigation).ToListAsync();
+            return await DB_CATALOGO_SERVICIOSContext.Especialista.Include("IdOficios").ToListAsync();
         }
 
         public async Task<IEnumerable<Especialista>> GetEspecialistaFilter(
@@ -34,12 +35,13 @@ namespace Data.Repositories
             string OrderBy,
             bool OrderByMethod)
         {
-            var queryable = DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.IdNavigation).Include(e => e.OficioEspecialista).AsQueryable();
+            //TODO Validate
+            var queryable = DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.IdNavigation).Include(e => e.IdOficios).AsQueryable();
 
             if (Busqueda != null)
             {
-                queryable = queryable.Where(x => x.OficioEspecialista.Any(a => a.IdOficioNavigation.Nombre.Contains(Busqueda)) ||
-                                                 x.NombreFantasia.Contains(Busqueda));
+                //TODO Validate
+                queryable = queryable.Where(x => x.NombreFantasia.Contains(Busqueda) || x.IdOficios.Any(a => a.Nombre.Contains(Busqueda)));
             };
             if (Calificacion.HasValue)
             {
@@ -61,17 +63,18 @@ namespace Data.Repositories
 
             queryable = OrderEspecialists(queryable, OrderBy, OrderByMethod);
             var oficios = await DB_CATALOGO_SERVICIOSContext.Oficios.ToListAsync();
-            await queryable.ForEachAsync(item =>
-            {
-                foreach (var oficio in item.OficioEspecialista)
-                {
-                    oficio.IdOficioNavigation = new Oficio()
-                    {
-                        Id = oficio.IdOficio,
-                        Nombre = oficios.FirstOrDefault(w => w.Id == oficio.IdOficio).Nombre
-                    };
-                }
-            });
+            //TODO Validate
+            //await queryable.ForEachAsync(item =>
+            //{
+            //    foreach (var oficio in item.OficioEspecialista)
+            //    {
+            //        oficio.IdOficioNavigation = new Oficio()
+            //        {
+            //            Id = oficio.IdOficio,
+            //            Nombre = oficios.FirstOrDefault(w => w.Id == oficio.IdOficio).Nombre
+            //        };
+            //    }
+            //});
 
             return queryable;
         }
@@ -92,7 +95,8 @@ namespace Data.Repositories
                     }
                     if (orderBy == "Oficio")
                     {
-                        queryable = queryable.OrderBy(o => o.OficioEspecialista);
+                        //TODO Validate
+                        //queryable = queryable.OrderBy(o => o.OficioEspecialista);
                     }
                     if (orderBy == "Calificacion")
                     {
@@ -107,7 +111,8 @@ namespace Data.Repositories
                     }
                     if (orderBy == "Oficio")
                     {
-                        queryable = queryable.OrderByDescending(o => o.OficioEspecialista);
+                        //TODO Validate
+                        //queryable = queryable.OrderByDescending(o => o.OficioEspecialista);
                     }
                     if (orderBy == "Calificacion")
                     {

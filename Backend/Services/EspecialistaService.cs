@@ -27,7 +27,7 @@ namespace Services
         private async Task<bool> ValidateAlreadyCreatedUserEspecialist(Especialista nuevoUsuario)
         {
             bool exists = false;
-            Especialista usuario = await _unitOfWork.EspecialistaRepository.GetEspecialistaByIdCompleteAsync(nuevoUsuario.Id.Value);
+            Especialista usuario = await _unitOfWork.EspecialistaRepository.GetEspecialistaByIdCompleteAsync(nuevoUsuario.Id);
             if (usuario != null) exists = true;
             return exists;
         }
@@ -57,7 +57,7 @@ namespace Services
 
         public async Task<Especialista> GetById(int idEspecialista)
         {
-            var especialista = await _unitOfWork.EspecialistaRepository.GetByIdAsync(idEspecialista);
+            var especialista = await _unitOfWork.EspecialistaRepository.GetEspecialistaByIdCompleteAsync(idEspecialista);
             return especialista;
         }
     }

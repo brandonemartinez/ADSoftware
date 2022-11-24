@@ -16,6 +16,7 @@ namespace Core.Models
         public int CantidadCiudades { get; set; }
         public string Nombre { get; set; } = null!;
         public int CantidadProfesiones { get; set; }
+        public string Descripcion { get; set; } = null!;
 
         public virtual ICollection<Especialista> Especialista { get; set; }
     }

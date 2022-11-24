@@ -50,10 +50,12 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet("{idEspecialista}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<EspecialistaResourceListResponse>>> Get(int idEspecialista)
+        public async Task<ActionResult<EspecialistaDto>> Get(int idEspecialista)
         {
             Especialista especialista = await _especialistaService.GetById(idEspecialista);
+
             if (especialista == null) return NotFound($"No se encontro ningun especialista");
+
             var especialistaResponse = _mapper.Map<Especialista, EspecialistaDto>(especialista);
             return Ok(especialistaResponse);
         }
@@ -94,16 +96,6 @@ namespace Api.Controllers
                 });
             if (especialsitaCollection == null) return NotFound($"No se encontro ningun especialista");
             IEnumerable<EspecialistaResourceListResponse> especialistaResourcesListResponse = _mapper.Map<IEnumerable<Especialista>, IEnumerable<EspecialistaResourceListResponse>>(especialsitaCollection);
-            foreach (var item in especialistaResourcesListResponse)
-            {
-                var especialista = especialsitaCollection.FirstOrDefault(f => f.NombreFantasia == item.Nombre);
-                item.Oficios = new List<EspecialistaOficioListResponse>();
-                foreach (var oficioEspecialista in especialista.OficioEspecialista)
-                {
-                    item.Oficios.Add(new EspecialistaOficioListResponse { Nombre = oficioEspecialista.IdOficioNavigation.Nombre });
-                }
-
-            };
             return Ok(especialistaResourcesListResponse);
         }
 

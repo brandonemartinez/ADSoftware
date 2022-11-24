@@ -19,6 +19,7 @@ namespace Data
         private CitaRepository _citaRepository;
         private OficioRepository _oficioRepository;
         private PlanRepository _planRepository;
+        private ArchivoRepository _archivoRepository;
 
         public UnitOfWork(DB_CATALOGO_SERVICIOSContext context)
         {
@@ -37,6 +38,8 @@ namespace Data
             _oficioRepository ??= new OficioRepository(_context);
         public IPlanRepository PlanRepository =>
             _planRepository ??= new PlanRepository(_context);
+        public IArchivoRepository ArchivoRepository =>
+            _archivoRepository ??= new ArchivoRepository(_context);
 
         public void Dispose()
         {

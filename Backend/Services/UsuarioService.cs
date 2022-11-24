@@ -48,8 +48,7 @@ namespace Services
                 nuevoUsuario.Contrasenia = Encrypt.GetSHA256(nuevoUsuario.Contrasenia);
                 nuevoUsuario.Rol = Roles.ESPECIALISTA;
                 nuevoUsuario.Activo = true;
-                nuevoUsuario.Especialista.Id = null;
-                await _unitOfWork.UsuarioRepository.CreateAsync(nuevoUsuario);
+                await _unitOfWork.UsuarioRepository.CreateWithAttach(nuevoUsuario);
                 await _unitOfWork.CommitAsync();
                 _emailService.EnviarEmailCuentaCreada(nuevoUsuario.Correo, nuevoUsuario.Nombre);
                 return nuevoUsuario;

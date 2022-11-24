@@ -15,6 +15,7 @@ namespace Core.Models
         public TimeSpan HoraDesde { get; set; }
         public TimeSpan HoraHasta { get; set; }
         public bool? EstadoPago { get; set; }
+        public bool? Calificado { get; set; }
         public string? Estado { get; set; }
         public string? Localidad { get; set; }
 
