@@ -64,6 +64,14 @@ class RegistroEmpresa extends StatelessWidget {
                   prefixIcon: Icons.description_rounded,
                   filled: true,
                 ),
+                SizedBox(height: 15,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text('Disponibilidad'),
+                  ],
+                ),
+                SizedBox(height: 15,),
                 TextField(
                   decoration: InputDecoration(
                     border: border,
