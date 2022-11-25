@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_life/src/models/cliente_model.dart';
+import 'package:home_life/src/resources/repositories/clienteRepository.dart';
 
 import '../util/utils.dart';
 import '../widget/primaryButton.dart';
@@ -12,6 +13,7 @@ class DatosDeContactoCliente extends StatefulWidget {
 
 class _DatosDeContactoClienteState extends State<DatosDeContactoCliente> {
   final _formKey = GlobalKey<FormState>();
+  String prueba = '';
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +114,7 @@ class _DatosDeContactoClienteState extends State<DatosDeContactoCliente> {
                   Row(
                     children: [
                       Checkbox(value: false, onChanged: (context) {}),
-                      Text('Acepto los términos y condiciones'),
+                      Text(prueba),
                     ],
                   ),
                   SizedBox(
@@ -120,9 +122,13 @@ class _DatosDeContactoClienteState extends State<DatosDeContactoCliente> {
                   ),
                   PrimaryButton(
                     label: 'Registrarme',
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
+                        var res = await ClienteRepository().registrarCliente(_formKey.currentState);
+                        setState(() {
+                          prueba = res;
+                        });
                       }
                     },
                   )
