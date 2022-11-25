@@ -6,5 +6,7 @@ namespace Core.Repositories
     {
         Task<IEnumerable<Cita>> GetAllById(int id);
         Task<Cita> GetByIdCompleteAsync(int id);
+        Task<IEnumerable<Cita>> GetAllByEspecialistaId(int id);
+        Task<IEnumerable<Cita>> GetAllByClienteId(int id);
     }
 }

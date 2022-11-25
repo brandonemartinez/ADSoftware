@@ -2,7 +2,10 @@
 using Api.Resources.Auth;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq.Dynamic.Core.Tokenizer;
+using System.Text.Json.Serialization;
 
 namespace Api.Controllers
 {
@@ -27,21 +30,9 @@ namespace Api.Controllers
         public async Task<ActionResult> Login([FromBody]LoginData loginData)
         {
             var token = await _authService.Auth(loginData.Correo, loginData.Contraseña);
-
-            if (token == null)
-                return NotFound(new RespuestaLogin
-                {
-                    Titulo = "Login",
-                    Valido = false,
-                    Token = token
-                });
-
-            return Ok(new RespuestaLogin
-            {
-                Titulo = "Login",
-                Valido = true,
-                Token = token
-            });
+            if (token == null) return NotFound($"No se encontro ningun usuario con el correo {loginData.Correo}");
+            RespuestaLogin respuesta = JsonConvert.DeserializeObject<RespuestaLogin>(token);
+            return Ok(respuesta);
         }
     }
 }

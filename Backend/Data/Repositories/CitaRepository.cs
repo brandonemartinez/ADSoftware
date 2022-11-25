@@ -18,6 +18,16 @@ namespace Data.Repositories
             get { return Context as DB_CATALOGO_SERVICIOSContext; }
         }
 
+        public async Task<IEnumerable<Cita>> GetAllByClienteId(int id)
+        {
+            return await DB_CATALOGO_SERVICIOSContext.Cita.Where(e => e.IdCliente == id).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Cita>> GetAllByEspecialistaId(int id)
+        {
+            return await DB_CATALOGO_SERVICIOSContext.Cita.Where(e => e.IdEspecialista == id).ToListAsync();
+        }
+
         public async Task<IEnumerable<Cita>> GetAllById(int id)
         {
             var queryable = DB_CATALOGO_SERVICIOSContext.Cita.Include(e => e.IdUsuarios).AsQueryable();

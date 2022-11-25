@@ -18,6 +18,8 @@ namespace Core.Models
         public bool? Calificado { get; set; }
         public string? Estado { get; set; }
         public string? Localidad { get; set; }
+        public int IdCliente { get; set; }
+        public int IdEspecialista { get; set; }
 
         public virtual ICollection<Usuario> IdUsuarios { get; set; }
     }

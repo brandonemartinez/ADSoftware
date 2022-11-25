@@ -5,6 +5,7 @@ using Api.Validators;
 using AutoMapper;
 using Core.Models;
 using Core.Services;
+using Dtos.Dto;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Services.Utilities;
@@ -30,6 +31,28 @@ namespace Api.Controllers
             _usuarioService = userservice;
             _archivoService = archivoService;
             _mapper = mapper;
+        }
+
+        /// <summary>
+        /// Obtener usuario por Id
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <returns></returns>
+        [HttpGet("{idUsuario}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<UsuarioDto>> GetUser([FromRoute] int idUsuario)
+        {
+            try
+            {
+                Usuario usuario = await _usuarioService.GetById(idUsuario);
+                UsuarioDto response = _mapper.Map<Usuario, UsuarioDto>(usuario);
+                return Ok(response);
+            }
+            catch (ArgumentException exception)
+            {
+                throw exception;
+            }
         }
 
         /// <summary>

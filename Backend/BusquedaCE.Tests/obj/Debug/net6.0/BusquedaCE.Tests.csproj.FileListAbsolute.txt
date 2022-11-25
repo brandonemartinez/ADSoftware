@@ -97,6 +97,7 @@ D:\Dev-Facultad\ADSoftware\backend\BusquedaCE.Tests\obj\Debug\net6.0\refint\Busq
 D:\Dev-Facultad\ADSoftware\backend\BusquedaCE.Tests\obj\Debug\net6.0\BusquedaCE.Tests.pdb
 D:\Dev-Facultad\ADSoftware\backend\BusquedaCE.Tests\obj\Debug\net6.0\BusquedaCE.Tests.genruntimeconfig.cache
 D:\Dev-Facultad\ADSoftware\backend\BusquedaCE.Tests\obj\Debug\net6.0\ref\BusquedaCE.Tests.dll
+C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\bin\Debug\net6.0\CoverletSourceRootsMapping
 C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\bin\Debug\net6.0\testhost.dll
 C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\bin\Debug\net6.0\testhost.exe
 C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\bin\Debug\net6.0\Microsoft.TestPlatform.PlatformAbstractions.dll
@@ -185,6 +186,10 @@ C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\bin\Debug\net6.0\zh-Hans\Microsoft.Vi
 C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\bin\Debug\net6.0\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\bin\Debug\net6.0\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\bin\Debug\net6.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\bin\Debug\net6.0\Core.dll
+C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\bin\Debug\net6.0\Dtos.dll
+C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\bin\Debug\net6.0\Core.pdb
+C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\bin\Debug\net6.0\Dtos.pdb
 C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\obj\Debug\net6.0\BusquedaCE.Tests.csproj.AssemblyReference.cache
 C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\obj\Debug\net6.0\BusquedaCE.Tests.GeneratedMSBuildEditorConfig.editorconfig
 C:\Dev\ADSoftware\Backend\BusquedaCE.Tests\obj\Debug\net6.0\BusquedaCE.Tests.AssemblyInfoInputs.cache

@@ -52,7 +52,6 @@ namespace Services
                 await _unitOfWork.CommitAsync();
                 _emailService.EnviarEmailCuentaCreada(nuevoUsuario.Correo, nuevoUsuario.Nombre);
                 return nuevoUsuario;
-
             }
             catch
             {

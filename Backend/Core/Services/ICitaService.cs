@@ -11,6 +11,8 @@ namespace Core.Services
     {
         Task<string> CreateCita(Cita cita, int idEspecialista, int idCliente);
         Task<IEnumerable<Cita>> GetById(int clienteId);
+        Task<IEnumerable<Cita>> GetCitasAgenda(int v);
+        Task<IEnumerable<Cita>> GetSolicitudes(int v);
         Task<string> UpdateStatus(int idCita, int idUsuario, string status);
     }
 }

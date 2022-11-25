@@ -35,12 +35,10 @@ namespace Data.Repositories
             string OrderBy,
             bool OrderByMethod)
         {
-            //TODO Validate
             var queryable = DB_CATALOGO_SERVICIOSContext.Especialista.Include(e => e.IdNavigation).Include(e => e.IdOficios).AsQueryable();
 
             if (Busqueda != null)
             {
-                //TODO Validate
                 queryable = queryable.Where(x => x.NombreFantasia.Contains(Busqueda) || x.IdOficios.Any(a => a.Nombre.Contains(Busqueda)));
             };
             if (Calificacion.HasValue)
@@ -63,18 +61,6 @@ namespace Data.Repositories
 
             queryable = OrderEspecialists(queryable, OrderBy, OrderByMethod);
             var oficios = await DB_CATALOGO_SERVICIOSContext.Oficios.ToListAsync();
-            //TODO Validate
-            //await queryable.ForEachAsync(item =>
-            //{
-            //    foreach (var oficio in item.OficioEspecialista)
-            //    {
-            //        oficio.IdOficioNavigation = new Oficio()
-            //        {
-            //            Id = oficio.IdOficio,
-            //            Nombre = oficios.FirstOrDefault(w => w.Id == oficio.IdOficio).Nombre
-            //        };
-            //    }
-            //});
 
             return queryable;
         }
@@ -91,12 +77,11 @@ namespace Data.Repositories
                 {
                     if (orderBy == "Nombre")
                     {
-                        queryable = queryable.OrderBy(o => o.IdNavigation.Nombre);
+                        queryable = queryable.OrderBy(o => o.NombreFantasia);
                     }
                     if (orderBy == "Oficio")
                     {
-                        //TODO Validate
-                        //queryable = queryable.OrderBy(o => o.OficioEspecialista);
+                        queryable = queryable.OrderBy(o => o.IdOficios);
                     }
                     if (orderBy == "Calificacion")
                     {
@@ -107,12 +92,11 @@ namespace Data.Repositories
                 {
                     if (orderBy == "Nombre")
                     {
-                        queryable = queryable.OrderByDescending(o => o.IdNavigation.Nombre);
+                        queryable = queryable.OrderByDescending(o => o.NombreFantasia);
                     }
                     if (orderBy == "Oficio")
                     {
-                        //TODO Validate
-                        //queryable = queryable.OrderByDescending(o => o.OficioEspecialista);
+                        queryable = queryable.OrderByDescending(o => o.IdOficios);
                     }
                     if (orderBy == "Calificacion")
                     {

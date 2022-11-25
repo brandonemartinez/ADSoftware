@@ -47,29 +47,51 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// Obtener citas
+        /// Obtener citas que se solicitaron al usuario
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        [Authorize(Roles = "Cliente, Especialista")]
+        [HttpGet("Agenda")]
+        [Authorize(Roles = "Especialista")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<CitaResourceResponse>> GetCitaCliente()
+        public async Task<ActionResult<CitaResourceResponse>> GetAgenda()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
             var userData = identity.Claims.ToList();
             if (userData == null)
                 return Unauthorized();
 
-            IEnumerable<Cita> citas = await _citaService.GetById(int.Parse(userData[0].Value));
+            IEnumerable<Cita> citas = await _citaService.GetCitasAgenda(int.Parse(userData[0].Value));
             IEnumerable<CitaDto> citasDtoCollection = _mapper.Map<IEnumerable<Cita>, IEnumerable<CitaDto>>(citas);
 
             return Ok(citasDtoCollection);
         }
 
         /// <summary>
-        /// Obtener citas
+        /// Obtiene solicitudes realizadas por el usuario
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Solicitudes")]
+        [Authorize(Roles = "Cliente, Especialista")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<CitaResourceResponse>> GetSolicitudes()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var userData = identity.Claims.ToList();
+            if (userData == null)
+                return Unauthorized();
+
+            IEnumerable<Cita> citas = await _citaService.GetSolicitudes(int.Parse(userData[0].Value));
+            IEnumerable<CitaDto> citasDtoCollection = _mapper.Map<IEnumerable<Cita>, IEnumerable<CitaDto>>(citas);
+
+            return Ok(citasDtoCollection);
+        }
+
+        /// <summary>
+        /// Cambiar estado cita
         /// </summary>
         /// <returns></returns>
         [HttpPut("{idCita}/{status}")]

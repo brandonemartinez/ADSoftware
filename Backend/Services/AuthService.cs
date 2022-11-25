@@ -5,6 +5,7 @@ using Core.Repositories;
 using Core.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -22,12 +23,18 @@ namespace Services
         }
         public async Task<string> Auth(string correo, string contrasenia)
         {
+            var valido = false;
             contrasenia = Encrypt.GetSHA256(contrasenia);
-
             var usuario = await _unitOfWork.UsuarioRepository.GetUsuarioLoginAsync(correo, contrasenia);
             if (usuario == null) return null;
 
-            return GetToken(usuario.Id, usuario.Rol, usuario.Correo);
+             var token = GetToken(usuario.Id, usuario.Rol, usuario.Correo);
+            if (token != null)
+            {
+                valido = true;
+            }
+            var response = JsonConvert.SerializeObject(new { Valido = valido, Titulo = "Login", Token = token, idUser = usuario.Id });
+            return response;
         }
 
         private string GetToken(int id, string rol, string correo)

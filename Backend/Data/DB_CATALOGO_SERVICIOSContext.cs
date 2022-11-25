@@ -107,6 +107,9 @@ namespace Data
                     .HasColumnType("date")
                     .HasColumnName("fecha");
 
+                entity.Property(e => e.IdEspecialista).HasColumnName("idEspecialista");
+                entity.Property(e => e.IdCliente).HasColumnName("idCliente");
+
                 entity.Property(e => e.HoraDesde).HasColumnName("horaDesde");
 
                 entity.Property(e => e.HoraHasta).HasColumnName("horaHasta");

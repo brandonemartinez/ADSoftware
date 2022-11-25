@@ -24,6 +24,7 @@ namespace Api.Mapping
             //Usuario
             CreateMap<UsuarioRegisterResponse, Usuario>().ReverseMap();
             CreateMap<UsuarioRegisterRequest, Usuario>().ReverseMap();
+            CreateMap<UsuarioDto, Usuario>().ReverseMap();
             CreateMap<Usuario, EspecialistResourceResponse>().ReverseMap();
             CreateMap<Departamento, DepartmentResourceListResponse>()
                 .ForMember(dest => dest.Departamento, act => act.MapFrom(src => src.Nombre))
