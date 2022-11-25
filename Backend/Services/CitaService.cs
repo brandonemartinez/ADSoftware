@@ -43,6 +43,7 @@ namespace Services
             cita.IdCliente = idCliente;
             cita.IdEspecialista = idEspecialista;
             cita.Estado = CitaStatus.SOLICITADA;
+            cita.EstadoPago = PaymentStatus.NOPAGADO;
             await _unitOfWork.CitaRepository.CreateAsync(cita);
             var result = await _unitOfWork.CommitAsync();
             if (result != 0)

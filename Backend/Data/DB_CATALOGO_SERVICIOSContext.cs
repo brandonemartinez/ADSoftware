@@ -212,6 +212,10 @@ namespace Data
                     .IsUnicode(false)
                     .HasColumnName("rut");
 
+                entity.Property(e => e.ExpiracionPlan)
+                    .HasColumnType("datetime")
+                    .HasColumnName("expiracionPlan");
+
                 entity.HasOne(d => d.IdNavigation)
                     .WithOne(p => p.Especialista)
                     .HasForeignKey<Especialista>(d => d.Id)

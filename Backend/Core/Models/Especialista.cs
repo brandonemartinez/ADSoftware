@@ -19,6 +19,7 @@
         public TimeSpan? HoraHasta { get; set; }
         public string? DepartamentoDisponible { get; set; }
         public int IdPaquete { get; set; }
+        public DateTime ExpiracionPlan { get; set; }
 
         public virtual Usuario IdNavigation { get; set; } = null!;
         public virtual Paquete IdPaqueteNavigation { get; set; } = null!;
