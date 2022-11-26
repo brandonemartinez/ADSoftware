@@ -95,6 +95,23 @@ class _DatosDeContactoClienteState extends State<DatosDeContactoCliente> {
                     height: 15,
                   ),
                   PrimaryTextField(
+                    label: 'Departamento',
+                    prefixIcon: Icons.home_rounded,
+                    filled: true,
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
+                        return 'Ingrese un departamento';
+                      }
+                      return null;
+                    },
+                    onSaved: (String? value) {
+                      cliente.idDepartamento = int.parse(value!);
+                    },
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  PrimaryTextField(
                     label: 'Dirección',
                     prefixIcon: Icons.home_rounded,
                     filled: true,
@@ -125,10 +142,7 @@ class _DatosDeContactoClienteState extends State<DatosDeContactoCliente> {
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        var res = await ClienteRepository().registrarCliente(_formKey.currentState);
-                        setState(() {
-                          prueba = res;
-                        });
+                        ClienteRepository().registrarCliente(cliente);
                       }
                     },
                   )
