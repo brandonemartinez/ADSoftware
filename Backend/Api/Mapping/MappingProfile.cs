@@ -4,6 +4,7 @@ using Api.Resources.Department;
 using Api.Resources.Especialist;
 using Api.Resources.Oficio;
 using Api.Resources.Plan;
+using Api.Resources.Reporte;
 using Api.Resources.Usuario;
 using AutoMapper;
 using Core.Models;
@@ -24,6 +25,7 @@ namespace Api.Mapping
             //Usuario
             CreateMap<UsuarioRegisterResponse, Usuario>().ReverseMap();
             CreateMap<UsuarioRegisterRequest, Usuario>().ReverseMap();
+            CreateMap<ServiciosContratadosResponse, Cita>().ReverseMap();
             CreateMap<UsuarioDto, Usuario>().ReverseMap();
             CreateMap<Usuario, EspecialistResourceResponse>().ReverseMap();
             CreateMap<Departamento, DepartmentResourceListResponse>()

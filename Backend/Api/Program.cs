@@ -29,6 +29,7 @@ builder.Services.AddScoped<IOficioService, OficioService>();
 builder.Services.AddScoped<IPlanService, PlanService>();
 builder.Services.AddScoped<IArchivoService, ArchivoService>();
 builder.Services.AddScoped<IDisponibilidadService, DisponibilidadService>();
+builder.Services.AddScoped<IReporteService, ReporteService>();
 
 //JWT
 var appsettingsSection = builder.Configuration.GetSection("Auth");

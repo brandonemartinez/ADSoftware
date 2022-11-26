@@ -39,5 +39,17 @@ namespace Data.Repositories
         {
             return await DB_CATALOGO_SERVICIOSContext.Cita.Include("IdUsuarios").FirstOrDefaultAsync(s => s.Id == id);
         }
+
+        public async Task<Tuple<int, IEnumerable<Cita>>> GetAllPaginated(int pagina)
+        {
+            if (pagina == 0)
+                pagina = 1;
+            
+            var skip = (pagina - 1) * 20;
+            var citas = await DB_CATALOGO_SERVICIOSContext.Cita.ToListAsync();
+            var cantidad = citas.Count();
+            var citasFiltradas = citas.OrderByDescending(o => o.Fecha).Skip(skip).Take(20);
+            return new Tuple<int, IEnumerable<Cita>>(cantidad, citasFiltradas);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Api.Resources.Department;
 using Api.Resources.Oficio;
+using Api.Resources.Reporte;
 using AutoMapper;
 using Core.Models;
 using Core.Services;
@@ -26,8 +27,8 @@ namespace Api.Controllers.Admin
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<OficioDetalleDto>>> CreateOficio([FromBody] OficioResourceCreateRequest oficioResourceCreateRequest)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        public async Task<ActionResult<string>> CreateOficio([FromBody] OficioResourceCreateRequest oficioResourceCreateRequest)
         {
             var oficio = _mapper.Map<OficioResourceCreateRequest, Oficio>(oficioResourceCreateRequest);
             bool result = await _oficioService.CreateOficio(oficio);

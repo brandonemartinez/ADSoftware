@@ -1,4 +1,6 @@
 ﻿using Api.Resources.Especialist;
+using Api.Resources.Oficio;
+using Api.Resources.Reporte;
 using AutoMapper;
 using Core.Models;
 using Core.Services;
@@ -19,18 +21,23 @@ namespace Api.Controllers.Admin
             _mapper = mapper;
         }
 
-        ///// <summary>
-        ///// Obtener a todos los Especialistas sin ningun filtro
-        ///// </summary>
-        ///// <returns></returns>
-        //[HttpGet]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //public async Task<ActionResult<IEnumerable<EspecialistaResourceListResponse>>> GetAll()
-        //{
-        //    var especialsitaCollection = await _especialistaService.GetAll();
-        //    if (especialsitaCollection == null) return NotFound($"No se encontro ningun especialista");
-        //    var especialistaResourcesListResponse = _mapper.Map<IEnumerable<Especialista>, IEnumerable<EspecialistaResourceListResponse>>(especialsitaCollection);
-        //    return Ok(especialistaResourcesListResponse);
-        //}  
+        /// <summary>
+        /// Reporte de servicios contratados
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("{pagina}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ReporteServiciosContratadosResponse))]
+        public async Task<ActionResult<ReporteServiciosContratadosResponse>> GetAll([FromRoute]int pagina)
+        {
+            Tuple<int, IEnumerable<Cita>> especialsitaCollection = await _reporteService.GetServiciosContratados(pagina);
+            var elementos = _mapper.Map<IEnumerable<Cita>, List<ServiciosContratadosResponse>> (especialsitaCollection.Item2);
+            var response = new ReporteServiciosContratadosResponse
+            {
+                Pagina = pagina,
+                Elementos = elementos,
+                TotalElementos = especialsitaCollection.Item1
+            };
+            return Ok(response);
+        }
     }
 }
