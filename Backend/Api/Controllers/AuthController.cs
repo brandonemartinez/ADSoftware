@@ -25,9 +25,9 @@ namespace Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("Login")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> Login([FromBody]LoginData loginData)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RespuestaLogin))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        public async Task<ActionResult<RespuestaLogin>> Login([FromBody]LoginData loginData)
         {
             var token = await _authService.Auth(loginData.Correo, loginData.Contraseña);
             if (token == null) return NotFound($"No se encontro ningun usuario con el correo {loginData.Correo}");

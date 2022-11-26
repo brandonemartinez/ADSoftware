@@ -4,6 +4,7 @@ using AutoMapper;
 using Core.Models;
 using Core.Services;
 using Dtos.Dto.Plan;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -28,9 +29,9 @@ namespace Api.Controllers
         /// <param name="citaResourceCreateRequest"></param>
         /// <returns></returns>
         [HttpPost]
-        //[Authorize(Roles = "Administrador")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Administrador")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<CitaResourceResponse>> Post([FromBody] PlanResourceCreateRequest citaResourceCreateRequest)
         {
@@ -49,11 +50,10 @@ namespace Api.Controllers
         /// <summary>
         /// Obtener todos los planes
         /// </summary>
-        /// <param name="citaResourceCreateRequest"></param>
         /// <returns></returns>
         [HttpGet]
         //[Authorize(Roles = "Administrador")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PlanListResourceResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<PlanListResourceResponse>> Get()
@@ -68,13 +68,16 @@ namespace Api.Controllers
             return Created(nameof(_planService.GetAll), new { Result = planes });
         }
 
-
+        /// <summary>
+        /// Obtener detalle de plan por ID
+        /// </summary>
+        /// <param name="idPlan"></param>
+        /// <returns></returns>
         [HttpGet("{idPlan}")]
-        //[Authorize(Roles = "Administrador")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Especialista, Administrador")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PlanDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<PlanDto>> GetById([FromRoute] int idPlan)
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;

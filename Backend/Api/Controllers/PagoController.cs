@@ -27,10 +27,10 @@ namespace Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("Cita")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult> PagoCita([FromBody] RegistrarPagoCita registrarPagoCita)
+        public async Task<ActionResult<string>> PagoCita([FromBody] RegistrarPagoCita registrarPagoCita)
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
             var userData = identity.Claims.ToList();
@@ -50,8 +50,8 @@ namespace Api.Controllers
         /// <param name="registrarPagoPlan">pago: Aceptado/Rechazado, anual: false=menusal/true=anual</param>
         /// <returns></returns>
         [HttpPost("Plan")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult> PagoPlan([FromBody] RegistrarPagoPlan registrarPagoPlan)
         {

@@ -1,4 +1,5 @@
-﻿using Api.Resources.Cita;
+﻿using Api.Resources;
+using Api.Resources.Cita;
 using AutoMapper;
 using Core.Models;
 using Core.Services;
@@ -12,7 +13,7 @@ namespace Api.Controllers
     [Consumes("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-
+    [Authorize(Roles = "Cliente, Especialsita")]
     public class CitaController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -24,14 +25,13 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// Crear cita
+        /// Crear una cita
         /// </summary>
-        /// <param name="citaResourceCreateRequest"></param>
+        /// <param name="citaResourceCreateRequest">Informacion de cita</param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Roles = "Cliente")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<CitaResourceResponse>> Post([FromBody] CitaResourceCreateRequest citaResourceCreateRequest)
         {
@@ -52,8 +52,7 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet("Agenda")]
         [Authorize(Roles = "Especialista")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CitaDto>))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<CitaResourceResponse>> GetAgenda()
         {
@@ -74,10 +73,9 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet("Solicitudes")]
         [Authorize(Roles = "Cliente, Especialista")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CitaDto>))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<CitaResourceResponse>> GetSolicitudes()
+        public async Task<ActionResult<IEnumerable<CitaDto>>> GetSolicitudes()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
             var userData = identity.Claims.ToList();
@@ -96,7 +94,7 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpPut("{idCita}/{status}")]
         [Authorize(Roles = "Cliente, Especialista")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<CitaResourceResponse>> CambiarEstadoCita([FromRoute] int idCita, [FromRoute] string status)

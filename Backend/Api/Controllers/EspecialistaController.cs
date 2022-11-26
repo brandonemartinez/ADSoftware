@@ -35,7 +35,8 @@ namespace Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<EspecialistaResourceListResponse>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         public async Task<ActionResult<IEnumerable<EspecialistaResourceListResponse>>> GetAll()
         {
             var especialsitaCollection = await _especialistaService.GetAll();
@@ -47,9 +48,11 @@ namespace Api.Controllers
         /// <summary>
         /// Obtener Especialista por Id
         /// </summary>
+        /// <param name="idEspecialista"></param>
         /// <returns></returns>
         [HttpGet("{idEspecialista}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK,Type = typeof(EspecialistaDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         public async Task<ActionResult<EspecialistaDto>> Get(int idEspecialista)
         {
             Especialista especialista = await _especialistaService.GetById(idEspecialista);
@@ -71,8 +74,8 @@ namespace Api.Controllers
         /// <param name="OrderByMethod">True: Ascendente, False: Descendente</param>
         /// <returns></returns>
         [HttpGet("Filtrado")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<EspecialistaResourceListResponse>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         public async Task<ActionResult<IEnumerable<EspecialistaResourceListResponse>>> GetListFiltred(
             string? Busqueda,
             decimal? Calificacion,

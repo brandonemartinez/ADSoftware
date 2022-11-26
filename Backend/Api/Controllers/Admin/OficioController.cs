@@ -25,6 +25,7 @@ namespace Api.Controllers.Admin
         /// <summary>
         /// Crear Oficio
         /// </summary>
+        /// <param name="oficioResourceCreateRequest"></param>
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]

@@ -40,12 +40,19 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet("{idUsuario}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         public async Task<ActionResult<UsuarioDto>> GetUser([FromRoute] int idUsuario)
         {
             try
             {
+                if(idUsuario == 0)
+                {
+                    return BadRequest("ID Invalida");
+                }
                 Usuario usuario = await _usuarioService.GetById(idUsuario);
+                if (usuario == null)
+                    NotFound($"No se encontro un usuario con la ID: {idUsuario}");
                 UsuarioDto response = _mapper.Map<Usuario, UsuarioDto>(usuario);
                 return Ok(response);
             }
@@ -106,15 +113,7 @@ namespace Api.Controllers
                 if (!validatorResult.IsValid)
                     return BadRequest(validatorResult.Errors);
 
-                //Mapper
                 var userToCreate = _mapper.Map<EspecialistRegisterRequest, Usuario>(userRegisterRequest);
-                //TODO Validate
-                //userRegisterRequest.Oficios.ForEach(f => userToCreate.Especialista.IdOficios.Add(new Oficio { Id = f.IdOficio }));
-                //if (userRegisterRequest.FotoPerfil != null)
-                //{
-                //    //userToCreate.Especialista.FotoPerfil = await FileHelper.MapFileToAdd(userRegisterRequest.FotoPerfil);
-                //}
-
 
                 Usuario newUser = await _usuarioService.CreateEspecialist(userToCreate);
                 Usuario user = await _usuarioService.GetById(newUser.Id);
@@ -177,10 +176,7 @@ namespace Api.Controllers
                 if (!validatorResult.IsValid)
                     return BadRequest(validatorResult.Errors);
 
-                //Mapper
                 var userToUpdate = _mapper.Map<EspecialistUpdateRequest, Usuario>(userUpdateRequest);
-                //TODO Validate
-                //userUpdateRequest.Oficios.ForEach(f => userToUpdate.Especialista.OficioEspecialista.Add(new OficioEspecialista { IdOficio = f.IdOficio, IdEspecialista = userToUpdate.Id }));
 
                 Usuario newUser = await _usuarioService.UpdateEspecialist(userToUpdate);
                 EspecialistResourceResponse response = _mapper.Map<Usuario, EspecialistResourceResponse>(newUser);
@@ -243,7 +239,7 @@ namespace Api.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return NotFound($"No se encontro un usuario con la Id: {id}.");
                 }
 
             }
@@ -256,11 +252,12 @@ namespace Api.Controllers
         /// <summary>
         /// Agregar foto de perfil
         /// </summary>
-        /// <param name="file"></param>
-        /// <param name="idEspecialista"></param>
+        /// <param name="file">Archivo</param>
+        /// <param name="idEspecialista">ID Especialista</param>
         /// <returns></returns>
         [HttpPost("AgregarFotoPerfil/{idEspecialista}")]
         [Consumes("multipart/form-data")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         public async Task<ActionResult<string>> GuardarFotoPerfil([FromForm] IFormFile file, int idEspecialista)
         {
 
@@ -284,11 +281,12 @@ namespace Api.Controllers
         /// <summary>
         /// Agregar Certificaciones
         /// </summary>
-        /// <param name="files"></param>
-        /// <param name="idEspecialista"></param>
+        /// <param name="files">Archivos</param>
+        /// <param name="idEspecialista">ID Especialista</param>
         /// <returns></returns>
         [HttpPost("AgregarCertificaciones/{idEspecialista}")]
         [Consumes("multipart/form-data")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         public async Task<ActionResult<string>> GardarCertificaciones([FromForm] List<IFormFile> files, int idEspecialista)
         {
             try

@@ -27,7 +27,8 @@ namespace Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<OficioDetalleDto>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         public async Task<ActionResult<IEnumerable<OficioDetalleDto>>> GetAll()
         {
             IEnumerable<Oficio> oficioDtoCollection = await _oficioService.GetAll();
