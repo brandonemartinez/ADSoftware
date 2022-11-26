@@ -47,9 +47,9 @@ class ClienteModel {
       "correo": correo,
       "telefono": telefono,
       "direccion": direccion,
-      "fechaNacimiento": fechaNacimiento,
+      "fechaNacimiento": fechaNacimiento?.toIso8601String(),
       "genero": genero,
-      "idDepartamento": idDepartamento,
+      "idDepartamento": idDepartamento.toString(),
     };
   }
 }

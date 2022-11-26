@@ -125,7 +125,7 @@ class _DatosPersonalesClienteState extends State<DatosPersonalesCliente> {
                           context: context,
                           initialDate: date ?? DateTime.now(),
                           firstDate: DateTime(
-                            2021,
+                            1920,
                           ),
                           lastDate: DateTime(
                             2030,
