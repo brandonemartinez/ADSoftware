@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:home_life/pages.dart';
-import 'package:home_life/src/core/utils/utils.dart';
-import 'package:home_life/src/presentation/view/homePage.dart';
+import 'package:home_life/src/util/utils.dart';
+import 'package:home_life/src/page/homePage.dart';
+
 
 void main() {
   runApp(MyApp());
