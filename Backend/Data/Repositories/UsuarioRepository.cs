@@ -13,15 +13,15 @@ namespace Data.Repositories
             get { return Context as DB_CATALOGO_SERVICIOSContext; }
         }
 
-        public async Task CreateWithAttach(Usuario user)
+        public async Task<Usuario> GetByCorreo(string correo)
         {
-            DB_CATALOGO_SERVICIOSContext.Usuarios.Attach(user);
+            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Where(w => w.Correo == correo).FirstOrDefaultAsync();
         }
 
         public async Task<Usuario> GetEspecialistaByIdCompleteAsync(int id)
         {
             //TODO Validate
-            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Especialista).Include(u => u.Especialista/*OficioEspecialista*/).FirstOrDefaultAsync(u => u.Id == id);
+            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Especialista).Include(u => u.Especialista.IdOficios).FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<Usuario> GetUsuarioLoginAsync(string correo, string contrasenia) => await DB_CATALOGO_SERVICIOSContext.Usuarios.Where(w => w.Correo == correo && w.Contrasenia == contrasenia).FirstOrDefaultAsync();

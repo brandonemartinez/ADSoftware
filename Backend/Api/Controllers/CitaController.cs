@@ -40,6 +40,16 @@ namespace Api.Controllers
             if (userData == null)
                 return Unauthorized();
 
+            if ((citaResourceCreateRequest.HoraDesde > citaResourceCreateRequest.HoraHasta) || citaResourceCreateRequest.HoraDesde == 0
+                || citaResourceCreateRequest.HoraHasta == 0)
+            {
+                return BadRequest("Se encontro un error en el horario.");
+            }
+            if(citaResourceCreateRequest.Fecha < DateTime.Now)
+            {
+                return BadRequest("Dia no puede ser menor a la fecha actual");
+            }
+
             Cita cita = _mapper.Map<CitaResourceCreateRequest, Cita>(citaResourceCreateRequest);
             string newCita = await _citaService.CreateCita(cita, citaResourceCreateRequest.IdEspecialista, int.Parse(userData[0].Value));
 

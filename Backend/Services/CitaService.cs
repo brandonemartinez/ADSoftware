@@ -37,11 +37,16 @@ namespace Services
             {
                 throw new InvalidOperationException("El especialista no esta disponible en ese horario.");
             }
+            if (!especialista.Especialista.DepartamentoDisponible.Contains(cita.Localidad))
+            {
+                throw new InvalidOperationException("El especialista no trabaja en esa localidad");
+            }
 
             cita.IdUsuarios.Add(especialista);
             cita.IdUsuarios.Add(cliente);
             cita.IdCliente = idCliente;
             cita.IdEspecialista = idEspecialista;
+            cita.Calificado = false;
             cita.Estado = CitaStatus.SOLICITADA;
             cita.EstadoPago = PaymentStatus.NOPAGADO;
             await _unitOfWork.CitaRepository.CreateAsync(cita);

@@ -59,6 +59,7 @@ namespace Api.Mapping
                 .ForPath(dest => dest.Especialista.IdPaquete, act => act.MapFrom(src => src.idPaquete))
                 .ReverseMap();
             CreateMap<EspecialistUpdateRequest, Usuario>()
+                .ForPath(dest => dest.Id, act => act.MapFrom(src => src.Id))
                 .ForPath(dest => dest.Especialista.RazonSocial, act => act.MapFrom(src => src.RazonSocial))
                 .ForPath(dest => dest.Especialista.NombreFantasia, act => act.MapFrom(src => src.NombreFantasia))
                 .ForPath(dest => dest.Especialista.Presentacion, act => act.MapFrom(src => src.Presentacion))
@@ -68,6 +69,8 @@ namespace Api.Mapping
                 .ForPath(dest => dest.Especialista.DepartamentoDisponible, act => act.MapFrom(src => src.DepartamentoDisponible))
                 .ForPath(dest => dest.Especialista.IdPaquete, act => act.MapFrom(src => src.IdPaquete))
                 .ReverseMap();
+
+            CreateMap<OficioEspecialistaDto, Oficio>().ReverseMap();
             CreateMap<EspecialistaResourceListResponse, Especialista>()
                 .ForMember(dest => dest.IdOficios, act => act.MapFrom(src => src.Oficios))
                 .ReverseMap();

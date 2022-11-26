@@ -20,6 +20,7 @@ namespace Core.Models
         public string? Localidad { get; set; }
         public int IdCliente { get; set; }
         public int IdEspecialista { get; set; }
+        public string Descripcion { get; set; }
 
         public virtual ICollection<Usuario> IdUsuarios { get; set; }
     }

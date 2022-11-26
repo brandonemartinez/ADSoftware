@@ -48,10 +48,12 @@ namespace Services
                                                                                                listFilter.CalificacionHasta,
                                                                                                listFilter.OrderBy,
                                                                                                listFilter.OrderByMethod);
-            if(!especialistas.Any())
-            {
-                await _unitOfWork.CommitAsync(EventTypes.SEARCH, TablesName.ESPECIALISTA, listFilter);
-            }
+            //TODO Audotoria de busqueda
+            //var test = especialistas.Count();
+            //if(especialistas.Count() == 0)
+            //{
+            //    await _unitOfWork.CommitAsync(EventTypes.SEARCH, TablesName.ESPECIALISTA, listFilter);
+            //}
             return especialistas;
         }
 

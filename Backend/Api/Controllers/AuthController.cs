@@ -30,7 +30,7 @@ namespace Api.Controllers
         public async Task<ActionResult<RespuestaLogin>> Login([FromBody]LoginData loginData)
         {
             var token = await _authService.Auth(loginData.Correo, loginData.Contraseña);
-            if (token == null) return NotFound($"No se encontro ningun usuario con el correo {loginData.Correo}");
+            if (token == null) return NotFound($"Credenciales invalidas.");
             RespuestaLogin respuesta = JsonConvert.DeserializeObject<RespuestaLogin>(token);
             return Ok(respuesta);
         }

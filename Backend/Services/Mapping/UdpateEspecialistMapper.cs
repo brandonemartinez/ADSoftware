@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Api.Utilities;
+using Core.Models;
 
 namespace Services.Mapping
 {
@@ -6,15 +7,18 @@ namespace Services.Mapping
     {
         public static void MapEspecialistToUpdate(Usuario userOld, Usuario userNew)
         {
-            //TODO Validate
-            //foreach (var item in userNew.Especialista.OficioEspecialista)
-            //{
-            //    userOld.Especialista.OficioEspecialista.Add(new OficioEspecialista
-            //    {
-            //        IdEspecialista = item.IdEspecialista,
-            //        IdOficio = item.IdOficio
-            //    });
-            //};
+
+            foreach (var item in userNew.Especialista.IdOficios)
+            {
+                if(!userOld.Especialista.IdOficios.Any(a => a.Id == item.Id))
+                {
+                    Oficio oficio = new Oficio();
+                    oficio.Id = item.Id;
+                    oficio.Nombre = item.Nombre;
+                    oficio.IdEspecialista.Add(userOld.Especialista);
+                    userOld.Especialista.IdOficios.Add(oficio);
+                }
+            };
             mapUpdatedEspecialist(userOld.Especialista, userNew.Especialista);
             mapUpdatedUser(userOld, userNew);
 
@@ -24,12 +28,6 @@ namespace Services.Mapping
         {
             if (especialistNew.RazonSocial != null)
             espcialistOld.RazonSocial = especialistNew.RazonSocial;
-            if (especialistNew.Calificacion != null)
-            espcialistOld.Calificacion = especialistNew.Calificacion;
-            //if (especialistNew.Fotos != null)
-            //espcialistOld.Fotos = especialistNew.Fotos;
-            if (especialistNew.IdPaquete != 0)
-            espcialistOld.IdPaquete = especialistNew.IdPaquete;
         }
 
         private static void mapUpdatedUser(Usuario userDb, Usuario userToUpdate)
@@ -41,7 +39,7 @@ namespace Services.Mapping
             if (userToUpdate.NombreUsuario != null)
                 userDb.NombreUsuario = userToUpdate.NombreUsuario;
             if (userToUpdate.Contrasenia != null)
-                userDb.Contrasenia = userToUpdate.Contrasenia;
+                userDb.Contrasenia = Encrypt.GetSHA256(userToUpdate.Contrasenia);
             if (userToUpdate.Correo != null)
                 userDb.Correo = userToUpdate.Correo;
             if (userToUpdate.Telefono != null)

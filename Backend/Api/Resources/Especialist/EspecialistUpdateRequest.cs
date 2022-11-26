@@ -4,6 +4,7 @@ namespace Api.Resources.Especialist
 {
     public class EspecialistUpdateRequest
     {
+        public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string NombreUsuario { get; set; }
@@ -21,8 +22,6 @@ namespace Api.Resources.Especialist
         public int HoraDesde { get; set; }
         public int HoraHasta { get; set; }
         public string DepartamentoDisponible { get; set; }
-        public string Fotos { get; set; }
-        public string FotoPerfil { get; set; }
         public string Presentacion { get; set; }
         public int IdPaquete { get; set; }
         public List<OficioEspecialistaDto> Oficios { get; set; }

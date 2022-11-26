@@ -20,8 +20,8 @@ namespace Data.Repositories
         {
             await Context.Set<TEntity>().AddRangeAsync(entity);
         }
-
-        public virtual void DeleteAsync(TEntity entity)
+        
+        public virtual async ValueTask DeleteAsync(TEntity entity)
         {
             Context.Set<TEntity>().Remove(entity);
         }

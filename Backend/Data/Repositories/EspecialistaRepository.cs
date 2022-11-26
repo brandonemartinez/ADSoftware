@@ -60,16 +60,16 @@ namespace Data.Repositories
             };
 
             queryable = OrderEspecialists(queryable, OrderBy, OrderByMethod);
-            var oficios = await DB_CATALOGO_SERVICIOSContext.Oficios.ToListAsync();
-
-            return queryable;
+            //var oficios = await DB_CATALOGO_SERVICIOSContext.Oficios.ToListAsync();
+            var test = await queryable.ToListAsync();
+            return test;
         }
 
         private IQueryable<Especialista> OrderEspecialists(IQueryable<Especialista> queryable, string orderBy, bool orderByMethod)
         {
             if (string.IsNullOrEmpty(orderBy))
             {
-                queryable = queryable.OrderBy(o => o.Calificacion);
+                queryable = queryable.OrderBy(o => o.NombreFantasia);
             }
             else
             {
@@ -82,6 +82,10 @@ namespace Data.Repositories
                     if (orderBy == "Oficio")
                     {
                         queryable = queryable.OrderBy(o => o.IdOficios);
+                    }
+                    if (orderBy == "Ciudad")
+                    {
+                        queryable = queryable.OrderBy(o => o.DepartamentoDisponible);
                     }
                     if (orderBy == "Calificacion")
                     {
@@ -97,6 +101,10 @@ namespace Data.Repositories
                     if (orderBy == "Oficio")
                     {
                         queryable = queryable.OrderByDescending(o => o.IdOficios);
+                    }
+                    if (orderBy == "Ciudad")
+                    {
+                        queryable = queryable.OrderByDescending(o => o.DepartamentoDisponible);
                     }
                     if (orderBy == "Calificacion")
                     {

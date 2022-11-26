@@ -76,16 +76,21 @@ namespace Api.Controllers
         [HttpGet("Filtrado")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<EspecialistaResourceListResponse>))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         public async Task<ActionResult<IEnumerable<EspecialistaResourceListResponse>>> GetListFiltred(
             string? Busqueda,
             decimal? Calificacion,
             decimal? CalificacionDesde,
             decimal? CalificacionHasta,
-            string Localidad,
+            string? Localidad,
             string? OrderBy,
             bool OrderByMethod = true
             )
         {
+            if (String.IsNullOrEmpty(Localidad))
+            {
+                return BadRequest("Debe seleccionar una ciudad para realizar una búsqueda.");
+            }
             var especialsitaCollection = await _especialistaService.GetListFiltred(
                 new ListFilter
                 {

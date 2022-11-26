@@ -31,11 +31,27 @@ namespace Services
 
         }
 
+        public async Task<bool> EliminarOficio(int id)
+        {
+            Oficio oficio = await _unitOfWork.OficioRepository.GetByIdAsync(id);
+            if(oficio != null)
+            {
+                await _unitOfWork.OficioRepository.DeleteAsync(oficio);
+                var result = await _unitOfWork.CommitAsync();
+                if (result > 0)
+                    return true;
+                else
+                    return false;
+            }
+            return false;
+        }
+
         public async Task<IEnumerable<Oficio>> GetAll()
         {
             try
             {
-                return await _unitOfWork.OficioRepository.GetAllAsync();
+                IEnumerable<Oficio> oficios = await _unitOfWork.OficioRepository.GetAllAsync();
+                return oficios.OrderBy(o => o.Nombre);
             }
             catch (Exception exe)
             {

@@ -8,6 +8,9 @@ namespace Api.Validators
         public ClientUpdateRequestValidator()
         {
 
+            RuleFor(m => m.Contrasenia).MinimumLength(8).WithMessage("Contraseña debe tener mas de 8 caracteres.");
+            RuleFor(m => m.Correo).EmailAddress().WithMessage("Correo no respeta el formato.");
+            RuleFor(m => m.FechaNacimiento).NotNull().LessThanOrEqualTo(DateTime.Now.AddYears(-18)).WithMessage("El usuario debe ser mayor de edad.");
         }
     }
 }

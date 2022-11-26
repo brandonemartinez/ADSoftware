@@ -38,5 +38,22 @@ namespace Api.Controllers.Admin
             else
                 return BadRequest("No se pudo crear el oficio");
         }
+
+        /// <summary>
+        /// Eliminar Oficio
+        /// </summary>
+        /// <param name="oficioResourceCreateRequest"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        public async Task<ActionResult<string>> EliminarOficio([FromBody] OficioDeleteResourceRequest oficio)
+        {
+            bool result = await _oficioService.EliminarOficio(oficio.Id);
+            if (result)
+                return NoContent();
+            else
+                return BadRequest("No se pudo eliminar el oficio");
+        }
     }
 }

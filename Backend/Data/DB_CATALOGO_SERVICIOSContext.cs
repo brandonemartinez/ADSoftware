@@ -107,6 +107,11 @@ namespace Data
                     .HasColumnType("date")
                     .HasColumnName("fecha");
 
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("descripcion");
+
                 entity.Property(e => e.IdEspecialista).HasColumnName("idEspecialista");
                 entity.Property(e => e.IdCliente).HasColumnName("idCliente");
 

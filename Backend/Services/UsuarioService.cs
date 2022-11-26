@@ -20,12 +20,19 @@ namespace Services
         {
             try
             {
-                nuevoUsuario.Contrasenia = Encrypt.GetSHA256(nuevoUsuario.Contrasenia);
-                nuevoUsuario.Rol = Roles.CLIENTE;
-                nuevoUsuario.Activo = true;
-                await _unitOfWork.UsuarioRepository.CreateAsync(nuevoUsuario);
-                await _unitOfWork.CommitAsync();
-                return nuevoUsuario;
+                if (!await UserExists(nuevoUsuario.Correo))
+                {
+                    nuevoUsuario.Contrasenia = Encrypt.GetSHA256(nuevoUsuario.Contrasenia);
+                    nuevoUsuario.Rol = Roles.CLIENTE;
+                    nuevoUsuario.Activo = true;
+                    await _unitOfWork.UsuarioRepository.CreateAsync(nuevoUsuario);
+                    await _unitOfWork.CommitAsync();
+                    return nuevoUsuario;
+                }
+                else
+                {
+                    throw new ArgumentException("El correo ya existe");
+                }
             }
             catch (Exception exe)
             {
@@ -38,20 +45,31 @@ namespace Services
         public async Task<IEnumerable<Usuario>> GetAll()
         {
             IEnumerable<Usuario> usuario = await _unitOfWork.UsuarioRepository.GetAllAsync();
-            return usuario;
+            return usuario.OrderBy(o => o.Id);
         }
 
         public async Task<Usuario> CreateEspecialist(Usuario nuevoUsuario)
         {
             try
             {
-                nuevoUsuario.Contrasenia = Encrypt.GetSHA256(nuevoUsuario.Contrasenia);
-                nuevoUsuario.Rol = Roles.ESPECIALISTA;
-                nuevoUsuario.Activo = true;
-                await _unitOfWork.UsuarioRepository.CreateWithAttach(nuevoUsuario);
-                await _unitOfWork.CommitAsync();
-                _emailService.EnviarEmailCuentaCreada(nuevoUsuario.Correo, nuevoUsuario.Nombre);
-                return nuevoUsuario;
+                if (!await UserExists(nuevoUsuario.Correo))
+                {
+                    nuevoUsuario.Contrasenia = Encrypt.GetSHA256(nuevoUsuario.Contrasenia);
+                    nuevoUsuario.Rol = Roles.ESPECIALISTA;
+                    nuevoUsuario.Activo = true;
+                    nuevoUsuario.Especialista.Calificacion = 0;
+                    nuevoUsuario.Especialista.ExpiracionPlan = new DateTime(1800, 1, 1);
+                    await _unitOfWork.UsuarioRepository.CreateAsync(nuevoUsuario);
+                    await _unitOfWork.CommitAsync();
+                    _emailService.EnviarEmailCuentaCreada(nuevoUsuario.Correo, nuevoUsuario.Nombre);
+                    return nuevoUsuario;
+                }
+                else
+                {
+
+                    throw new ArgumentException("El correo ya existe");
+
+                }
             }
             catch
             {
@@ -74,22 +92,16 @@ namespace Services
             return userToUpdate;
         }
 
-
-        private async Task<bool> ValidateAlreadyCreatedUserEspecialist(Usuario nuevoUsuario)
-        {
-            bool exists = false;
-            Usuario usuario = await _unitOfWork.UsuarioRepository.GetEspecialistaByIdCompleteAsync(nuevoUsuario.Id);
-            if (usuario != null) exists = true;
-            return exists;
-        }
-
         public async Task<bool> UserActivation(int id, bool activacion)
         {
-            //TODO Agregar columna activo
             Usuario usuario = await _unitOfWork.UsuarioRepository.GetByIdAsync(id);
-            //usuario.Activo = activacion;
+            usuario.Activo = activacion;
             _unitOfWork.UsuarioRepository.UpdateAsync(usuario);
-            return true;
+            var result = await _unitOfWork.CommitAsync();
+            if (result > 0)
+                return true;
+            else
+                return false;
         }
 
         public async Task<Usuario> CreateAlreadyEspecialist(Usuario nuevoUsuario)
@@ -129,6 +141,15 @@ namespace Services
             _unitOfWork.UsuarioRepository.UpdateAsync(userDb);
             await _unitOfWork.CommitAsync();
             return userToUpdate;
+        }
+
+        private async Task<bool> UserExists(string correo)
+        {
+            var user = await _unitOfWork.UsuarioRepository.GetByCorreo(correo);
+            if (user != null)
+                return true;
+            else
+                return false;
         }
     }
 }

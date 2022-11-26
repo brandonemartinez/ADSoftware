@@ -6,9 +6,7 @@ using AutoMapper;
 using Core.Models;
 using Core.Services;
 using Dtos.Dto;
-using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using Services.Utilities;
 
 namespace Api.Controllers
 {
@@ -18,19 +16,40 @@ namespace Api.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
-        private readonly IEspecialistaService _especialistaService;
         private readonly IArchivoService _archivoService;
         private readonly IMapper _mapper;
 
         public UsuarioController(IUsuarioService userservice,
-                                 IEspecialistaService especialistaService,
                                  IArchivoService archivoService,
                                  IMapper mapper)
         {
-            _especialistaService = especialistaService;
             _usuarioService = userservice;
             _archivoService = archivoService;
             _mapper = mapper;
+        }
+
+        /// <summary>
+        /// Obtener todo los Usuarios
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<UsuarioDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        public async Task<ActionResult<UsuarioDto>> GetUsers()
+        {
+            try
+            {
+                IEnumerable<Usuario> usuarios = await _usuarioService.GetAll();
+                if (usuarios == null)
+                    NotFound("No se encontraron usuarios.");
+                IEnumerable<UsuarioDto> response = _mapper.Map<IEnumerable<Usuario>, IEnumerable<UsuarioDto>>(usuarios);
+                return Ok(response);
+            }
+            catch (ArgumentException exception)
+            {
+                throw exception;
+            }
         }
 
         /// <summary>
@@ -46,7 +65,7 @@ namespace Api.Controllers
         {
             try
             {
-                if(idUsuario == 0)
+                if (idUsuario == 0)
                 {
                     return BadRequest("ID Invalida");
                 }
@@ -177,6 +196,14 @@ namespace Api.Controllers
                     return BadRequest(validatorResult.Errors);
 
                 var userToUpdate = _mapper.Map<EspecialistUpdateRequest, Usuario>(userUpdateRequest);
+                userUpdateRequest.Oficios.ForEach(item =>
+                {
+                    userToUpdate.Especialista.IdOficios.Add(new Oficio
+                    {
+                        Id = item.Id,
+                        Nombre = item.Nombre
+                    });
+                });
 
                 Usuario newUser = await _usuarioService.UpdateEspecialist(userToUpdate);
                 EspecialistResourceResponse response = _mapper.Map<Usuario, EspecialistResourceResponse>(newUser);
@@ -231,7 +258,8 @@ namespace Api.Controllers
         public async Task<ActionResult<bool>> Activacion([FromRoute] int id, [FromRoute] bool activacion)
         {
             try
-            {
+            { 
+                
                 bool activacionResult = await _usuarioService.UserActivation(id, activacion);
                 if (activacionResult)
                 {
@@ -300,7 +328,7 @@ namespace Api.Controllers
                         fileBytes = memoryStream.ToArray();
                     }
                     await _archivoService.Create(fileBytes, idEspecialista, false);
-                }   
+                }
                 return Ok("Archivos guardados");
             }
             catch (Exception exe)

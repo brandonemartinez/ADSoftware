@@ -37,7 +37,7 @@ namespace Data.Repositories
         
         public async Task<Cita> GetByIdCompleteAsync(int id)
         {
-            return await DB_CATALOGO_SERVICIOSContext.Cita.Include("IdUsuarios").FirstOrDefaultAsync(s => s.Id == id);
+            return await DB_CATALOGO_SERVICIOSContext.Cita.Include(i => i.IdUsuarios).FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<Tuple<int, IEnumerable<Cita>>> GetAllPaginated(int pagina)
