@@ -9,10 +9,10 @@ class PlanCard extends StatelessWidget {
     this.onTap,
   });
 
-  final String title;
-  final String description;
-  final String monthlyPrice;
-  final String anualPrice;
+  final String? title;
+  final String? description;
+  final int? monthlyPrice;
+  final int? anualPrice;
   final VoidCallback? onTap;
 
   var _color;
@@ -36,7 +36,7 @@ class PlanCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    selectColor(monthlyPrice);
+    selectColor(monthlyPrice.toString());
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(
@@ -52,7 +52,7 @@ class PlanCard extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                title,
+                title ?? '',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -66,7 +66,7 @@ class PlanCard extends StatelessWidget {
                   8.0,
                 ),
                 child: Text(
-                  description,
+                  description ?? '',
                   style: TextStyle(
                     fontSize: 16,
                   ),

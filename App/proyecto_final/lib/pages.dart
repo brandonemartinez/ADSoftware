@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:home_life/src/bloc/plan_bloc.dart';
 import 'package:home_life/src/page/calendar.dart';
 import 'package:home_life/src/page/calificar.dart';
 import 'package:home_life/src/page/cobrar.dart';
@@ -92,7 +93,7 @@ class NamedRoutes {
     solicitud: (BuildContext context) => Solicitud(),
     solicitudes: (BuildContext context) => SolicitudesPage(),
     calificar: (BuildContext context) => Calificar(),
-    planes: (BuildContext context) => SeleccionPlanes(),
+    planes: (BuildContext context) => SeleccionPlanes(bloc: PlanBloc(),),
     cobrar: (BuildContext context) => Cobrar(),
     codigo: (BuildContext context) => CodigoQR(),
     empresa: (BuildContext context) => RegistroEmpresa(),

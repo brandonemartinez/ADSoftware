@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:home_life/src/models/cliente_model.dart';
 import 'package:home_life/src/models/departamento_model.dart';
+import 'package:home_life/src/models/plan_model.dart';
 import 'package:home_life/src/util/constants.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,7 +31,7 @@ class HttpService {
         _fullUrl,
       ),
     );
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       print("Departamentos cargados");
       final body = jsonDecode(response.body) as List;
 
@@ -38,9 +39,30 @@ class HttpService {
         final departamento = e as Map<String, dynamic>;
         return DepartamentoModel.fromJson(departamento);
       }).toList();
-    }
-    else{
+    } else {
       throw Exception('Error departamentos.');
+    }
+  }
+
+  Future<List<PlanModel>> listarPlanes() async {
+    var _fullUrl = kBaseUrl + 'Plan';
+    final response = await http.get(
+      Uri.parse(
+        _fullUrl,
+      ),
+    );
+    if (response.statusCode == 201) {
+      print("Planes cargados");
+      final body = jsonDecode(response.body);
+
+      final List<PlanModel> planList = body['result']
+          .map<PlanModel>(
+            (e) => PlanModel.fromJson(e),
+          )
+          .toList();
+      return planList;
+    } else {
+      throw Exception('Error planes.' + response.statusCode.toString());
     }
   }
 }
