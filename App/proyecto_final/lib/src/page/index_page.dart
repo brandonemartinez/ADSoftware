@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:home_life/src/page/profilePage.dart';
-import 'package:home_life/src/page/searchPage.dart';
+import 'package:home_life/src/page/profile_page.dart';
+import 'package:home_life/src/page/search_page.dart';
 import 'package:home_life/src/page/solicitudes.dart';
 
 import '../util/utils.dart';
 import 'calendar.dart';
-import 'homePage.dart';
-import 'locationPage.dart';
+import 'home_page.dart';
+import 'location_page.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({Key? key}) : super(key: key);

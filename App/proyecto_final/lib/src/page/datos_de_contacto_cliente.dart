@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:home_life/src/models/cliente_model.dart';
-import 'package:home_life/src/resources/repositories/clienteRepository.dart';
+import 'package:home_life/src/resources/repositories/cliente_repository.dart';
 
+import '../models/departamento_model.dart';
+import '../util/constants.dart';
 import '../util/utils.dart';
-import '../widget/primaryButton.dart';
-import '../widget/primaryTextField.dart';
+import '../widget/primary_button.dart';
+import '../widget/primary_text_field.dart';
 
 class DatosDeContactoCliente extends StatefulWidget {
   @override
@@ -12,8 +14,8 @@ class DatosDeContactoCliente extends StatefulWidget {
 }
 
 class _DatosDeContactoClienteState extends State<DatosDeContactoCliente> {
+  String dropdownValue = departamentos?.first.nombre ?? '';
   final _formKey = GlobalKey<FormState>();
-  String prueba = '';
 
   @override
   Widget build(BuildContext context) {
@@ -94,23 +96,76 @@ class _DatosDeContactoClienteState extends State<DatosDeContactoCliente> {
                   SizedBox(
                     height: 15,
                   ),
-                  PrimaryTextField(
-                    label: 'Departamento',
-                    prefixIcon: Icons.home_rounded,
-                    filled: true,
-                    validator: (String? value) {
-                      if (value!.isEmpty) {
-                        return 'Ingrese un departamento';
-                      }
-                      return null;
-                    },
-                    onSaved: (String? value) {
-                      cliente.idDepartamento = int.parse(value!);
-                    },
+                  Container(
+                    height: 60,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: primaryColor,
+                        ),
+                        borderRadius: borderRadius,
+                      ),
+                    ),
+                    child: DropdownButton(
+                      underline: Container(
+                        color: Colors.white,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        15,
+                      ),
+                      isExpanded: true,
+                      icon: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 10,
+                        ),
+                        child: Icon(Icons.arrow_drop_down),
+                      ),
+                      value: dropdownValue,
+                      items: departamentos?.map<DropdownMenuItem<String>>(
+                          (DepartamentoModel value) {
+                        return DropdownMenuItem<String>(
+                          value: value.nombre,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 15.0,
+                              top: 10,
+                            ),
+                            child: Text(value.nombre!),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? value) {
+                        setState(
+                          () {
+                            dropdownValue = value!;
+                            cliente.idDepartamento =
+                                getIdDepartamentoByName(value);
+                          },
+                        );
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: 15,
                   ),
+                  // PrimaryTextField(
+                  //   label: 'Departamento',
+                  //   prefixIcon: Icons.home_rounded,
+                  //   filled: true,
+                  //   validator: (String? value) {
+                  //     if (value!.isEmpty) {
+                  //       return 'Ingrese un departamento';
+                  //     }
+                  //     return null;
+                  //   },
+                  //   onSaved: (String? value) {
+                  //     cliente.idDepartamento = int.parse(value!);
+                  //   },
+                  // ),
+                  // SizedBox(
+                  //   height: 15,
+                  // ),
                   PrimaryTextField(
                     label: 'Dirección',
                     prefixIcon: Icons.home_rounded,
@@ -131,7 +186,7 @@ class _DatosDeContactoClienteState extends State<DatosDeContactoCliente> {
                   Row(
                     children: [
                       Checkbox(value: false, onChanged: (context) {}),
-                      Text(prueba),
+                      Text('Acepto los términos y condiciones.'),
                     ],
                   ),
                   SizedBox(

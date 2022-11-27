@@ -3,28 +3,28 @@ import 'package:home_life/src/page/calendar.dart';
 import 'package:home_life/src/page/calificar.dart';
 import 'package:home_life/src/page/cobrar.dart';
 import 'package:home_life/src/page/codigo_qr.dart';
-import 'package:home_life/src/page/datosDeContactoCliente.dart';
-import 'package:home_life/src/page/datosDeContactoEspecialista.dart';
-import 'package:home_life/src/page/datosEmpresaRegistro.dart';
-import 'package:home_life/src/page/datosPersonalesCliente.dart';
-import 'package:home_life/src/page/datosPersonalesEspecialista.dart';
-import 'package:home_life/src/page/homePage.dart';
+import 'package:home_life/src/page/datos_de_contacto_cliente.dart';
+import 'package:home_life/src/page/datos_de_contacto_especialista.dart';
+import 'package:home_life/src/page/datos_empresa_registro.dart';
+import 'package:home_life/src/page/datos_personales_cliente.dart';
+import 'package:home_life/src/page/datos_personales_especialista.dart';
+import 'package:home_life/src/page/home_page.dart';
 import 'package:home_life/src/page/hp.dart';
-import 'package:home_life/src/page/indexPage.dart';
-import 'package:home_life/src/page/locationPage.dart';
-import 'package:home_life/src/page/loginPage.dart';
-import 'package:home_life/src/page/modificarCiudades.dart';
-import 'package:home_life/src/page/modificarNegocio.dart';
-import 'package:home_life/src/page/profilePage.dart';
-import 'package:home_life/src/page/searchPage.dart';
-import 'package:home_life/src/page/seleccionCIudades.dart';
-import 'package:home_life/src/page/seleccionarOficios.dart';
-import 'package:home_life/src/page/seleccionarPlanes.dart';
-import 'package:home_life/src/page/signupPage.dart';
-import 'package:home_life/src/page/solicitarServicioPage.dart';
+import 'package:home_life/src/page/index_page.dart';
+import 'package:home_life/src/page/location_page.dart';
+import 'package:home_life/src/page/login_page.dart';
+import 'package:home_life/src/page/modificar_ciudades.dart';
+import 'package:home_life/src/page/modificar_negocio.dart';
+import 'package:home_life/src/page/profile_page.dart';
+import 'package:home_life/src/page/search_page.dart';
+import 'package:home_life/src/page/seleccion_cIudades.dart';
+import 'package:home_life/src/page/seleccionar_oficios.dart';
+import 'package:home_life/src/page/seleccionar_planes.dart';
+import 'package:home_life/src/page/signup_page.dart';
+import 'package:home_life/src/page/solicitar_servicio_page.dart';
 import 'package:home_life/src/page/solicitudes.dart';
-import 'package:home_life/src/page/workerDetailPage.dart';
-
+import 'package:home_life/src/page/splash_screen.dart';
+import 'package:home_life/src/page/worker_detail_page.dart';
 
 class NamedRoutes {
   static const homePage = '/home';
@@ -52,6 +52,7 @@ class NamedRoutes {
   static const seleccionarCiudades = '/select-ciudades';
   static const seleccionarOficios = '/select-oficios';
   static const indexPages = '/index';
+  static const splashScreen = '/splash';
 
   static final menuLogedOut = {
     'Inicio': homePage,
@@ -100,5 +101,6 @@ class NamedRoutes {
     seleccionarCiudades: (BuildContext context) => SeleccionarCiudades(),
     seleccionarOficios: (BuildContext context) => SeleccionarOficios(),
     indexPages: (BuildContext context) => IndexPage(),
+    splashScreen: (BuildContext context) => SplashScreen(),
   };
 }
