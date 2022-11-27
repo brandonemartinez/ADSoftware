@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_life/src/util/utils.dart';
-import 'package:home_life/src/widget/planCard.dart';
+import 'package:home_life/src/widget/plan_card.dart';
 
 class SeleccionPlanes extends StatelessWidget {
   @override

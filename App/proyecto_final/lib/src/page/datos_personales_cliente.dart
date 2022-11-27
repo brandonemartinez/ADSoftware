@@ -4,8 +4,8 @@ import 'package:home_life/src/models/cliente_model.dart';
 import 'package:intl/intl.dart';
 
 import '../util/utils.dart';
-import '../widget/primaryButton.dart';
-import '../widget/primaryTextField.dart';
+import '../widget/primary_button.dart';
+import '../widget/primary_text_field.dart';
 
 class DatosPersonalesCliente extends StatefulWidget {
   @override

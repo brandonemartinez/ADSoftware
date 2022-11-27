@@ -55,7 +55,7 @@ class CodigoQR extends StatelessWidget {
               ),
               Image.asset(
                 'assets/qr.png',
-                width: 360,
+                width: 260,
               ),
               SizedBox(
                 height: 90,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home_life/model/worker.dart';
 import 'package:home_life/src/util/utils.dart';
 
-import '../widget/primaryButton.dart';
+import '../widget/primary_button.dart';
 
 class WorkerDetail extends StatelessWidget {
   const WorkerDetail();

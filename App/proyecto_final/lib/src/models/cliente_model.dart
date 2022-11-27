@@ -49,7 +49,7 @@ class ClienteModel {
       "direccion": direccion,
       "fechaNacimiento": fechaNacimiento?.toIso8601String(),
       "genero": genero,
-      "idDepartamento": idDepartamento.toString(),
+      "idDepartamento": idDepartamento,
     };
   }
 }

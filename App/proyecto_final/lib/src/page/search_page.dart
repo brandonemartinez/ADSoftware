@@ -3,7 +3,7 @@ import 'package:home_life/model/worker.dart';
 import 'package:home_life/src/util/utils.dart';
 
 import '../../pages.dart';
-import '../widget/searchCard.dart';
+import '../widget/search_card.dart';
 
 class SearchPage extends StatefulWidget {
   @override
