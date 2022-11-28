@@ -2,7 +2,7 @@ import 'package:home_life/src/models/oficio_model.dart';
 
 import '../models/departamento_model.dart';
 
-const String kBaseUrl = 'http://192.168.1.2:7120/api/';
+const String kBaseUrl = 'http://localhost:5001/api/';
 
 List<DepartamentoModel>? departamentos;
 
