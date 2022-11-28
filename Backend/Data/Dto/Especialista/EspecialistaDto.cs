@@ -14,7 +14,7 @@ namespace Data.Dto.Especialista
         public string Correo { get; set; }
         public string Telefono { get; set; }
         public string Rut { get; set; }
-        public int? Calificacion { get; set; }
+        //public int? Calificacion { get; set; }
         public string? RangoDia { get; set; }
         public TimeSpan? HoraDesde { get; set; }
         public TimeSpan? HoraHasta { get; set; }
