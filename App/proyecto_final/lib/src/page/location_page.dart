@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home_life/src/models/departamento_model.dart';
 import 'package:home_life/src/util/utils.dart';
 
+import '../util/config.dart';
 import '../util/constants.dart';
 
 class LocationPage extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../util/config.dart';
 import '../util/utils.dart';
 
 class Profile extends StatelessWidget {

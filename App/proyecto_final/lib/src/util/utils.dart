@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-String? state = null;
-String? city = null;
-var signedIn = false;
-var rol = 'Cliente';
+import '../models/oficio_model.dart';
+import 'constants.dart';
+
 Map<int, Color> color = {
   50: Color.fromRGBO(136, 14, 79, .1),
   100: Color.fromRGBO(136, 14, 79, .2),
@@ -45,4 +44,35 @@ int getIdDepartamentoByName(String departamento) {
     default:
       return 2;
   }
+}
+
+List<String>? ciudadesSeleccionadas = [];
+List<String>? oficiosSeleccionados = [];
+
+String armarString() {
+  String ciudadesFinales = '';
+  ciudadesSeleccionadas?.forEach(
+    (ciudad) {
+      ciudadesFinales += '${ciudad}, ';
+    },
+  );
+
+  return ciudadesFinales;
+}
+
+List<OficioModel> armarOficios() {
+  List<OficioModel> oficiosFinales = [];
+  oficiosSeleccionados?.forEach(
+    (string) {
+      oficios?.forEach(
+        (element) {
+          if (element.nombre == string) {
+            oficiosFinales.add(element);
+          }
+        },
+      );
+    },
+  );
+
+  return oficiosFinales;
 }

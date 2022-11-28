@@ -83,12 +83,14 @@ class _SeleccionOficiosCiudadesPageState
           child: PrimaryButton(
             label: 'Finalizar',
             height: 50,
-            onPressed: () {
+            onPressed: () async {
               String ciudadFinal = armarString();
               List<OficioModel> oficioFinal = armarOficios();
               especialista.departamentoDisponible = ciudadFinal;
               especialista.oficios = oficioFinal;
-              EspecialistaRepository().registrarEspecialista(especialista);
+              await EspecialistaRepository()
+                  .registrarEspecialista(especialista);
+              Navigator.pushNamed(context, '/signIn');
             },
           ),
         ),

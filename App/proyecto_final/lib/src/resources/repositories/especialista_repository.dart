@@ -8,7 +8,12 @@ class EspecialistaRepository {
     await HttpService().registrarEspecialista(especialista);
   }
 
-  Future<List<EspecialistaModel>> obtenerEspecialistas(String ciudad, String busqueda) async {
+  Future<List<EspecialistaModel>> obtenerEspecialistas(
+      String ciudad, String busqueda) async {
     return await HttpService().listarEspecialistasPorCiudad(ciudad, busqueda);
+  }
+
+  Future<EspecialistaModel> obtenerEspecialistaPorId(int id) async {
+    return await HttpService().obtenerEspecialistasPorId(id);
   }
 }

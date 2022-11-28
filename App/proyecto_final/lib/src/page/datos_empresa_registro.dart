@@ -237,6 +237,9 @@ class _RegistroEmpresaState extends State<RegistroEmpresa> {
                   Row(
                     children: [
                       Text('Desde'),
+                      SizedBox(
+                        width: 20,
+                      ),
                       DropdownButton(
                         value: dropdownValue1,
                         items: horas.map<DropdownMenuItem<String>>(
@@ -258,7 +261,13 @@ class _RegistroEmpresaState extends State<RegistroEmpresa> {
                           );
                         },
                       ),
+                      SizedBox(
+                        width: 20,
+                      ),
                       Text('Hasta'),
+                      SizedBox(
+                        width: 20,
+                      ),
                       DropdownButton(
                         value: dropdownValue2,
                         items: horas.map<DropdownMenuItem<String>>(
@@ -284,45 +293,6 @@ class _RegistroEmpresaState extends State<RegistroEmpresa> {
                   ),
                   SizedBox(
                     height: 15,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: border,
-                      prefixIcon: Icon(
-                        Icons.person,
-                      ),
-                      hintText: 'Cargar fotos',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: border,
-                      prefixIcon: Icon(
-                        Icons.alternate_email,
-                      ),
-                      hintText: 'Foto de perfil',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: border,
-                      prefixIcon: Icon(
-                        Icons.home,
-                      ),
-                      hintText: 'Disponibilidad',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
                   ),
                   PrimaryButton(
                     label: 'Seleccionar plan',

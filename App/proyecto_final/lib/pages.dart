@@ -57,28 +57,9 @@ class NamedRoutes {
   static const splashScreen = '/splash';
   static const oficiosCiudadesScreen = '/oficios_ciudades';
 
-  static final menuLogedOut = {
-    'Inicio': homePage,
-    'Iniciar sesión': loginPage,
-    'Cambiar ubicación': locationPage,
-  };
-  static final menuLogedIn = {
-    'Ver mi perfil': profilePage,
-    'Servicios solicitados': solicitudes,
-    'Historial de pagos': historial,
-    'Unirme como especialista': empresa,
-  };
-
-  static final menuWorkerLogedIn = {
-    'Ver mi perfil': profilePage,
-    'Historial de pagos': historial,
-    'Ver agenda': calendar,
-    'Servicios solicitados': solicitudes,
-  };
 
   static final routes = {
     homePage: (BuildContext context) => MyHomePage(),
-    workerDetailPage: (BuildContext context) => WorkerDetail(),
     loginPage: (BuildContext context) => LogIn(),
     signUpPage: (BuildContext context) => SignUp(),
     locationPage: (BuildContext context) => LocationPage(),

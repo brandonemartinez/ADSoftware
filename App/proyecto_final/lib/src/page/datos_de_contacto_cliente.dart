@@ -149,23 +149,6 @@ class _DatosDeContactoClienteState extends State<DatosDeContactoCliente> {
                   SizedBox(
                     height: 15,
                   ),
-                  // PrimaryTextField(
-                  //   label: 'Departamento',
-                  //   prefixIcon: Icons.home_rounded,
-                  //   filled: true,
-                  //   validator: (String? value) {
-                  //     if (value!.isEmpty) {
-                  //       return 'Ingrese un departamento';
-                  //     }
-                  //     return null;
-                  //   },
-                  //   onSaved: (String? value) {
-                  //     cliente.idDepartamento = int.parse(value!);
-                  //   },
-                  // ),
-                  // SizedBox(
-                  //   height: 15,
-                  // ),
                   PrimaryTextField(
                     label: 'Dirección',
                     prefixIcon: Icons.home_rounded,
@@ -197,7 +180,8 @@ class _DatosDeContactoClienteState extends State<DatosDeContactoCliente> {
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        ClienteRepository().registrarCliente(cliente);
+                        await ClienteRepository().registrarCliente(cliente);
+                        Navigator.pushNamed(context, '/signIn');
                       }
                     },
                   )
