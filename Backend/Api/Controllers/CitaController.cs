@@ -13,7 +13,7 @@ namespace Api.Controllers
     [Consumes("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Cliente, Especialsita")]
+    //[Authorize(Roles = "Cliente, Especialsita")]
     public class CitaController : ControllerBase
     {
         private readonly IMapper _mapper;
