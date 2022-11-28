@@ -23,6 +23,8 @@ class EspecialistaModel {
     this.idPaquete,
     this.oficios,
     this.rangoDia,
+    this.cantidadOficios,
+    this.cantidadCiudades,
   });
 
   String? nombre;
@@ -44,7 +46,9 @@ class EspecialistaModel {
   String? departamentoDisponible;
   String? presentacion;
   int? idPaquete;
-  List<OficioModel>? oficios; //No es string
+  List<OficioModel>? oficios;
+  int? cantidadOficios;
+  int? cantidadCiudades;
 
   factory EspecialistaModel.fromJson(Map<String, dynamic> parsedJson) {
     return EspecialistaModel(

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:home_life/src/bloc/plan_bloc.dart';
 import 'package:home_life/src/page/calendar.dart';
 import 'package:home_life/src/page/calificar.dart';
 import 'package:home_life/src/page/cobrar.dart';
@@ -19,6 +20,7 @@ import 'package:home_life/src/page/profile_page.dart';
 import 'package:home_life/src/page/search_page.dart';
 import 'package:home_life/src/page/seleccion_cIudades.dart';
 import 'package:home_life/src/page/seleccionar_oficios.dart';
+import 'package:home_life/src/page/seleccionar_oficios_ciudades_page.dart';
 import 'package:home_life/src/page/seleccionar_planes.dart';
 import 'package:home_life/src/page/signup_page.dart';
 import 'package:home_life/src/page/solicitar_servicio_page.dart';
@@ -53,6 +55,7 @@ class NamedRoutes {
   static const seleccionarOficios = '/select-oficios';
   static const indexPages = '/index';
   static const splashScreen = '/splash';
+  static const oficiosCiudadesScreen = '/oficios_ciudades';
 
   static final menuLogedOut = {
     'Inicio': homePage,
@@ -92,7 +95,7 @@ class NamedRoutes {
     solicitud: (BuildContext context) => Solicitud(),
     solicitudes: (BuildContext context) => SolicitudesPage(),
     calificar: (BuildContext context) => Calificar(),
-    planes: (BuildContext context) => SeleccionPlanes(),
+    planes: (BuildContext context) => SeleccionPlanes(bloc: PlanBloc(),),
     cobrar: (BuildContext context) => Cobrar(),
     codigo: (BuildContext context) => CodigoQR(),
     empresa: (BuildContext context) => RegistroEmpresa(),
@@ -102,5 +105,6 @@ class NamedRoutes {
     seleccionarOficios: (BuildContext context) => SeleccionarOficios(),
     indexPages: (BuildContext context) => IndexPage(),
     splashScreen: (BuildContext context) => SplashScreen(),
+    oficiosCiudadesScreen: (BuildContext context) => SeleccionOficiosCiudadesPage(),
   };
 }
