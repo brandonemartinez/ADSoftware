@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_life/model/worker.dart';
+import 'package:home_life/src/models/especialista_model.dart';
+import 'package:home_life/src/resources/repositories/especialista_repository.dart';
 import 'package:home_life/src/util/utils.dart';
 
 import '../../pages.dart';
@@ -11,6 +13,9 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  EspecialistaRepository repo = EspecialistaRepository();
+  List<EspecialistaModel> especialistas = [];
+
   @override
   void initState() {
     super.initState();
@@ -51,18 +56,18 @@ class _SearchPageState extends State<SearchPage> {
   FocusNode focus = FocusNode();
   TextEditingController searchController = TextEditingController();
 
-  Widget trailingIcon(double rating) {
+  Widget trailingIcon(int? rating) {
     return SizedBox(
       width: 50,
       child: Row(
         children: [
           Text('${rating} '),
-          if (rating >= 4)
+          if (rating! >= 4)
             Icon(
               Icons.star,
               color: Colors.orangeAccent,
             ),
-          if (rating <= 3.5)
+          if (rating! <= 3.5)
             Icon(
               Icons.star_half,
               color: Colors.orangeAccent,
@@ -171,27 +176,27 @@ class _SearchPageState extends State<SearchPage> {
       location: 'Maldonado',
       name: 'Washington',
       lastName: 'Perez',
-      works: ['Carpintero', 'Programador', 'Ingeniero en hacer licuados'],
+      works: ['Carpintero', 'Jardinero', 'Personal Trainer'],
       rating: 5,
     ),
     Worker(
       location: 'Maldonado',
       name: 'Jack',
       lastName: 'Sheppard',
-      works: ['Programador', 'Limpiador', 'Piloto de barcos de papel'],
+      works: ['Programador', 'Tecnico IT', 'Service Desk'],
       rating: 5,
     ),
     Worker(
       name: 'Pepe',
       lastName: 'Guerra',
-      works: ['Cantor', 'Ingenierio', 'Albañil'],
+      works: ['Tapicero', 'Cortinero', 'Albañil'],
       location: 'Maldonado',
       rating: 4.5,
     ),
     Worker(
       name: 'Melina',
       lastName: 'Acosta',
-      works: ['Peluquera', 'Niñera', 'Maga'],
+      works: ['Peluquera', 'Niñera', 'Cocinera'],
       location: 'Salto',
       rating: 5,
     ),
@@ -217,9 +222,9 @@ class _SearchPageState extends State<SearchPage> {
       rating: 3.5,
     ),
     Worker(
-      name: 'Melina',
+      name: 'Diadora',
       lastName: 'Suarez',
-      works: ['Peluquera', 'Niñera', 'Maga'],
+      works: ['Cocinera', 'Niñera', 'Limpieza'],
       location: 'Salto',
       rating: 4,
     ),
@@ -227,27 +232,27 @@ class _SearchPageState extends State<SearchPage> {
       location: 'Maldonado',
       name: 'Marta',
       lastName: 'Costa',
-      works: ['Niñera', 'Cocinera', 'Limpiadora'],
+      works: ['Carpintera', 'Cocinera', 'Limpiadora'],
       rating: 3.5,
     ),
     Worker(
       location: 'Maldonado',
-      name: 'Jack',
-      lastName: 'Sheppard',
-      works: ['Programador', 'Limpiador', 'Piloto de barcos de papel'],
+      name: 'Louis',
+      lastName: 'Vutton',
+      works: ['Programador', 'Limpiador', 'Paseador de perros'],
       rating: 3,
     ),
     Worker(
-      name: 'Juan',
-      lastName: 'Cruz',
-      works: ['Cantor', 'Ingenierio', 'Albañil'],
+      name: 'Jhon',
+      lastName: 'Evans',
+      works: ['Electricista', 'Ingenierio', 'Albañil'],
       location: 'Maldonado',
       rating: 2.5,
     ),
     Worker(
-      name: 'Melina',
-      lastName: 'Suarez',
-      works: ['Peluquera', 'Niñera', 'Maga'],
+      name: 'Catalina',
+      lastName: 'Alcoba',
+      works: ['Costurera', 'Niñera', 'Limpieza'],
       location: 'Salto',
       rating: 5,
     ),
@@ -266,6 +271,21 @@ class _SearchPageState extends State<SearchPage> {
             .any((category) => category.toLowerCase().contains(query)) ==
         true;
     return matchesCategory || matchesName;
+  }
+
+  Future<void> buildListEspecialistas(String ciudad, String busqueda) async {
+    try {
+      final List<EspecialistaModel> _especialistas =
+          await repo.obtenerEspecialistas(ciudad, busqueda);
+      await agregarALista(_especialistas.toList());
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  agregarALista(List<EspecialistaModel> listaEspecialista) {
+    especialistas = [];
+    especialistas.addAll(listaEspecialista);
   }
 
   @override
@@ -300,8 +320,8 @@ class _SearchPageState extends State<SearchPage> {
                         icon: Icon(
                           Icons.search,
                         ),
-                        onPressed: () {
-                          filter(searchController.text);
+                        onPressed: () async {
+                          await buildListEspecialistas(city!, searchController.text);
                           setState(() {});
                         },
                       ),
@@ -309,9 +329,7 @@ class _SearchPageState extends State<SearchPage> {
                         icon: Icon(
                           Icons.tune_sharp,
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/ubication');
-                        },
+                        onPressed: () {},
                       ),
                       border: border,
                     ),
@@ -323,26 +341,24 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                 ),
               ),
-              if (!filteredList.isEmpty)
+              if (especialistas.isNotEmpty)
                 SingleChildScrollView(
                   child: SizedBox(
                     height: 534,
                     child: ListView.builder(
-                      itemCount: filteredList.length,
+                      itemCount: especialistas.length,
                       itemBuilder: (context, index) {
                         return SearchCard(
-                          image: Icon(Icons.image_not_supported),
-                          name:
-                              '${filteredList[index].name} ${filteredList[index].lastName}',
+                          name: '${especialistas[index].nombreFantasia}',
                           oficio:
-                              '${filteredList[index].works.first}, ${filteredList[index].works[1]}, ${filteredList[index].works[2]} ',
+                              '${especialistas[index].oficios?.first.nombre}, ${especialistas[index].oficios?[1].nombre ?? ''}, ${especialistas[index].oficios?[2].nombre ?? ''} ',
                           icon: trailingIcon(
-                            filteredList[index].rating,
+                            especialistas[index].calificacion,
                           ),
                           ontap: () => Navigator.pushNamed(
                             context,
                             '/worker-detail',
-                            arguments: filteredList[index],
+                            arguments: especialistas[index],
                           ),
                         );
                       },
