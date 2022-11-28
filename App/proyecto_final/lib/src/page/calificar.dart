@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:home_life/src/models/especialista_model.dart';
 
-import '../../model/worker.dart';
 
 class Calificar extends StatefulWidget {
   _CalificarState createState() => _CalificarState();
@@ -10,7 +9,7 @@ class Calificar extends StatefulWidget {
 class _CalificarState extends State<Calificar> {
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Worker;
+    final args = ModalRoute.of(context)!.settings.arguments as EspecialistaModel;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -49,7 +48,7 @@ class _CalificarState extends State<Calificar> {
                   height: 30,
                 ),
                 Text(
-                  args.name + ' ' + args.lastName,
+                  args.nombreFantasia ?? '',
                   style: TextStyle(
                     fontSize: 28,
                   ),
@@ -58,7 +57,7 @@ class _CalificarState extends State<Calificar> {
                   height: 10,
                 ),
                 Text(
-                  '${args.works.first}, ${args.works[1]}, ${args.works[2]} ',
+                  '${args.oficios?.first.nombre}, ${args.oficios?[1].nombre ?? ''}, ${args.oficios?[2].nombre ?? ''} ',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
