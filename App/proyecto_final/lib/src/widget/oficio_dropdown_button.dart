@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:home_life/src/util/config.dart';
 
 import '../models/oficio_model.dart';
 import '../util/constants.dart';
 
 class OficioDropdownButton extends StatefulWidget {
-  OficioDropdownButton({this.index});
+  OficioDropdownButton({required this.index});
 
-  final num? index;
+  final int index;
 
   @override
   _CustomDropdownButton createState() => _CustomDropdownButton();
@@ -45,6 +46,7 @@ class _CustomDropdownButton extends State<OficioDropdownButton> {
                 setState(
                   () {
                     dropdownValue = value!;
+                    oficiosSeleccionados?.insert(widget.index, value);
                   },
                 );
               },

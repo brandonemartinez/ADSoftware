@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:home_life/src/models/cliente_model.dart';
 import 'package:home_life/src/models/departamento_model.dart';
+import 'package:home_life/src/models/especialista_model.dart';
 import 'package:home_life/src/models/oficio_model.dart';
 import 'package:home_life/src/models/plan_model.dart';
 import 'package:home_life/src/util/constants.dart';
@@ -22,6 +23,23 @@ class HttpService {
       print('Usuario creado');
     } else {
       throw Exception(response.statusCode);
+    }
+  }
+
+  registrarEspecialista(EspecialistaModel especialista) async {
+    var _fullUrl = kBaseUrl + 'Usuario/Especialista';
+    final response = await http.post(
+      Uri.parse(_fullUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(especialista.toJson()),
+    );
+
+    if (response.statusCode == 201) {
+      print('Especialista creado');
+    } else {
+      throw Exception(response.body);
     }
   }
 

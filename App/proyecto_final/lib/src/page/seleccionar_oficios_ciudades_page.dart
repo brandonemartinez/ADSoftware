@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:home_life/src/models/oficio_model.dart';
+import 'package:home_life/src/resources/repositories/especialista_repository.dart';
+import 'package:home_life/src/util/config.dart';
 import 'package:home_life/src/widget/ciudad_dropdown_button.dart';
 import 'package:home_life/src/widget/oficio_dropdown_button.dart';
 import 'package:home_life/src/widget/primary_button.dart';
@@ -12,10 +15,8 @@ class SeleccionOficiosCiudadesPage extends StatefulWidget {
       _SeleccionOficiosCiudadesPageState();
 }
 
-class _SeleccionOficiosCiudadesPageState extends State<SeleccionOficiosCiudadesPage> {
-
-  List<String> ciudades = [];
-
+class _SeleccionOficiosCiudadesPageState
+    extends State<SeleccionOficiosCiudadesPage> {
   @override
   void initState() {
     super.initState();
@@ -27,21 +28,6 @@ class _SeleccionOficiosCiudadesPageState extends State<SeleccionOficiosCiudadesP
         ModalRoute.of(context)!.settings.arguments as EspecialistaModel;
     return Scaffold(
       backgroundColor: backgroundColor,
-      bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            border: Border(
-              top: BorderSide(color: Colors.grey),
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(
-                left: 30.0, right: 30, bottom: 25, top: 20),
-            child: PrimaryButton(
-              label: 'Finalizar',
-              height: 50,
-            ),
-          )),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
@@ -65,7 +51,9 @@ class _SeleccionOficiosCiudadesPageState extends State<SeleccionOficiosCiudadesP
                 shrinkWrap: true,
                 itemCount: especialista.cantidadOficios,
                 itemBuilder: (context, index) {
-                  return OficioDropdownButton(index: index);
+                  return OficioDropdownButton(
+                    index: index,
+                  );
                 },
               ),
               ListView.builder(
@@ -73,10 +61,35 @@ class _SeleccionOficiosCiudadesPageState extends State<SeleccionOficiosCiudadesP
                 shrinkWrap: true,
                 itemCount: especialista.cantidadCiudades,
                 itemBuilder: (context, index) {
-                  return CiudadDropdownButton();
+                  return CiudadDropdownButton(
+                    index: index,
+                  );
                 },
               ),
             ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          border: Border(
+            top: BorderSide(color: Colors.grey),
+          ),
+        ),
+        child: Padding(
+          padding:
+              const EdgeInsets.only(left: 30.0, right: 30, bottom: 25, top: 20),
+          child: PrimaryButton(
+            label: 'Finalizar',
+            height: 50,
+            onPressed: () {
+              String ciudadFinal = armarString();
+              List<OficioModel> oficioFinal = armarOficios();
+              especialista.departamentoDisponible = ciudadFinal;
+              especialista.oficios = oficioFinal;
+              EspecialistaRepository().registrarEspecialista(especialista);
+            },
           ),
         ),
       ),
