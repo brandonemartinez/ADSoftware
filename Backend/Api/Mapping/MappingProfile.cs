@@ -85,8 +85,8 @@ namespace Api.Mapping
             CreateMap<OficioEspecialistaDto, Oficio>().ReverseMap();
             CreateMap<EspecialistaResourceListResponse, Especialista>()
                 .ForMember(dest => dest.IdOficios, act => act.MapFrom(src => src.Oficios))
-                .ForMember(dest => dest.HoraDesde.Value.Hours, act => act.MapFrom(src => src.HoraDesde))
-                .ForMember(dest => dest.HoraHasta.Value.Hours, act => act.MapFrom(src => src.HoraHasta))
+                .ForPath(dest => dest.HoraDesde.Value.Hours, act => act.MapFrom(src => src.HoraDesde))
+                .ForPath(dest => dest.HoraHasta.Value.Hours, act => act.MapFrom(src => src.HoraHasta))
                 .ReverseMap();
             CreateMap<CitaResourceCreateRequest, Cita>()
                 .ForPath(dest => dest.HoraHasta, act => act.MapFrom(src => TimeSpan.FromHours(src.HoraHasta)))
