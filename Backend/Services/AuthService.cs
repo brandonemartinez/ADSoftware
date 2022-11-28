@@ -41,14 +41,14 @@ namespace Services
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var key = Encoding.ASCII.GetBytes(_configuration.GetSection("Auth:Token").Value);
+            var key = Encoding.ASCII.GetBytes("27340c5a942aa436845ca719894f0c2d57a5a87b01f55f7327123e2899c76ece");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(
                     new Claim[]
                     {
                         new Claim(ClaimTypes.NameIdentifier, id.ToString()),
-                        new Claim(ClaimTypes.Role, "Cliente"),
+                        new Claim(ClaimTypes.Role, rol),
                     }
                     ),
                 Expires = DateTime.UtcNow.AddDays(60),

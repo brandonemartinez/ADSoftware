@@ -24,9 +24,9 @@ namespace Data.Repositories
             DB_CATALOGO_SERVICIOSContext.Usuarios.Add(user);
         }
 
-        public async Task<Usuario> GetByCorreo(string correo)
+        public async Task<Usuario> GetByCorreo(string correo, string nombreUsuario)
         {
-            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Where(w => w.Correo == correo).FirstOrDefaultAsync();
+            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Where(w => w.Correo == correo || w.NombreUsuario == nombreUsuario).FirstOrDefaultAsync();
         }
 
         public async Task<Usuario> GetEspecialistaByIdCompleteAsync(int id)
@@ -35,7 +35,7 @@ namespace Data.Repositories
             return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Especialista).Include(u => u.Especialista.Archivos).Include(u => u.Especialista.IdOficios).FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task<Usuario> GetUsuarioLoginAsync(string correo, string contrasenia) => await DB_CATALOGO_SERVICIOSContext.Usuarios.Where(w => w.Correo == correo && w.Contrasenia == contrasenia).FirstOrDefaultAsync();
+        public async Task<Usuario> GetUsuarioLoginAsync(string correo, string contrasenia) => await DB_CATALOGO_SERVICIOSContext.Usuarios.Where(w => (w.Correo == correo || w.NombreUsuario == correo )  && w.Contrasenia == contrasenia).FirstOrDefaultAsync();
         public void UpdateCompleteEspecialistAsync(Usuario? user)
         {
             try

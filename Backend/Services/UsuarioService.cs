@@ -20,7 +20,7 @@ namespace Services
         {
             try
             {
-                if (!await UserExists(nuevoUsuario.Correo))
+                if (!await UserExists(nuevoUsuario.Correo, nuevoUsuario.NombreUsuario))
                 {
                     nuevoUsuario.Contrasenia = Encrypt.GetSHA256(nuevoUsuario.Contrasenia);
                     nuevoUsuario.Rol = Roles.CLIENTE;
@@ -31,7 +31,7 @@ namespace Services
                 }
                 else
                 {
-                    throw new ArgumentException("El correo ya existe");
+                    throw new ArgumentException("El correo o el Nombre de Usuario ya existe.");
                 }
             }
             catch (Exception exe)
@@ -52,7 +52,7 @@ namespace Services
         {
             try
             {
-                if (!await UserExists(nuevoUsuario.Correo))
+                if (!await UserExists(nuevoUsuario.Correo, nuevoUsuario.NombreUsuario))
                 {
                     nuevoUsuario.Contrasenia = Encrypt.GetSHA256(nuevoUsuario.Contrasenia);
                     nuevoUsuario.Rol = Roles.ESPECIALISTA;
@@ -67,7 +67,7 @@ namespace Services
                 else
                 {
 
-                    throw new ArgumentException("El correo ya existe");
+                    throw new ArgumentException("El correo o el Nombre de Usuario ya existe.");
 
                 }
             }
@@ -143,9 +143,9 @@ namespace Services
             return userToUpdate;
         }
 
-        private async Task<bool> UserExists(string correo)
+        private async Task<bool> UserExists(string correo, string nombreUsuario)
         {
-            var user = await _unitOfWork.UsuarioRepository.GetByCorreo(correo);
+            var user = await _unitOfWork.UsuarioRepository.GetByCorreo(correo, nombreUsuario);
             if (user != null)
                 return true;
             else

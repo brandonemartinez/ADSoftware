@@ -5,6 +5,7 @@ using Core;
 using Core.Services;
 using Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Services;
@@ -32,11 +33,11 @@ builder.Services.AddScoped<IDisponibilidadService, DisponibilidadService>();
 builder.Services.AddScoped<IReporteService, ReporteService>();
 
 //JWT
-var appsettingsSection = builder.Configuration.GetSection("Auth");
+var appsettingsSection = builder.Configuration.GetSection("Auth:Token");
 builder.Services.Configure<AppSettings>(appsettingsSection);
 
 var appsettings = appsettingsSection.Get<AppSettings>();
-var key = Encoding.ASCII.GetBytes(appsettings.Token);
+//var key = Encoding.ASCII.GetBytes(appsettings.Token);
 
 builder.Services.AddAuthentication(d =>
 {
@@ -49,7 +50,7 @@ builder.Services.AddAuthentication(d =>
     d.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(key),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("27340c5a942aa436845ca719894f0c2d57a5a87b01f55f7327123e2899c76ece")),
         ValidateIssuer = false,
         ValidateAudience = false
     };
