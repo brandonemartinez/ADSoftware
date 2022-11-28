@@ -43,6 +43,28 @@ class HttpService {
     }
   }
 
+  Future<List<EspecialistaModel>> listarEspecialistasPorCiudad(String ciudad, String busqueda) async {
+    var _fullUrl = kBaseUrl + 'Especialista/Filtrado?Localidad=${ciudad}&Busqueda=${busqueda}';
+    final response = await http.get(
+      Uri.parse(
+        _fullUrl,
+      ),
+    );
+    if (response.statusCode == 200) {
+      print("Especialistas por ciudad cargados");
+      final body = jsonDecode(response.body);
+
+      final List<EspecialistaModel> especialistaList = body
+          .map<EspecialistaModel>(
+            (e) => EspecialistaModel.fromJson(e),
+      )
+          .toList();
+      return especialistaList;
+    } else {
+      throw Exception('Error especialistas.' + response.statusCode.toString());
+    }
+  }
+
   Future<List<DepartamentoModel>> listarDepartamentos() async {
     var _fullUrl = kBaseUrl + 'Departamento';
     final response = await http.get(

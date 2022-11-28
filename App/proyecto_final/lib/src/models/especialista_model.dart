@@ -23,6 +23,7 @@ class EspecialistaModel {
     this.idPaquete,
     this.oficios,
     this.rangoDia,
+    this.calificacion,
     this.cantidadOficios,
     this.cantidadCiudades,
   });
@@ -47,6 +48,7 @@ class EspecialistaModel {
   String? presentacion;
   int? idPaquete;
   List<OficioModel>? oficios;
+  int? calificacion;
   int? cantidadOficios;
   int? cantidadCiudades;
 
@@ -59,20 +61,30 @@ class EspecialistaModel {
       correo: parsedJson['correo'],
       telefono: parsedJson['telefono'],
       direccion: parsedJson['direccion'],
-      fechaDeNacimiento: parsedJson['fechaNacimiento'] as DateTime,
+      // fechaDeNacimiento: parsedJson['fechaNacimiento'] as DateTime,
       genero: parsedJson['genero'],
-      idDepartamento: parsedJson['idDepartamento'] as int,
+      // idDepartamento: parsedJson['idDepartamento'] as int,
       razonSocial: parsedJson['razonSocial'],
       rut: parsedJson['rut'],
       nombreFantasia: parsedJson['nombreFantasia'],
       rangoDia: parsedJson['rangoDia'],
-      horaDesde: parsedJson['horaDesde'] as int,
-      horaHasta: parsedJson['horaHasta'] as int,
+      // horaDesde: parsedJson['horaDesde'] as int,
+      // horaHasta: parsedJson['horaHasta'] as int,
       departamentoDisponible: parsedJson['departamentoDisponible'],
       presentacion: parsedJson['presentacion'],
       idPaquete: parsedJson['idPaquete'] as int,
-      oficios: parsedJson['oficios'],
+      oficios: parseOficios(parsedJson),
+      calificacion: parsedJson['calificacion'] as int,
     );
+  }
+
+  static List<OficioModel>? parseOficios(Map<String, dynamic> parsedJson) {
+    final oficios = parsedJson['oficios'] as List;
+
+    if (oficios.isNotEmpty) {
+      final List<OficioModel>? listaOficios = OficioModel.fromList(oficios);
+      return listaOficios;
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -98,5 +110,19 @@ class EspecialistaModel {
       "idPaquete": idPaquete,
       "oficios": Jsonable.toJsonList(oficios),
     };
+  }
+
+  static List<EspecialistaModel>? fromList(List<dynamic>? list) {
+    var result = <EspecialistaModel>[];
+    list?.forEach(
+      (item) {
+        var especialista = EspecialistaModel.fromJson(item);
+        if (especialista != null) {
+          result.add(especialista);
+        }
+      },
+    );
+
+    return result;
   }
 }
