@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:home_life/src/util/config.dart';
 
 import '../models/departamento_model.dart';
 import '../util/constants.dart';
 
 class CiudadDropdownButton extends StatefulWidget {
+  CiudadDropdownButton({
+    required this.index,
+  });
+
+  final int index;
+
   @override
   _CiudadDropdownButtonState createState() => _CiudadDropdownButtonState();
 }
@@ -93,6 +100,7 @@ class _CiudadDropdownButtonState extends State<CiudadDropdownButton> {
               setState(
                 () {
                   ciudadDropdownValue = value!;
+                  ciudadesSeleccionadas?.insert(widget.index, value);
                 },
               );
             },

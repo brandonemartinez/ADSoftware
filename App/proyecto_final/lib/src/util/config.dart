@@ -1,12 +1,34 @@
-import '../models/departamento_model.dart';
+import 'package:home_life/src/util/constants.dart';
+
 import '../models/oficio_model.dart';
 
-class Configuration {
-  Configuration({
-    this.departamentos,
-    this.oficios,
-  });
+List<String>? ciudadesSeleccionadas = [];
+List<String>? oficiosSeleccionados = [];
 
-  final List<DepartamentoModel>? departamentos;
-  final List<OficioModel>? oficios;
+String armarString() {
+  String ciudadesFinales = '';
+  ciudadesSeleccionadas?.forEach(
+    (ciudad) {
+      ciudadesFinales += '${ciudad}, ';
+    },
+  );
+
+  return ciudadesFinales;
+}
+
+List<OficioModel> armarOficios() {
+  List<OficioModel> oficiosFinales = [];
+  oficiosSeleccionados?.forEach(
+    (string) {
+      oficios?.forEach(
+        (element) {
+          if (element.nombre == string) {
+            oficiosFinales.add(element);
+          }
+        },
+      );
+    },
+  );
+
+  return oficiosFinales;
 }
