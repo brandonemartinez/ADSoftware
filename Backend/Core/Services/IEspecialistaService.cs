@@ -9,6 +9,7 @@ namespace Core.Services
         Task<Especialista> CreateEspecialist(Especialista especialista);
         Task<IEnumerable<Especialista>> GetAll();
         Task<Especialista> GetById(int idEspecialista);
+        Task<Usuario> GetDetailById(int idEspecialista);
         Task<IEnumerable<Especialista>> GetListFiltred(ListFilter listFilter);
     }
 }

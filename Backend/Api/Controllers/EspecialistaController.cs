@@ -55,11 +55,11 @@ namespace Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         public async Task<ActionResult<EspecialistaDto>> Get(int idEspecialista)
         {
-            Especialista especialista = await _especialistaService.GetById(idEspecialista);
+            Usuario especialista = await _especialistaService.GetDetailById(idEspecialista);
 
             if (especialista == null) return NotFound($"No se encontro ningun especialista");
 
-            var especialistaResponse = _mapper.Map<Especialista, EspecialistaDto>(especialista);
+            var especialistaResponse = _mapper.Map<Usuario, EspecialistaDto>(especialista);
             return Ok(especialistaResponse);
         }
         /// <summary>

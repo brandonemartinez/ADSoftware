@@ -27,6 +27,18 @@ namespace Api.Mapping
             CreateMap<UsuarioRegisterRequest, Usuario>().ReverseMap();
             CreateMap<ServiciosContratadosResponse, Cita>().ReverseMap();
             CreateMap<UsuarioDto, Usuario>().ReverseMap();
+            CreateMap<EspecialistaDto, Usuario>()
+                .ForPath(dest => dest.Especialista.RazonSocial, act => act.MapFrom(src => src.RazonSocial))
+                .ForPath(dest => dest.Especialista.Rut, act => act.MapFrom(src => src.Rut))
+                .ForPath(dest => dest.Especialista.NombreFantasia, act => act.MapFrom(src => src.NombreFantasia))
+                .ForPath(dest => dest.Especialista.Presentacion, act => act.MapFrom(src => src.Presentacion))
+                .ForPath(dest => dest.Especialista.RangoDia, act => act.MapFrom(src => src.RangoDia))
+                .ForPath(dest => dest.Especialista.HoraDesde, act => act.MapFrom(src => src.HoraDesde))
+                .ForPath(dest => dest.Especialista.HoraHasta, act => act.MapFrom(src => src.HoraHasta))
+                .ForPath(dest => dest.Especialista.DepartamentoDisponible, act => act.MapFrom(src => src.DepartamentoDisponible))
+                .ForPath(dest => dest.Especialista.IdOficios, act => act.MapFrom(src => src.Oficios))
+                .ForPath(dest => dest.Especialista.Archivos, act => act.MapFrom(src => src.Archivos))
+                .ReverseMap();
             CreateMap<Usuario, EspecialistResourceResponse>().ReverseMap();
             CreateMap<Departamento, DepartmentResourceListResponse>()
                 .ForMember(dest => dest.Departamento, act => act.MapFrom(src => src.Nombre))

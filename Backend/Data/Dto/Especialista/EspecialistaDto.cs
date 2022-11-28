@@ -9,6 +9,11 @@ namespace Data.Dto.Especialista
         public string RazonSocial { get; set; } = null!;
         public string NombreFantasia { get; set; } = null!;
         public string Presentacion { get; set; } = null!;
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Correo { get; set; }
+        public string Telefono { get; set; }
+        public string Rut { get; set; }
         public int? Calificacion { get; set; }
         public string? RangoDia { get; set; }
         public TimeSpan? HoraDesde { get; set; }

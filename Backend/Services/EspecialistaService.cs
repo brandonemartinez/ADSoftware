@@ -61,6 +61,11 @@ namespace Services
         {
             var especialista = await _unitOfWork.EspecialistaRepository.GetEspecialistaByIdCompleteAsync(idEspecialista);
             return especialista;
+        }        
+        public async Task<Usuario> GetDetailById(int idEspecialista)
+        {
+            var especialista = await _unitOfWork.UsuarioRepository.GetEspecialistaByIdCompleteAsync(idEspecialista);
+            return especialista;
         }
     }
 }

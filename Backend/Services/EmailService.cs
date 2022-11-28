@@ -52,7 +52,7 @@ namespace Services
             Usuario especialista = cita.IdUsuarios.FirstOrDefault(f => f.Id == cita.IdEspecialista);
             try
             {
-                MailMessage MailMessage = new MailMessage(_emailFrom, cliente.Correo, _asuntoCambioEstado, BodyTemplateCambioEstadoACliente(cliente, especialista.Especialista, cita));
+                MailMessage MailMessage = new MailMessage(_emailFrom, cliente.Correo, _asuntoCambioEstado, BodyTemplateCambioEstadoACliente(cliente, especialista.Especialista, cita, estado));
                 MailMessage.IsBodyHtml = true;
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
                 smtpClient.EnableSsl = true;
@@ -74,7 +74,7 @@ namespace Services
             Usuario especialista = cita.IdUsuarios.FirstOrDefault(f => f.Id == cita.IdEspecialista);
             try
             {
-                MailMessage MailMessage = new MailMessage(_emailFrom, cliente.Correo, _asuntoCambioEstado, BodyTemplateCambioEstadoAEspecialista(cliente, especialista.Especialista, cita));
+                MailMessage MailMessage = new MailMessage(_emailFrom, cliente.Correo, _asuntoCambioEstado, BodyTemplateCambioEstadoAEspecialista(cliente, especialista.Especialista, cita, estado));
                 MailMessage.IsBodyHtml = true;
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
                 smtpClient.EnableSsl = true;
@@ -90,13 +90,13 @@ namespace Services
             }
         }
         //TODO HACER TEMPLATES
-        private string BodyTemplateCambioEstadoACliente(Usuario usuario, Especialista especialista, Cita cita)
+        private string BodyTemplateCambioEstadoACliente(Usuario usuario, Especialista especialista, Cita cita, string estado)
         {
-            return $"<table style=\"height: 224px; width: 50.9924%; border-collapse: collapse; border-style: hidden; margin-left: auto; margin-right: auto;\" border=\"1\"><caption>&nbsp;</caption>\r\n<tbody>\r\n<tr style=\"height: 54px;\">\r\n<td style=\"width: 100%; height: 54px;\">\r\n<h3 style=\"text-align: center;\">Hola Brandon!&nbsp;</h3>\r\n</td>\r\n</tr>\r\n<tr style=\"height: 258px;\">\r\n<td style=\"width: 100%; height: 196px;\">\r\n<p style=\"text-align: center;\">Te infomamos que el usuario CLIENTE ha cambiado el estado el estado de tu solicitud del DIA a las HORA a ESTADO.</p>\r\n<p style=\"text-align: center;\"><br />Atentamente,<br /><em>Equipo ADSoftware</em></p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>";
+            return $"<table style=\"height: 224px; width: 50.9924%; border-collapse: collapse; border-style: hidden; margin-left: auto; margin-right: auto;\" border=\"1\"><caption>&nbsp;</caption>\r\n<tbody>\r\n<tr style=\"height: 54px;\">\r\n<td style=\"width: 100%; height: 54px;\">\r\n<h3 style=\"text-align: center;\">Hola {usuario.Nombre}!&nbsp;</h3>\r\n</td>\r\n</tr>\r\n<tr style=\"height: 258px;\">\r\n<td style=\"width: 100%; height: 196px;\">\r\n<p style=\"text-align: center;\">Te infomamos que el usuario {especialista.NombreFantasia} ha cambiado el estado el estado de tu solicitud del {cita.Fecha} a las {cita.HoraDesde} a {estado}.</p>\r\n<p style=\"text-align: center;\"><br />Atentamente,<br /><em>Equipo ADSoftware</em></p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>";
         }
-        private string BodyTemplateCambioEstadoAEspecialista(Usuario usuario, Especialista especialista, Cita cita)
+        private string BodyTemplateCambioEstadoAEspecialista(Usuario usuario, Especialista especialista, Cita cita, string estado)
         {
-            return $"<table style=\"height: 224px; width: 50.9924%; border-collapse: collapse; border-style: hidden; margin-left: auto; margin-right: auto;\" border=\"1\"><caption>&nbsp;</caption>\r\n<tbody>\r\n<tr style=\"height: 54px;\">\r\n<td style=\"width: 100%; height: 54px;\">\r\n<h3 style=\"text-align: center;\">Hola Brandon!&nbsp;</h3>\r\n</td>\r\n</tr>\r\n<tr style=\"height: 258px;\">\r\n<td style=\"width: 100%; height: 196px;\">\r\n<p style=\"text-align: center;\">Te infomamos que el usuario CLIENTE ha cambiado el estado de la cita con FECHA para las HORAS a ESTADO.</p>\r\n<p style=\"text-align: center;\"><br />Atentamente,<br /><em>Equipo ADSoftware</em></p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>";
+            return $"<table style=\"height: 224px; width: 50.9924%; border-collapse: collapse; border-style: hidden; margin-left: auto; margin-right: auto;\" border=\"1\"><caption>&nbsp;</caption>\r\n<tbody>\r\n<tr style=\"height: 54px;\">\r\n<td style=\"width: 100%; height: 54px;\">\r\n<h3 style=\"text-align: center;\">Hola {especialista.NombreFantasia}!&nbsp;</h3>\r\n</td>\r\n</tr>\r\n<tr style=\"height: 258px;\">\r\n<td style=\"width: 100%; height: 196px;\">\r\n<p style=\"text-align: center;\">Te infomamos que el usuario {usuario.Nombre} ha cambiado el estado de la cita con {cita.Fecha} para la {cita.HoraDesde} a {estado}.</p>\r\n<p style=\"text-align: center;\"><br />Atentamente,<br /><em>Equipo ADSoftware</em></p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>";
         }
         private string BodyTemplateCuentaCreada(string nombre)
         {

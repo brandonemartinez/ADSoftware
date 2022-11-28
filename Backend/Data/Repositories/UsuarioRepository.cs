@@ -32,7 +32,7 @@ namespace Data.Repositories
         public async Task<Usuario> GetEspecialistaByIdCompleteAsync(int id)
         {
             //TODO Validate
-            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Especialista).Include(u => u.Especialista.IdOficios).FirstOrDefaultAsync(u => u.Id == id);
+            return await DB_CATALOGO_SERVICIOSContext.Usuarios.Include(u => u.Especialista).Include(u => u.Especialista.Archivos).Include(u => u.Especialista.IdOficios).FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<Usuario> GetUsuarioLoginAsync(string correo, string contrasenia) => await DB_CATALOGO_SERVICIOSContext.Usuarios.Where(w => w.Correo == correo && w.Contrasenia == contrasenia).FirstOrDefaultAsync();
