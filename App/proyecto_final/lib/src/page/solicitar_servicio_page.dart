@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:home_life/src/models/especialista_model.dart';
 import 'package:intl/intl.dart';
 
-import '../../model/worker.dart';
 
 class Solicitud extends StatefulWidget {
   _SolicitudState createState() => _SolicitudState();
@@ -34,7 +34,7 @@ class _SolicitudState extends State<Solicitud> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Worker;
+    final args = ModalRoute.of(context)!.settings.arguments as EspecialistaModel;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -73,7 +73,7 @@ class _SolicitudState extends State<Solicitud> {
                   height: 30,
                 ),
                 Text(
-                  args.name + ' ' + args.lastName,
+                  args.nombreFantasia ?? '',
                   style: TextStyle(
                     fontSize: 28,
                   ),
@@ -82,7 +82,7 @@ class _SolicitudState extends State<Solicitud> {
                   height: 10,
                 ),
                 Text(
-                  '${args.works.first}, ${args.works[1]}, ${args.works[2]} ',
+                  '${args.oficios?.first.nombre}, ${args.oficios?[1].nombre ?? ''}, ${args.oficios?[2].nombre ?? ''} ',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,

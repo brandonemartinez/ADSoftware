@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:home_life/model/worker.dart';
+import 'package:home_life/src/models/especialista_model.dart';
 import 'package:home_life/src/util/utils.dart';
 
 import '../widget/primary_button.dart';
@@ -26,7 +26,8 @@ class WorkerDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Worker;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as EspecialistaModel;
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -69,7 +70,7 @@ class WorkerDetail extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    args.name + ' ' + args.lastName,
+                    args.nombreFantasia ?? '',
                     style: TextStyle(
                       fontSize: 28,
                     ),
@@ -81,7 +82,7 @@ class WorkerDetail extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    '${args.works.first}, ${args.works[1]}, ${args.works[2]} ',
+                    '${args.oficios?.first.nombre}, ${args.oficios?[1].nombre ?? ''}, ${args.oficios?[2].nombre ?? ''} ',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -101,20 +102,20 @@ class WorkerDetail extends StatelessWidget {
                       SizedBox(
                         width: 15,
                       ),
-                      if (args.rating >= 4)
+                      if (args.calificacion! >= 4)
                         Icon(
                           Icons.star,
                           color: Color(0xfffcaf14),
                           size: 40,
                         ),
-                      if (args.rating <= 3.5)
+                      if (args.calificacion! <= 3.5)
                         Icon(
                           Icons.star_half,
                           color: Color(0xfffcaf14),
                           size: 40,
                         ),
                       Text(
-                        args.rating.toString(),
+                        args.calificacion.toString(),
                         style: TextStyle(fontSize: 24),
                       ),
                       Spacer(),
@@ -161,14 +162,14 @@ class WorkerDetail extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Text(
-                    'Acerca de ${args.name}:',
+                    'Acerca de ${args.nombreFantasia}:',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Text(
-                    '14 años de experiencia en el rubro, además de varios certificados que comprueban las habilidades de ${args.name} como ${args.works[0]}, ${args.works[1]} y ${args.works[2]}.',
+                    args.presentacion ?? '',
                     style: TextStyle(fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
