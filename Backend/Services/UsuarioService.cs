@@ -59,7 +59,7 @@ namespace Services
                     nuevoUsuario.Activo = true;
                     nuevoUsuario.Especialista.Calificacion = 0;
                     nuevoUsuario.Especialista.ExpiracionPlan = new DateTime(1800, 1, 1);
-                    await _unitOfWork.UsuarioRepository.CreateAsync(nuevoUsuario);
+                    await _unitOfWork.UsuarioRepository.CreatWithOficios(nuevoUsuario);
                     await _unitOfWork.CommitAsync();
                     _emailService.EnviarEmailCuentaCreada(nuevoUsuario.Correo, nuevoUsuario.Nombre);
                     return nuevoUsuario;

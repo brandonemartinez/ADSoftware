@@ -12,6 +12,17 @@ namespace Data.Repositories
         {
             get { return Context as DB_CATALOGO_SERVICIOSContext; }
         }
+        public async Task CreatWithOficios(Usuario user)
+        {
+            var oficios = user.Especialista.IdOficios.ToList();
+            user.Especialista.IdOficios = new List<Oficio>();
+            foreach (var oficio in oficios)
+            {
+                var oficioAux = await DB_CATALOGO_SERVICIOSContext.Oficios.FindAsync(oficio.Id);
+                user.Especialista.IdOficios.Add(oficioAux);
+            }
+            DB_CATALOGO_SERVICIOSContext.Usuarios.Add(user);
+        }
 
         public async Task<Usuario> GetByCorreo(string correo)
         {
@@ -40,6 +51,6 @@ namespace Data.Repositories
 
                 throw new Exception(exe.Message);
             }
-        } 
+        }
     }
 }

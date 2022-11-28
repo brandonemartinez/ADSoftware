@@ -8,5 +8,6 @@ namespace Core.Repositories
         void UpdateCompleteEspecialistAsync(Usuario user);
         Task<Usuario> GetUsuarioLoginAsync(string correo, string contrasenia);
         Task<Usuario> GetByCorreo(string correo);
+        Task CreatWithOficios(Usuario user);
     }
 }
