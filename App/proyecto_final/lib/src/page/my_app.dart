@@ -15,8 +15,14 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
+HttpService dataSource = HttpService();
+
 cargarDepartamentos() async {
-  departamentos = await HttpService().listarDepartamentos();
+  departamentos = await dataSource.listarDepartamentos();
+}
+
+cargarOficios() async {
+  oficios = await dataSource.listarOficios();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -24,6 +30,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     cargarDepartamentos();
+    cargarOficios();
   }
 
   @override

@@ -22,7 +22,7 @@ class PlanCard extends StatelessWidget {
       case '3':
         _color = Colors.blueAccent;
         break;
-      case '3,5':
+      case '2':
         _color = Colors.green;
         break;
       case '4':

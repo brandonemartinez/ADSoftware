@@ -4,6 +4,8 @@ import 'package:home_life/src/models/plan_model.dart';
 import 'package:home_life/src/util/utils.dart';
 import 'package:home_life/src/widget/plan_card.dart';
 
+import '../models/especialista_model.dart';
+
 class SeleccionPlanes extends StatefulWidget {
   SeleccionPlanes({
     required this.bloc,
@@ -24,6 +26,8 @@ class _SeleccionPlanesState extends State<SeleccionPlanes> {
 
   @override
   Widget build(BuildContext context) {
+    final especialista =
+        ModalRoute.of(context)!.settings.arguments as EspecialistaModel;
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -64,6 +68,13 @@ class _SeleccionPlanesState extends State<SeleccionPlanes> {
                           description: planList[index].descripcion,
                           monthlyPrice: planList[index].precioMensual,
                           anualPrice: planList[index].precioAnual,
+                          onTap: () {
+                            especialista.idPaquete = planList[index].id;
+                            especialista.cantidadOficios = planList[index].cantidadProfesiones;
+                            especialista.cantidadCiudades = planList[index].cantidadCiudades;
+                            Navigator.pushNamed(context, '/oficios_ciudades',
+                                arguments: especialista);
+                          },
                         );
                       },
                     ),
