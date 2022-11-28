@@ -11,8 +11,8 @@ namespace Api.Resources.Especialist
         public string? Presentacion { get; set; }
         public int? Calificacion { get; set; }
         public string? RangoDia { get; set; }
-        public TimeSpan? HoraDesde { get; set; }
-        public TimeSpan? HoraHasta { get; set; }
+        public int HoraDesde { get; set; }
+        public int HoraHasta { get; set; }
         public string? DepartamentoDisponible { get; set; }
         public int IdPaquete { get; set; }
         public virtual ICollection<OficioDetalleDto> Oficios { get; set; }
