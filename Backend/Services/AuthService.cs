@@ -33,7 +33,7 @@ namespace Services
             {
                 valido = true;
             }
-            var response = JsonConvert.SerializeObject(new { Valido = valido, Titulo = "Login", Token = token, idUser = usuario.Id });
+            var response = JsonConvert.SerializeObject(new { Valido = valido, Titulo = "Login", Token = token, idUser = usuario.Id, Rol = usuario.Rol });
             return response;
         }
 
