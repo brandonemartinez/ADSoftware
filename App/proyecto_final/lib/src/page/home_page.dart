@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_life/src/util/utils.dart';
 
-import '../widget/primaryButton.dart';
-import '../widget/secondaryButton.dart';
+import '../widget/primary_button.dart';
+import '../widget/secondary_button.dart';
 
 class MyHomePage extends StatelessWidget {
   @override
