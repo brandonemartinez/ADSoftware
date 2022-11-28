@@ -3,6 +3,7 @@ import 'package:home_life/src/util/jsonable.dart';
 
 class EspecialistaModel {
   EspecialistaModel({
+    this.id,
     this.nombre,
     this.apellido,
     this.nombreUsuario,
@@ -28,6 +29,7 @@ class EspecialistaModel {
     this.cantidadCiudades,
   });
 
+  int? id;
   String? nombre;
   String? apellido;
   String? nombreUsuario;
@@ -54,6 +56,7 @@ class EspecialistaModel {
 
   factory EspecialistaModel.fromJson(Map<String, dynamic> parsedJson) {
     return EspecialistaModel(
+      id: parsedJson['id'] as int,
       nombre: parsedJson['nombre'],
       apellido: parsedJson['apellido'],
       nombreUsuario: parsedJson['nombreUsuario'],
@@ -68,13 +71,13 @@ class EspecialistaModel {
       rut: parsedJson['rut'],
       nombreFantasia: parsedJson['nombreFantasia'],
       rangoDia: parsedJson['rangoDia'],
-      // horaDesde: parsedJson['horaDesde'] as int,
-      // horaHasta: parsedJson['horaHasta'] as int,
+      horaDesde: parsedJson['horaDesde'] as int,
+      horaHasta: parsedJson['horaHasta'] as int,
       departamentoDisponible: parsedJson['departamentoDisponible'],
       presentacion: parsedJson['presentacion'],
-      idPaquete: parsedJson['idPaquete'] as int,
+      // idPaquete: parsedJson['idPaquete'] as int,
       oficios: parseOficios(parsedJson),
-      calificacion: parsedJson['calificacion'] as int,
+      // calificacion: parsedJson['calificacion'] as int,
     );
   }
 

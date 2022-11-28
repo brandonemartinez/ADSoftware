@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_life/src/util/utils.dart';
 
+import '../util/config.dart';
+
 class CustomBottomNavigationBar extends StatefulWidget {
   @override
   _CustomBottomNavigationBarState createState() =>
@@ -49,6 +51,13 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           backgroundColor: primaryColor,
         ),
       );
+      navigationBarItems.add(
+        BottomNavigationBarItem(
+          icon: Icon(Icons.logout),
+          label: 'Cerrar sesión',
+          backgroundColor: primaryColor,
+        ),
+      );
     } else {
       navigationBarItems.insert(
         0,
@@ -75,6 +84,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             return '/solicitudes';
           case 4:
             return '/profile';
+          case 5:
+            signedIn = false;
+            return '/signIn';
           default:
             return '/home';
         }
@@ -86,6 +98,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             return '/ubication';
           case 2:
             return '/profile';
+          case 3:
+            signedIn = false;
+            return '/signIn';
           default:
             return '/home';
         }

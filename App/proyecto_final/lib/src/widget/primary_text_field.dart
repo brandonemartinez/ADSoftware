@@ -14,10 +14,12 @@ class PrimaryTextField extends StatefulWidget {
     this.validator,
     this.onSaved,
     bool? isEmail,
+    int? maxLines,
   })  : filled = filled ?? false,
         obscureText = obscureText ?? false,
         readOnly = readOnly ?? false,
         isEmail = isEmail ?? false,
+        maxLines = maxLines ?? 1,
         super();
 
   final String label;
@@ -31,6 +33,7 @@ class PrimaryTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final void Function(String?)? onSaved;
   final bool isEmail;
+  final int maxLines;
 
   @override
   _PrimaryTextFieldState createState() => _PrimaryTextFieldState();
@@ -53,6 +56,7 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: widget.maxLines,
       controller: _controller,
       readOnly: widget.readOnly,
       obscureText: widget.obscureText,
@@ -71,7 +75,8 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
       onTap: widget.onTap,
       validator: widget.validator,
       onSaved: widget.onSaved,
-      keyboardType: widget.isEmail ? TextInputType.emailAddress : TextInputType.text,
+      keyboardType:
+          widget.isEmail ? TextInputType.emailAddress : TextInputType.text,
     );
   }
 }

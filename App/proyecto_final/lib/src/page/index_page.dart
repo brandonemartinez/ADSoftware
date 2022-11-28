@@ -3,6 +3,7 @@ import 'package:home_life/src/page/profile_page.dart';
 import 'package:home_life/src/page/search_page.dart';
 import 'package:home_life/src/page/solicitudes.dart';
 
+import '../util/config.dart';
 import '../util/utils.dart';
 import 'calendar.dart';
 import 'home_page.dart';
